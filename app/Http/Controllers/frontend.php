@@ -17,7 +17,7 @@ class frontend extends Controller
         $blog = Blog::with(['media'])->get();
         return view ('frontend.index', compact('footer','blog'));
     }
-     
+    
      public function abouts(){
          $blog = Blog::all();
          return view ('frontend.abouts', compact('blog'));
@@ -47,6 +47,12 @@ class frontend extends Controller
     
     public function testimonial(){
         return view ('frontend.testimonial');
+    }
+    public function chef(){
+        return view ('frontend.chef');
+    }
+    public function contact(){
+        return view ('frontend.contact');
     }
 
     // public function footer() {

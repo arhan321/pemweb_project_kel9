@@ -8,7 +8,13 @@ Route::get('/special', 'frontend@special')->name('frontend.special');
 Route::get('/event', 'frontend@event')->name('frontend.event');
 Route::get('/galery', 'frontend@galery')->name('frontend.galery');
 Route::get('/testimonial', 'frontend@testimonial')->name('frontend.testimonial');
+Route::get('/chef', 'frontend@chef')->name('frontend.chef');
+Route::get('/contact', 'frontend@contact')->name('frontend.contact');
 Route::get('/reservasi', 'frontend@reservasi')->name('layouts.reservasi');
+Route::get('/error', function () {
+    return view('frontend.error');
+});
+
 
 //Route::redirect('/', '/login');
 

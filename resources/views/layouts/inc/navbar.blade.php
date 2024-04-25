@@ -14,8 +14,7 @@
   
           <div class="languages d-none d-md-flex align-items-center">
             <ul>
-              <li>En</li>
-              <li><a href="#">De</a></li>
+              <li>PEMWEB KEL9</li>
             </ul>
           </div>
         </div>
@@ -31,27 +30,28 @@
             <a href="{{ route('frontend.index') }}">Han`s Restaurant</a>
           </h1>
 
-<nav id="navbar" class="navbar order-last order-lg-0">
-    <ul>
-      <li><a class="nav-link scrollto active" href="{{ route('frontend.index') }}">Home</a></li>
-      <li><a class="nav-link scrollto" href="{{ route('frontend.abouts') }}">Abouts</a></li>
-      <li><a class="nav-link scrollto" href="{{ route('frontend.menu') }}">Menu</a></li>
-      <li><a class="nav-link scrollto" href="{{ route('frontend.special') }}">Specials</a></li>
-      <li><a class="nav-link scrollto" href="{{ route('frontend.event') }}">Events</a></li>
-      <li><a class="nav-link scrollto" href="{{ route('frontend.galery') }}">Gallery</a></li>
-      <li><a class="nav-link scrollto" href="{{ route('frontend.testimonial') }}">testimonial</a></li>
-      <li><a class="nav-link scrollto" href="#chefs">Chefs</a></li>
-      <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-    </ul>
-    <i class="bi bi-list mobile-nav-toggle"></i>
-  </nav>
-  <!-- .navbar -->
-  <a
-  id="tombol"
-  href="{{ route('layouts.reservasi') }}"
-  class="book-a-table-btn scrollto d-none d-lg-flex"
-  >Reservation</a
->
-</div>
-</header>
-<!-- End Header -->
+  <nav id="navbar" class="navbar order-last order-lg-0">
+      <ul>
+        <li><a class="nav-link scrollto active" href="{{ route('frontend.index') }}">Home</a></li>
+        <li><a class="nav-link scrollto" href="{{ route('frontend.abouts') }}">Abouts</a></li>
+        <li><a class="nav-link scrollto" href="{{ route('frontend.menu') }}">Menu</a></li>
+        <li><a class="nav-link scrollto" href="{{ route('frontend.special') }}">Specials</a></li>
+        <li><a class="nav-link scrollto" href="{{ route('frontend.event') }}">Events</a></li>
+        <li><a class="nav-link scrollto" href="{{ route('frontend.galery') }}">Gallery</a></li>
+        <li><a class="nav-link scrollto" href="{{ route('frontend.testimonial') }}">testimonial</a></li>
+        <li><a class="nav-link scrollto" href="{{ route('frontend.chef') }}">Chefs</a></li>
+        <li><a class="nav-link scrollto" href="{{ route('frontend.contact') }}">Contact</a></li>
+      </ul>
+      <i class="bi bi-list mobile-nav-toggle"></i>
+    </nav>
+    <!-- navbar -->
+    <a
+    id="tombol"
+    href="{{ route('layouts.reservasi') }}"
+    class="book-a-table-btn scrollto d-none d-lg-flex"
+    >Reservation</a
+  >
+  </div>
+  </header>
+  <!-- End Header -->
+  

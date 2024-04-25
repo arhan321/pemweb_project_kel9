@@ -1,3 +1,9 @@
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+  <title>Restaurantly Bootstrap Template - Index</title>
+  <meta content="" name="description" />
+  <meta content="" name="keywords" />
     <!-- Favicons -->
     <link href="frontend/assets/img/favicon.png" rel="icon" />
     <link href="frontend/assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
@@ -15,19 +21,23 @@
       href="frontend/assets/vendor/bootstrap/css/bootstrap.min.css"
       rel="stylesheet"
     />
+
     <link
       href="frontend/assets/vendor/bootstrap-icons/bootstrap-icons.css"
       rel="stylesheet"
     />
+
     <link href="frontend/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
+
     <link
       href="frontend/assets/vendor/glightbox/css/glightbox.min.css"
       rel="stylesheet"
     />
+    
     <link href="frontend/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet" />
 
     <!-- Template Main CSS File -->
-    <link href="frontend/assets/css/styleee.css" rel="stylesheet" />
+    <link href="frontend/assets/css/c.css" rel="stylesheet" />
 
     <!-- =======================================================
   * Template Name: Restaurantly - v3.1.0
@@ -35,3 +45,4 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+  

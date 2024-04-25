@@ -12,7 +12,7 @@ body {
   font-family: "Open Sans", sans-serif;
   background: #0c0b09;
   color: #fff;
-}   
+}
 
 a {
   color: #cda45e;
@@ -1088,6 +1088,8 @@ section {
 # Events
 --------------------------------------------------------------*/
 .events {
+  margin-top: 8%;
+  margin-bottom: 5%;
   background: url(../img/events-bg.jpg) center center no-repeat;
   background-size: cover;
   position: relative;
@@ -1368,6 +1370,11 @@ section {
 /*--------------------------------------------------------------
 # Gallery
 --------------------------------------------------------------*/
+.gallery {
+  margin-top: 8%;
+  margin-bottom: 5%;
+}
+
 .gallery .gallery-item {
   overflow: hidden;
   border-right: 3px solid #454035;
@@ -1385,6 +1392,11 @@ section {
 /*--------------------------------------------------------------
 # Chefs
 --------------------------------------------------------------*/
+.chefs {
+  margin-top: 8%;
+  margin-bottom: 5%;
+}
+
 .chefs .member {
   text-align: center;
   margin-bottom: 20px;
@@ -1475,6 +1487,11 @@ section {
 /*--------------------------------------------------------------
 # Contact
 --------------------------------------------------------------*/
+.contact {
+  margin-top: 8%;
+  margin-bottom: 5%;
+}
+
 .contact .info {
   width: 100%;
 }

@@ -102,7 +102,18 @@
       </div>
     </div>
 
-    <script src="javascript/javascript.js"></script>
+<script>
+    // Mendapatkan waktu saat ini
+    var currentTime = new Date();
+    var currentHour = currentTime.getHours();
+
+    // Mengecek apakah sudah lewat pukul 22:00 (10 malam) atau belum
+    if (currentHour >= 22 || currentHour < 10) {
+        // Redirect pengguna ke halaman lain (misalnya halaman utama)
+        window.location.href = '/error';
+    }
+</script>
+   
 
     <!-- <div class="reservation-form">
     <section class="sec-form-reservation"><div class="container"><div class="wrap-title"><h4>RESERVATION</h4> <p class="subtitle text-label"><span> SCBD </span></p> <p>
