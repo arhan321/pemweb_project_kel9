@@ -14,6 +14,9 @@ Route::get('/reservasi', 'frontend@reservasi')->name('layouts.reservasi');
 Route::get('/error', function () {
     return view('frontend.error');
 });
+Route::get('/qr', function () {
+    return view('layouts.qrcode');
+});
 
 
 //Route::redirect('/', '/login');
