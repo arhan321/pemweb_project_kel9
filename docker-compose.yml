@@ -5,6 +5,7 @@ services:
     image: php:latest
     container_name: php_tester
     hostname: "php_tester"
+    restart: always
     volumes:
       - ./restoran_project_kel9:/var/www/html
       - ./php/www.conf:/usr/local/etc/php-fpm.d/www.conf
@@ -34,6 +35,7 @@ services:
     build: ./nginx
     image: nginx:latest
     container_name: nginx_tester
+    restart: always
     hostname: "nginx"
     ports:
       - "80:80"

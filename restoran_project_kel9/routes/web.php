@@ -1,5 +1,11 @@
 <?php
 
+//routing frontend untuk makan dittempat
+Route::get('/qr', function () {
+    return view('layouts.qrcode');
+});
+ Route::get('/makan', 'makan_tempat@getmakan')->name('layouts.makan_di_tempat.makan');
+
 //routing front end 
 Route::get('/', 'frontend@getdb')->name('frontend.index');
 Route::get('/abouts', 'frontend@abouts')->name('frontend.abouts');
@@ -14,9 +20,7 @@ Route::get('/reservasi', 'frontend@reservasi')->name('layouts.reservasi');
 Route::get('/error', function () {
     return view('frontend.error');
 });
-Route::get('/qr', function () {
-    return view('layouts.qrcode');
-});
+
 
 
 //Route::redirect('/', '/login');
