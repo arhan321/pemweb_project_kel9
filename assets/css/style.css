@@ -17,6 +17,10 @@ body {
 a {
   color: #cda45e;
   text-decoration: none;
+  font-family: "Garamond Premr Pro";
+    src: url(../webfonts/fonts/GaramondPremrPro-MedIt.otf) format("opentype");
+    font-weight: 400;
+    font-style: italic;
 }
 
 a:hover {
@@ -178,9 +182,9 @@ h6 {
 # Header
 --------------------------------------------------------------*/
 #header {
-  background: rgba(12, 11, 9, 0.6);
-  border-bottom: 1px solid rgba(12, 11, 9, 0.6);
-  transition: all 0.5s;
+  background: rgba(12, 11, 9, 0);
+  transition: all 0.3s;
+  transition: background-color 0.3s ease;
   z-index: 997;
   padding: 15px 0;
   top: 40px;
@@ -470,6 +474,8 @@ h6 {
   background-size: cover;
   position: relative;
   padding: 0;
+  padding-left: 390px;
+  justify-content: center;
 }
 
 #hero:before {
@@ -484,6 +490,7 @@ h6 {
 
 #hero .container {
   padding-top: 110px;
+  text-align: center;
 }
 
 @media (max-width: 992px) {
@@ -494,21 +501,26 @@ h6 {
 
 #hero h1 {
   margin: 0;
-  font-size: 48px;
+  font-size: 36px;
   font-weight: 700;
   line-height: 56px;
   color: #fff;
-  font-family: "Poppins", sans-serif;
-}
-
-#hero h1 span {
-  color: #cda45e;
+  font-family: "Garamond Premr Pro";
+    src: url(../webfonts/fonts/GaramondPremrPro-MedIt.otf) format("opentype");
+    font-weight: 400;
+    font-style: italic;
+    text-align: center;
 }
 
 #hero h2 {
   color: #eee;
   margin-bottom: 10px 0 0 0;
   font-size: 22px;
+  font-family: "Garamond Premr Pro";
+    src: url(../webfonts/fonts/GaramondPremrPro-MedIt.otf) format("opentype");
+    font-weight: 400;
+    font-style: italic;
+    text-align: center;
 }
 
 #hero .btns {
@@ -776,7 +788,7 @@ section {
 
 .about:before {
   content: "";
-  background: rgba(0, 0, 0, 0.8);
+  background: #f0f0e6;
   position: absolute;
   bottom: 0;
   top: 0;
@@ -791,7 +803,7 @@ section {
 
 .about .about-img img {
   max-width: 100%;
-  border: 4px solid rgba(255, 255, 255, 0.2);
+  border: 4px solid #f0f0e6;
   position: relative;
 }
 
@@ -837,7 +849,20 @@ section {
 
 .about .content h3 {
   font-weight: 600;
-  font-size: 26px;
+  font-size: 40px;
+  color: #3c2415;
+  font-family: "Garamond Premr Pro";
+    src: url(../webfonts/fonts/GaramondPremrPro-MedIt.otf) format("opentype");
+    font-weight: 400;
+    font-style: italic;
+}
+.about .content p{
+  font-size: 16px;
+  color: #3c2415;
+  font-family: "Garamond Premr Pro";
+    src: url(../webfonts/fonts/GaramondPremrPro-MedIt.otf) format("opentype");
+    font-weight: 400;
+    font-style: italic;
 }
 
 .about .content ul {
