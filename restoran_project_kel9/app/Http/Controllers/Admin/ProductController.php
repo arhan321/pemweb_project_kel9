@@ -2,28 +2,29 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Gate;
+use App\Models\Product;
+use Illuminate\Http\Request;
+use App\Charts\ProductPieChart;
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\Traits\MediaUploadingTrait;
-use App\Http\Requests\MassDestroyProductRequest;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
-use App\Models\Product;
-use Gate;
-use Illuminate\Http\Request;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Symfony\Component\HttpFoundation\Response;
+use App\Http\Requests\MassDestroyProductRequest;
+use App\Http\Controllers\Traits\MediaUploadingTrait;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class ProductController extends Controller
 {
     use MediaUploadingTrait;
 
-    public function index()
-    {
+    public function index(ProductPieChart $chart)
+    {   
         abort_if(Gate::denies('product_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $products = Product::with(['media'])->get();
 
-        return view('admin.products.index', compact('products'));
+        return view('admin.products.index', compact('products'), ['chart' => $chart->build()]);
     }
 
     public function create()

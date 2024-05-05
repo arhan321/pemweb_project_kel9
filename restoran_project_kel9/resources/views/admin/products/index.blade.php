@@ -1,5 +1,12 @@
 @extends('layouts.admin')
 @section('content')
+<div class="container px-4 mx-auto">
+
+    <div class="p-6 m-10 bg-white rounded shadow">
+        {!! $chart->container() !!}
+    </div>
+
+</div>
 @can('product_create')
     <div style="margin-bottom: 10px;" class="row">
         <div class="col-lg-12">
@@ -114,6 +121,9 @@
 
 @endsection
 @section('scripts')
+<script src="{{ $chart->cdn() }}"></script>
+
+{{ $chart->script() }}
 @parent
 <script>
     $(function () {
