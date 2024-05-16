@@ -900,11 +900,15 @@ section {
 /*--------------------------------------------------------------
 # Why Us
 --------------------------------------------------------------*/
+.why-us{
+  background: #f0f0e6;
+}
+
 .why-us .box {
   padding: 50px 30px;
   box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
   transition: all ease-in-out 0.3s;
-  background: #1a1814;
+  background: #f0f0e6;
 }
 
 .why-us .box span {
@@ -919,11 +923,19 @@ section {
   font-weight: 600;
   padding: 0;
   margin: 20px 0;
-  color: rgba(255, 255, 255, 0.8);
+  color: #3c2415;
+  font-family: "Garamond Premr Pro";
+    src: url(../webfonts/fonts/GaramondPremrPro-MedIt.otf) format("opentype");
+    font-weight: 400;
+    font-style: italic;
 }
 
 .why-us .box p {
-  color: #aaaaaa;
+  color: #3c2415;
+  font-family: "Garamond Premr Pro";
+    src: url(../webfonts/fonts/GaramondPremrPro-MedIt.otf) format("opentype");
+    font-weight: 400;
+    font-style: italic;
   font-size: 15px;
   margin: 0;
   padding: 0;
@@ -933,17 +945,22 @@ section {
   background: #cda45e;
   padding: 30px 30px 70px 30px;
   box-shadow: 10px 15px 30px rgba(0, 0, 0, 0.18);
+  transform: scale();
 }
 
 .why-us .box:hover span,
 .why-us .box:hover h4,
 .why-us .box:hover p {
-  color: #fff;
+  color: #00000093;
 }
 
 /*--------------------------------------------------------------
 # Menu Section
 --------------------------------------------------------------*/
+.menu{
+  background: #f0f0e6;
+}
+
 .menu #menu-flters {
   padding: 0;
   margin: 0 auto 0 auto;
@@ -959,11 +976,13 @@ section {
   font-size: 16px;
   font-weight: 500;
   line-height: 1;
-  color: #fff;
   margin-bottom: 10px;
   transition: all ease-in-out 0.3s;
   border-radius: 50px;
-  font-family: "Playfair Display", serif;
+  color: #3c2415;
+  font-family: "Garamond Premr Pro";
+    src: url(../webfonts/fonts/GaramondPremrPro-MedIt.otf) format("opentype");
+    font-style: italic;
 }
 
 .menu #menu-flters li:hover,
@@ -1009,11 +1028,15 @@ section {
 
 .menu .menu-content a {
   padding-right: 10px;
-  background: #1a1814;
+  background: #f0f0e6;
   position: relative;
   z-index: 3;
   font-weight: 700;
-  color: white;
+  color: #3c2415;
+  font-family: "Garamond Premr Pro";
+    src: url(../webfonts/fonts/GaramondPremrPro-MedIt.otf) format("opentype");
+    
+    font-style: italic;
   transition: 0.3s;
 }
 
@@ -1022,20 +1045,23 @@ section {
 }
 
 .menu .menu-content span {
-  background: #1a1814;
+  background: #f0f0e6;
   position: relative;
   z-index: 3;
   padding: 0 10px;
   font-weight: 600;
-  color: #cda45e;
+  color: #3c2415;
 }
 
 .menu .menu-ingredients {
   margin-left: 85px;
   font-style: italic;
   font-size: 14px;
-  font-family: "Poppins", sans-serif;
-  color: rgba(255, 255, 255, 0.5);
+  color: #3c2415;
+  font-family: "Garamond Premr Pro";
+    src: url(../webfonts/fonts/GaramondPremrPro-MedIt.otf) format("opentype");
+    font-weight: 400;
+    font-style: italic;
 }
 
 /*--------------------------------------------------------------
@@ -1056,7 +1082,7 @@ section {
   transition: 0.3s;
   color: #3c2415;
   border-radius: 0;
-  border-right: 2px solid #cda45e;
+  /* border-right: 2px solid #cda45e; */
   font-weight: 600;
   font-size: 15px;
 }
@@ -1071,8 +1097,13 @@ section {
     src: url(../webfonts/fonts/GaramondPremrPro-MedIt.otf) format("opentype");
     font-weight: 400;
     font-style: italic;
-  background: #cda45e;
-  border-color: #cda45e;
+  background: #f0f0e6;
+  border-color: #f0f0e6;
+}
+
+.img-fluid{
+  width: 200px;
+  height: auto;
 }
 
 .signature .nav-link:hover {
@@ -1118,7 +1149,7 @@ section {
 /*--------------------------------------------------------------
 # Events
 --------------------------------------------------------------*/
-.events {
+/* .events {
   background: url(../img/events-bg.jpg) center center no-repeat;
   background-size: cover;
   position: relative;
@@ -1207,12 +1238,12 @@ section {
 
 .events .swiper-pagination .swiper-pagination-bullet-active {
   background-color: #cda45e;
-}
+} */
 
 /*--------------------------------------------------------------
 # Book A Table
 --------------------------------------------------------------*/
-.book-a-table .php-email-form {
+/* .book-a-table .php-email-form {
   width: 100%;
 }
 
@@ -1318,11 +1349,15 @@ section {
 
 .book-a-table .php-email-form button[type="submit"]:hover {
   background: #d3af71;
-}
+} */
 
 /*--------------------------------------------------------------
 # Testimonials
 --------------------------------------------------------------*/
+.testimonials{
+  background-color: #f0f0e6;
+}
+
 .testimonials .testimonial-item {
   box-sizing: content-box;
   min-height: 320px;
@@ -1341,12 +1376,19 @@ section {
   font-size: 18px;
   font-weight: bold;
   margin: 10px 0 5px 45px;
-  color: white;
+  
+  color: #3c2415;
+  font-family: "Garamond Premr Pro";
+    src: url(../webfonts/fonts/GaramondPremrPro-MedIt.otf) format("opentype");
+    font-style: italic;
 }
 
 .testimonials .testimonial-item h4 {
   font-size: 14px;
-  color: rgba(255, 255, 255, 0.6);
+  color: #3c2415;
+  font-family: "Garamond Premr Pro";
+    src: url(../webfonts/fonts/GaramondPremrPro-MedIt.otf) format("opentype");
+    font-style: italic;
   margin: 0 0 0 45px;
 }
 
@@ -1373,11 +1415,15 @@ section {
   font-style: italic;
   margin: 0 15px 0 15px;
   padding: 20px 20px 60px 20px;
-  background: #26231d;
+  background: rgba(3, 0, 0, 0.163);
   position: relative;
   border-radius: 6px;
   position: relative;
   z-index: 1;
+  color: #3c2415;
+  font-family: "Garamond Premr Pro";
+    src: url(../webfonts/fonts/GaramondPremrPro-MedIt.otf) format("opentype");
+    font-style: italic;
 }
 
 .testimonials .swiper-pagination {
@@ -1388,12 +1434,12 @@ section {
 .testimonials .swiper-pagination .swiper-pagination-bullet {
   width: 12px;
   height: 12px;
-  background-color: rgba(255, 255, 255, 0.4);
+  background-color: rgba(3, 0, 0, 0.586);
   opacity: 1;
 }
 
 .testimonials .swiper-pagination .swiper-pagination-bullet-active {
-  background-color: #cda45e;
+  background-color: #3c2415;
 }
 
 /*--------------------------------------------------------------
@@ -1403,7 +1449,18 @@ section {
   overflow: hidden;
   border-right: 3px solid #454035;
   border-bottom: 3px solid #454035;
+  margin: 15px;
 }
+
+.img-fluid{
+  width: auto;
+}
+
+
+.gallery{
+  background-color: #f0f0e6;
+}
+
 
 .gallery .gallery-item img {
   transition: all ease-in-out 0.4s;
@@ -1416,6 +1473,10 @@ section {
 /*--------------------------------------------------------------
 # Chefs
 --------------------------------------------------------------*/
+.chefs{
+  background-color: #f0f0e6;
+}
+
 .chefs .member {
   text-align: center;
   margin-bottom: 20px;
@@ -1670,14 +1731,17 @@ section {
 # Footer
 --------------------------------------------------------------*/
 #footer {
-  background: black;
+  background: #f0f0e6;
   padding: 0 0 30px 0;
-  color: #fff;
+  color: #3c2415;
+  font-family: "Garamond Premr Pro";
+    src: url(../webfonts/fonts/GaramondPremrPro-MedIt.otf) format("opentype");
+    font-style: italic;
   font-size: 14px;
 }
 
 #footer .footer-top {
-  background: #0c0b09;
+  background: #f0f0e6;
   border-top: 1px solid #37332a;
   border-bottom: 1px solid #28251f;
   padding: 60px 0 30px 0;
@@ -1695,22 +1759,30 @@ section {
   line-height: 1;
   font-weight: 300;
   text-transform: uppercase;
-  font-family: "Poppins", sans-serif;
+  color: #3c2415;
+  font-family: "Garamond Premr Pro";
+    src: url(../webfonts/fonts/GaramondPremrPro-MedIt.otf) format("opentype");
+    font-style: italic;
 }
 
 #footer .footer-top .footer-info p {
   font-size: 14px;
   line-height: 24px;
   margin-bottom: 0;
-  font-family: "Playfair Display", serif;
-  color: #fff;
+  color: #3c2415;
+  font-family: "Garamond Premr Pro";
+    src: url(../webfonts/fonts/GaramondPremrPro-MedIt.otf) format("opentype");
+    font-style: italic;
 }
 
 #footer .footer-top .social-links a {
   font-size: 18px;
   display: inline-block;
-  background: #28251f;
-  color: #fff;
+  background: #f0f0e6;
+  color: #3c2415;
+  font-family: "Garamond Premr Pro";
+    src: url(../webfonts/fonts/GaramondPremrPro-MedIt.otf) format("opentype");
+    font-style: italic;
   line-height: 1;
   padding: 8px 0;
   margin-right: 4px;
@@ -1723,14 +1795,20 @@ section {
 
 #footer .footer-top .social-links a:hover {
   background: #cda45e;
-  color: #fff;
+  color: #3c2415;
+  font-family: "Garamond Premr Pro";
+    src: url(../webfonts/fonts/GaramondPremrPro-MedIt.otf) format("opentype");
+    font-style: italic;
   text-decoration: none;
 }
 
 #footer .footer-top h4 {
   font-size: 16px;
   font-weight: 600;
-  color: #fff;
+  color: #3c2415;
+  font-family: "Garamond Premr Pro";
+    src: url(../webfonts/fonts/GaramondPremrPro-MedIt.otf) format("opentype");
+    font-style: italic;
   position: relative;
   padding-bottom: 12px;
 }
@@ -1764,7 +1842,10 @@ section {
 }
 
 #footer .footer-top .footer-links ul a {
-  color: #fff;
+  color: #3c2415;
+  font-family: "Garamond Premr Pro";
+    src: url(../webfonts/fonts/GaramondPremrPro-MedIt.otf) format("opentype");
+    font-style: italic;
   transition: 0.3s;
   display: inline-block;
   line-height: 1;
@@ -1788,7 +1869,10 @@ section {
   padding: 4px;
   width: calc(100% - 110px);
   background: #28251f;
-  color: white;
+  color: #3c2415;
+  font-family: "Garamond Premr Pro";
+    src: url(../webfonts/fonts/GaramondPremrPro-MedIt.otf) format("opentype");
+    font-style: italic;
 }
 
 #footer .footer-top .footer-newsletter form input[type="submit"] {
@@ -1813,11 +1897,18 @@ section {
 #footer .copyright {
   text-align: center;
   padding-top: 30px;
+  color: #3c2415;
+  font-family: "Garamond Premr Pro";
+    src: url(../webfonts/fonts/GaramondPremrPro-MedIt.otf) format("opentype");
+    font-style: italic;
 }
 
 #footer .credits {
   padding-top: 10px;
   text-align: center;
   font-size: 13px;
-  color: #fff;
+  color: #3c2415;
+  font-family: "Garamond Premr Pro";
+    src: url(../webfonts/fonts/GaramondPremrPro-MedIt.otf) format("opentype");
+    font-style: italic;
 }
