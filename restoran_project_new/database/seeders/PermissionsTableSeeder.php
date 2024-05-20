@@ -326,6 +326,67 @@ class PermissionsTableSeeder extends Seeder
                 'id'    => 79,
                 'title' => 'profile_password_edit',
             ],
+            [
+                'id'    => 80,
+                'title' => 'home_access',
+            ],
+            [
+                'id'    => 81,
+                'title' => 'home_create',
+            ],
+            [
+                'id'    => 82,
+                'title' => 'home_delete',
+            ],
+            [
+                'id'    => 83,
+                'title' => 'home_edit',
+            ],
+            [
+                'id'    => 84,
+                'title' => 'home_show',
+            ],
+            [
+                'id'    => 85,
+                'title' => 'why_access',
+            ],
+            [
+                'id'    => 86,
+                'title' => 'why_create',
+            ],
+            [
+                'id'    => 87,
+                'title' => 'why_delete',
+            ],
+            [
+                'id'    => 88,
+                'title' => 'why_edit',
+            ],
+            [
+                'id'    => 89,
+                'title' => 'why_show',
+            ],
+            [
+                'id'    => 90,
+                'title' => 'datachef_access',
+            ],
+            [
+                'id'    => 91,
+                'title' => 'datachef_create',
+            ],
+            [
+                'id'    => 92,
+                'title' => 'datachef_delete',
+            ],
+            [
+                'id'    => 93,
+                'title' => 'datachef_edit',
+            ],
+            [
+                'id'    => 94,
+                'title' => 'datachef_show',
+            ],
+     
         ];
 
         Permission::insert($permissions);

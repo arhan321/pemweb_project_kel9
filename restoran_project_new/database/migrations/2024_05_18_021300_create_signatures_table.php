@@ -13,6 +13,7 @@ return new class extends Migration
             $table->unsignedBigInteger('product_id');
             $table->string('menu_name')->nullable();
             $table->text('description')->nullable();
+            $table->string('category')->nullable();
             $table->timestamps();
             $table->softDeletes();
 

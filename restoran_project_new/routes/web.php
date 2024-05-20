@@ -65,17 +65,31 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::post('profiles/ckmedia', 'ProfileController@storeCKEditorImages')->name('profiles.storeCKEditorImages');
     Route::resource('profiles', 'ProfileController');
 
-    // // About
-    // Route::delete('abouts/destroy', 'AboutController@massDestroy')->name('abouts.massDestroy');
-    // Route::post('abouts/media', 'AboutController@storeMedia')->name('abouts.storeMedia');
-    // Route::post('abouts/ckmedia', 'AboutController@storeCKEditorImages')->name('abouts.storeCKEditorImages');
-    // Route::resource('abouts', 'AboutController');
+    // About
+    Route::delete('abouts/destroy', 'AboutController@massDestroy')->name('abouts.massDestroy');
+    Route::post('abouts/media', 'AboutController@storeMedia')->name('abouts.storeMedia');
+    Route::post('abouts/ckmedia', 'AboutController@storeCKEditorImages')->name('abouts.storeCKEditorImages');
+    Route::resource('abouts', 'AboutController');
 
+  
     // Gallery
     Route::delete('galleries/destroy', 'GalleryController@massDestroy')->name('galleries.massDestroy');
     Route::post('galleries/media', 'GalleryController@storeMedia')->name('galleries.storeMedia');
     Route::post('galleries/ckmedia', 'GalleryController@storeCKEditorImages')->name('galleries.storeCKEditorImages');
     Route::resource('galleries', 'GalleryController');
+
+    // Why us
+    Route::delete('whys/destroy', 'WhyController@massDestroy')->name('whys.massDestroy');
+    Route::post('whys/media', 'WhyController@storeMedia')->name('whys.storeMedia');
+    Route::post('whys/ckmedia', 'WhyController@storeCKEditorImages')->name('whys.storeCKEditorImages');
+    Route::resource('whys', 'WhyController');
+  
+    // Data Chef
+    Route::delete('datachefs/destroy', 'DatacheffController@massDestroy')->name('datachefs.massDestroy');
+    Route::post('datachefs/media', 'DatacheffController@storeMedia')->name('datachefs.storeMedia');
+    Route::post('datachefs/ckmedia', 'DatacheffController@storeCKEditorImages')->name('datachefs.storeCKEditorImages');
+    Route::resource('datachefs', 'DatacheffController');
+     
 
      // Home
      Route::delete('homes/destroy', 'HomeAdminController@massDestroy')->name('homes.massDestroy');

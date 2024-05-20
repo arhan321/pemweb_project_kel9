@@ -3,11 +3,11 @@
 namespace App\Models;
 
 use DateTimeInterface;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\HasMedia;
+use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class Gallery extends Model implements HasMedia
@@ -27,9 +27,9 @@ class Gallery extends Model implements HasMedia
     ];
 
     protected $fillable = [
-        'title',
+        'title_1',
+        'title_2',
         'description',
-        'price',
         'created_at',
         'updated_at',
         'deleted_at',

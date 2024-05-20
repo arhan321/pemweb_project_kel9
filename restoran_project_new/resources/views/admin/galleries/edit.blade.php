@@ -11,15 +11,25 @@
             @method('PUT')
             @csrf
             <div class="form-group">
-                <label class="required" for="title">{{ trans('cruds.gallery.fields.title') }}</label>
-                <input class="form-control {{ $errors->has('title') ? 'is-invalid' : '' }}" type="text" name="title" id="title" value="{{ old('title', $gallery->title) }}" required>
-                @if($errors->has('title'))
+                <label class="required" for="title_1">{{ trans('cruds.gallery.fields.title_1') }}</label>
+                <input class="form-control {{ $errors->has('title_1') ? 'is-invalid' : '' }}" type="text" name="title_1" id="title_1" value="{{ old('title_1', $gallery->title_1) }}" required>
+                @if($errors->has('title_1'))
                     <div class="invalid-feedback">
-                        {{ $errors->first('title') }}
+                        {{ $errors->first('title_1') }}
                     </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.gallery.fields.title_helper') }}</span>
             </div>
+            <div class="form-group">
+              <label class="required" for="title_2">{{ trans('cruds.gallery.fields.title_2') }}</label>
+              <input class="form-control {{ $errors->has('title_2') ? 'is-invalid' : '' }}" type="text" name="title_2" id="title_2" value="{{ old('title_2', $gallery->title_2) }}" required>
+              @if($errors->has('title_2'))
+                  <div class="invalid-feedback">
+                      {{ $errors->first('title_2') }}
+                  </div>
+              @endif
+              <span class="help-block">{{ trans('cruds.gallery.fields.title_helper') }}</span>
+          </div>
             <div class="form-group">
                 <label for="description">{{ trans('cruds.gallery.fields.description') }}</label>
                 <textarea class="form-control ckeditor {{ $errors->has('description') ? 'is-invalid' : '' }}" name="description" id="description">{!! old('description', $gallery->description) !!}</textarea>
@@ -40,16 +50,6 @@
                     </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.gallery.fields.image_helper') }}</span>
-            </div>
-            <div class="form-group">
-                <label for="price">{{ trans('cruds.gallery.fields.price') }}</label>
-                <input class="form-control {{ $errors->has('price') ? 'is-invalid' : '' }}" type="number" name="price" id="price" value="{{ old('price', $gallery->price) }}" step="0.01">
-                @if($errors->has('price'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('price') }}
-                    </div>
-                @endif
-                <span class="help-block">{{ trans('cruds.gallery.fields.price_helper') }}</span>
             </div>
             <div class="form-group">
                 <button class="btn btn-danger" type="submit">

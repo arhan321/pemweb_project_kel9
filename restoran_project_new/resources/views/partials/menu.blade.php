@@ -69,14 +69,14 @@
                     @can('home_access')
                     <li class="c-sidebar-nav-item">
                         <a href="{{ route("admin.homes.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/homes") || request()->is("admin/homes/*") ? "c-active" : "" }}">
-                            <i class="fa-fw fas fa-address-book c-sidebar-nav-icon">
-
+                            <i class="fa-fw fas fa-home c-sidebar-nav-icon"></i>
+                                {{-- <i class="fa-solid fa-house"></i> --}}
                             </i>
                             {{ trans('cruds.home.title') }}
                         </a>
                     </li>
                     @endcan
-                    @can('daftar_layanan_access')
+                    {{-- @can('daftar_layanan_access')
                         <li class="c-sidebar-nav-item">
                             <a href="{{ route("admin.daftar-layanans.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/daftar-layanans") || request()->is("admin/daftar-layanans/*") ? "c-active" : "" }}">
                                 <i class="fa-fw fas fa-concierge-bell c-sidebar-nav-icon">
@@ -85,8 +85,8 @@
                                 {{ trans('cruds.daftarLayanan.title') }}
                             </a>
                         </li>
-                    @endcan
-                    @can('profile_access')
+                    @endcan --}}
+                    {{-- @can('profile_access')
                         <li class="c-sidebar-nav-item">
                             <a href="{{ route("admin.profiles.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/profiles") || request()->is("admin/profiles/*") ? "c-active" : "" }}">
                                 <i class="fa-fw far fa-user-circle c-sidebar-nav-icon">
@@ -95,8 +95,8 @@
                                 {{ trans('cruds.profile.title') }}
                             </a>
                         </li>
-                    @endcan
-                    {{-- @can('about_access')
+                    @endcan --}}
+                    @can('about_access')
                         <li class="c-sidebar-nav-item">
                             <a href="{{ route("admin.abouts.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/abouts") || request()->is("admin/abouts/*") ? "c-active" : "" }}">
                                 <i class="fa-fw far fa-address-card c-sidebar-nav-icon">
@@ -105,7 +105,17 @@
                                 {{ trans('cruds.about.title') }}
                             </a>
                         </li>
-                    @endcan --}}
+                    @endcan
+                    @can('why_access')
+                    <li class="c-sidebar-nav-item">
+                        <a href="{{ route("admin.whys.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/whys") || request()->is("admin/whys/*") ? "c-active" : "" }}">
+                            <i class="fa-fw far fa-address-card c-sidebar-nav-icon">
+
+                            </i>
+                            {{ trans('cruds.whys.title') }}
+                        </a>
+                    </li>
+                @endcan
                     @can('blog_access')
                         <li class="c-sidebar-nav-item">
                             <a href="{{ route("admin.blogs.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/blogs") || request()->is("admin/blogs/*") ? "c-active" : "" }}">
@@ -126,10 +136,21 @@
                             </a>
                         </li>
                     @endcan
+                    @can('datachef_access')
+                    <li class="c-sidebar-nav-item">
+                        <a href="{{ route("admin.datachefs.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/datachefs") || request()->is("admin/datachefs/*") ? "c-active" : "" }}">
+                            <i class="fa-fw fas fa-chess-queen c-sidebar-nav-icon">
+                                {{-- <i class="fa-regular fa-chess-queen"></i> --}}
+                            </i>
+                            {{ trans('cruds.datachef.title') }}
+                        </a>
+                    </li>
+                @endcan
                     @can('tim_access')
                         <li class="c-sidebar-nav-item">
                             <a href="{{ route("admin.tims.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/tims") || request()->is("admin/tims/*") ? "c-active" : "" }}">
                                 <i class="fa-fw fab fa-teamspeak c-sidebar-nav-icon">
+                                    
 
                                 </i>
                                 {{ trans('cruds.tim.title') }}

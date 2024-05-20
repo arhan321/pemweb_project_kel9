@@ -35,7 +35,7 @@
   
           <nav id="navbar" class="navbar order-last order-lg-0">
             <ul>
-              <li><a class="nav-link scrollto active" href="{{ route('frontend.home') }}">Home</a></li>
+              <li><a class="nav-link scrollto" href="{{ route('frontend.home') }}">Home</a></li>
               <li><a class="nav-link scrollto" href="{{ route('frontend.about') }}">About</a></li>
               <li><a class="nav-link scrollto" href="{{ route('frontend.menu') }}">Menu</a></li>
               <li><a class="nav-link scrollto" href="{{ route('frontend.signature') }}">Signature</a></li>

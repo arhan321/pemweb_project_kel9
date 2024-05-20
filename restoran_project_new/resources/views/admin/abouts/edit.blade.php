@@ -1,44 +1,45 @@
-{{-- @extends('layouts.admin')
+@extends('layouts.admin')
 @section('content')
 
 <div class="card">
     <div class="card-header">
-        {{ trans('global.edit') }} {{ trans('cruds.about.title_singular') }}
+        {{ trans('global.edit') }} {{ trans('cruds.gallery.title_singular') }}
     </div>
 
     <div class="card-body">
-        <form method="POST" action="{{ route("admin.abouts.update", [$about->id]) }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route("admin.galleries.update", [$gallery->id]) }}" enctype="multipart/form-data">
             @method('PUT')
             @csrf
             <div class="form-group">
-                <label for="vision">{{ trans('cruds.about.fields.vision') }}</label>
-                <textarea class="form-control ckeditor {{ $errors->has('vision') ? 'is-invalid' : '' }}" name="vision" id="vision">{!! old('vision', $about->vision) !!}</textarea>
-                @if($errors->has('vision'))
+                <label class="required" for="title">{{ trans('cruds.gallery.fields.title') }}</label>
+                <input class="form-control {{ $errors->has('title') ? 'is-invalid' : '' }}" type="text" name="title" id="title" value="{{ old('title', $gallery->title) }}" required>
+                @if($errors->has('title'))
                     <div class="invalid-feedback">
-                        {{ $errors->first('vision') }}
+                        {{ $errors->first('title') }}
                     </div>
                 @endif
-                <span class="help-block">{{ trans('cruds.about.fields.vision_helper') }}</span>
+                <span class="help-block">{{ trans('cruds.gallery.fields.title_helper') }}</span>
             </div>
             <div class="form-group">
-                <label for="mission">{{ trans('cruds.about.fields.mission') }}</label>
-                <textarea class="form-control ckeditor {{ $errors->has('mission') ? 'is-invalid' : '' }}" name="mission" id="mission">{!! old('mission', $about->mission) !!}</textarea>
-                @if($errors->has('mission'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('mission') }}
-                    </div>
-                @endif
-                <span class="help-block">{{ trans('cruds.about.fields.mission_helper') }}</span>
-            </div>
-            <div class="form-group">
-                <label for="description">{{ trans('cruds.about.fields.description') }}</label>
-                <textarea class="form-control ckeditor {{ $errors->has('description') ? 'is-invalid' : '' }}" name="description" id="description">{!! old('description', $about->description) !!}</textarea>
+                <label for="description">{{ trans('cruds.gallery.fields.description') }}</label>
+                <textarea class="form-control ckeditor {{ $errors->has('description') ? 'is-invalid' : '' }}" name="description" id="description">{!! old('description', $gallery->description) !!}</textarea>
                 @if($errors->has('description'))
                     <div class="invalid-feedback">
                         {{ $errors->first('description') }}
                     </div>
                 @endif
-                <span class="help-block">{{ trans('cruds.about.fields.description_helper') }}</span>
+                <span class="help-block">{{ trans('cruds.gallery.fields.description_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label class="required" for="image">{{ trans('cruds.gallery.fields.image') }}</label>
+                <div class="needsclick dropzone {{ $errors->has('image') ? 'is-invalid' : '' }}" id="image-dropzone">
+                </div>
+                @if($errors->has('image'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('image') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.gallery.fields.image_helper') }}</span>
             </div>
             <div class="form-group">
                 <button class="btn btn-danger" type="submit">
@@ -65,7 +66,7 @@
               return new Promise(function(resolve, reject) {
                 // Init request
                 var xhr = new XMLHttpRequest();
-                xhr.open('POST', '{{ route('admin.abouts.storeCKEditorImages') }}', true);
+                xhr.open('POST', '{{ route('admin.galleries.storeCKEditorImages') }}', true);
                 xhr.setRequestHeader('x-csrf-token', window._token);
                 xhr.setRequestHeader('Accept', 'application/json');
                 xhr.responseType = 'json';
@@ -98,7 +99,7 @@
                 // Send request
                 var data = new FormData();
                 data.append('upload', file);
-                data.append('crud_id', '{{ $about->id ?? 0 }}');
+                data.append('crud_id', '{{ $gallery->id ?? 0 }}');
                 xhr.send(data);
               });
             })
@@ -118,4 +119,59 @@
 });
 </script>
 
-@endsection --}}
+<script>
+    Dropzone.options.imageDropzone = {
+    url: '{{ route('admin.galleries.storeMedia') }}',
+    maxFilesize: 2, // MB
+    acceptedFiles: '.jpeg,.jpg,.png,.gif',
+    maxFiles: 1,
+    addRemoveLinks: true,
+    headers: {
+      'X-CSRF-TOKEN': "{{ csrf_token() }}"
+    },
+    params: {
+      size: 2,
+      width: 4096,
+      height: 4096
+    },
+    success: function (file, response) {
+      $('form').find('input[name="image"]').remove()
+      $('form').append('<input type="hidden" name="image" value="' + response.name + '">')
+    },
+    removedfile: function (file) {
+      file.previewElement.remove()
+      if (file.status !== 'error') {
+        $('form').find('input[name="image"]').remove()
+        this.options.maxFiles = this.options.maxFiles + 1
+      }
+    },
+    init: function () {
+@if(isset($gallery) && $gallery->image)
+      var file = {!! json_encode($gallery->image) !!}
+          this.options.addedfile.call(this, file)
+      this.options.thumbnail.call(this, file, file.preview ?? file.preview_url)
+      file.previewElement.classList.add('dz-complete')
+      $('form').append('<input type="hidden" name="image" value="' + file.file_name + '">')
+      this.options.maxFiles = this.options.maxFiles - 1
+@endif
+    },
+    error: function (file, response) {
+        if ($.type(response) === 'string') {
+            var message = response //dropzone sends it's own error messages in string
+        } else {
+            var message = response.errors.file
+        }
+        file.previewElement.classList.add('dz-error')
+        _ref = file.previewElement.querySelectorAll('[data-dz-errormessage]')
+        _results = []
+        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+            node = _ref[_i]
+            _results.push(node.textContent = message)
+        }
+
+        return _results
+    }
+}
+
+</script>
+@endsection

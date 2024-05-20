@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Footer;
 use Gate;
+use App\Models\Footer;
 use Illuminate\Foundation\Http\FormRequest;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -19,8 +19,8 @@ class MassDestroyFooterRequest extends FormRequest
     public function rules()
     {
         return [
-            'ids'   => 'required|array',
-            'ids.*' => 'exists:footers,id',
+            // 'ids'   => 'required|array',
+            // 'ids.*' => 'exists:footers,id',
         ];
     }
 }

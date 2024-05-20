@@ -26,7 +26,7 @@
                 <i class="bx bxs-quote-alt-right quote-icon-right"></i>
               </p>
               <img
-                src="assets/img/testimonials/anya.png"
+                src="frontend/assets/img/testimonials/anya.png"
                 class="testimonial-img"
                 alt=""
               />
@@ -47,7 +47,7 @@
                 <i class="bx bxs-quote-alt-right quote-icon-right"></i>
               </p>
               <img
-                src="assets/img/testimonials/rigen.png"
+                src="frontend/assets/img/testimonials/rigen.png"
                 class="testimonial-img"
                 alt=""
               />
@@ -69,7 +69,7 @@
                 <i class="bx bxs-quote-alt-right quote-icon-right"></i>
               </p>
               <img
-                src="assets/img/testimonials/anastasya.png"
+                src="frontend/assets/img/testimonials/anastasya.png"
                 class="testimonial-img"
                 alt=""
               />
@@ -90,7 +90,7 @@
                 <i class="bx bxs-quote-alt-right quote-icon-right"></i>
               </p>
               <img
-                src="assets/img/testimonials/pesulap1.png"
+                src="frontend/assets/img/testimonials/pesulap1.png"
                 class="testimonial-img"
                 alt=""
               />
@@ -109,7 +109,7 @@
                 <i class="bx bxs-quote-alt-right quote-icon-right"></i>
               </p>
               <img
-                src="assets/img/testimonials/gibran.png"
+                src="frontend/assets/img/testimonials/gibran.png"
                 class="testimonial-img"
                 alt=""
               />

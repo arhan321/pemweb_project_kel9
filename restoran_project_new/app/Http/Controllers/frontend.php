@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Why;
 use App\Models\Blog;
 use App\Models\Home;
+use App\Models\About;
 use App\Models\Table;
 use App\Models\Footer;
+use App\Models\Gallery;
 use App\Models\Product;
+use App\Models\Datachef;
+use App\Models\SosialMedium;
 use Illuminate\Http\Request;
 
 class frontend extends Controller
@@ -27,8 +32,9 @@ class frontend extends Controller
     }
 
      public function abouts(){
-        //  $blog = Blog::all();
-         return view ('frontend.about');
+        $whyus = Why::all();
+        $About = About::all();
+         return view ('frontend.about', compact('About','whyus'));
      }
      
      public function menu(){
@@ -46,11 +52,14 @@ class frontend extends Controller
     }
     
     public function galery(){
-        return view ('frontend.galery');
+        $galery = Gallery::all();
+        return view ('frontend.galery', compact('galery'));
     }
     
     public function chefs(){
-        return view ('frontend.chefs');
+        $chefs = Datachef::all();
+        $icon = SosialMedium::all();
+        return view ('frontend.chefs',compact('chefs','icon'));
     }
 
 

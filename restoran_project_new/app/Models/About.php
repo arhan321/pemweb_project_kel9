@@ -16,6 +16,10 @@ class About extends Model implements HasMedia
 
     public $table = 'abouts';
 
+    protected $appends = [
+        'image',
+    ];
+
     protected $dates = [
         'created_at',
         'updated_at',
@@ -23,8 +27,7 @@ class About extends Model implements HasMedia
     ];
 
     protected $fillable = [
-        'vision',
-        'mission',
+        'title',
         'description',
         'created_at',
         'updated_at',
@@ -41,10 +44,10 @@ class About extends Model implements HasMedia
         $this->addMediaConversion('thumb')->fit('crop', 50, 50);
         $this->addMediaConversion('preview')->fit('crop', 120, 120);
     }
-    
+
     public function getImageAttribute()
     {
-        $file = $this->getMedia('imageabout')->last();
+        $file = $this->getMedia('image')->last();
         if ($file) {
             $file->url       = $file->getUrl();
             $file->thumbnail = $file->getUrl('thumb');
