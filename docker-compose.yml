@@ -7,7 +7,7 @@ services:
     hostname: "php_tester"
     restart: always
     volumes:
-      - ./restoran_project_new:/var/www/html
+      - ./restoran_project_new(dipake):/var/www/html
       - ./php/www.conf:/usr/local/etc/php-fpm.d/www.conf
     working_dir: /var/www/html
     depends_on: 
@@ -40,7 +40,7 @@ services:
     ports:
       - "80:80"
     volumes:
-      - ./restoran_project_new:/var/www/html
+      - ./restoran_project_new(dipake):/var/www/html
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
     depends_on:
       - php_tester
