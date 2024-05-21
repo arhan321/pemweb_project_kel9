@@ -66,4 +66,9 @@ class Product extends Model implements HasMedia
 
         return $file;
     }
+    
+    public function signatures()
+    {
+        return $this->hasMany(Signature::class);
+    }
 }

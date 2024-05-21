@@ -7,20 +7,20 @@ Route::get('/qr', function () {
  Route::get('/makan', 'makan_tempat@getmakan')->name('layouts.makan_di_tempat.makan');
 
 //routing front end 
-Route::get('/', 'frontend@getdb')->name('frontend.index');
-Route::get('/abouts', 'frontend@abouts')->name('frontend.abouts');
-Route::get('/menu', 'frontend@menu')->name('frontend.menu');
-Route::get('/special', 'frontend@special')->name('frontend.special');
-Route::get('/event', 'frontend@event')->name('frontend.event');
-Route::get('/galery', 'frontend@galery')->name('frontend.galery');
-Route::get('/testimonial', 'frontend@testimonial')->name('frontend.testimonial');
-Route::get('/chef', 'frontend@chef')->name('frontend.chef');
-Route::get('/contact', 'frontend@contact')->name('frontend.contact');
+Route::get('/', 'frontend@home')->name('frontend.home');
+ Route::get('/abouts', 'frontend@abouts')->name('frontend.about');
+ Route::get('/menu', 'frontend@menu')->name('frontend.menu');
+ Route::get('/signature', 'frontend@signature')->name('frontend.signature');
+ Route::get('/testimonial', 'frontend@testimonial')->name('frontend.testimonial');
+ Route::get('/galery', 'frontend@galery')->name('frontend.galery');
+ Route::get('/chefs', 'frontend@chefs')->name('frontend.chefs');
+//  Route::get('/contact', 'frontend@contact')->name('frontend.contact');
+// Route::get('/chef', 'frontend@chef')->name('frontend.chef');
+// Route::get('/contact', 'frontend@contact')->name('frontend.contact');
 Route::get('/reservasi', 'frontend@reservasi')->name('layouts.reservasi');
 Route::get('/error', function () {
     return view('frontend.error');
 });
-
 
 
 //Route::redirect('/', '/login');
@@ -71,12 +71,32 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::post('abouts/ckmedia', 'AboutController@storeCKEditorImages')->name('abouts.storeCKEditorImages');
     Route::resource('abouts', 'AboutController');
 
+  
     // Gallery
     Route::delete('galleries/destroy', 'GalleryController@massDestroy')->name('galleries.massDestroy');
     Route::post('galleries/media', 'GalleryController@storeMedia')->name('galleries.storeMedia');
     Route::post('galleries/ckmedia', 'GalleryController@storeCKEditorImages')->name('galleries.storeCKEditorImages');
     Route::resource('galleries', 'GalleryController');
 
+    // Why us
+    Route::delete('whys/destroy', 'WhyController@massDestroy')->name('whys.massDestroy');
+    Route::post('whys/media', 'WhyController@storeMedia')->name('whys.storeMedia');
+    Route::post('whys/ckmedia', 'WhyController@storeCKEditorImages')->name('whys.storeCKEditorImages');
+    Route::resource('whys', 'WhyController');
+  
+    // Data Chef
+    Route::delete('datachefs/destroy', 'DatacheffController@massDestroy')->name('datachefs.massDestroy');
+    Route::post('datachefs/media', 'DatacheffController@storeMedia')->name('datachefs.storeMedia');
+    Route::post('datachefs/ckmedia', 'DatacheffController@storeCKEditorImages')->name('datachefs.storeCKEditorImages');
+    Route::resource('datachefs', 'DatacheffController');
+     
+
+     // Home
+     Route::delete('homes/destroy', 'HomeAdminController@massDestroy')->name('homes.massDestroy');
+     Route::post('homes/media', 'HomeAdminController@storeMedia')->name('homes.storeMedia');
+     Route::post('homes/ckmedia', 'HomeAdminController@storeCKEditorImages')->name('homes.storeCKEditorImages');
+     Route::resource('homes', 'HomeAdminController');
+ 
     // Tim
     Route::delete('tims/destroy', 'TimController@massDestroy')->name('tims.massDestroy');
     Route::post('tims/media', 'TimController@storeMedia')->name('tims.storeMedia');

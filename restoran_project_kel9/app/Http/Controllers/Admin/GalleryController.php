@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Gate;
+use App\Models\Gallery;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\Traits\MediaUploadingTrait;
-use App\Http\Requests\MassDestroyGalleryRequest;
 use App\Http\Requests\StoreGalleryRequest;
 use App\Http\Requests\UpdateGalleryRequest;
-use App\Models\Gallery;
-use Gate;
-use Illuminate\Http\Request;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Symfony\Component\HttpFoundation\Response;
+use App\Http\Requests\MassDestroyGalleryRequest;
+use App\Http\Controllers\Traits\MediaUploadingTrait;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class GalleryController extends Controller
 {

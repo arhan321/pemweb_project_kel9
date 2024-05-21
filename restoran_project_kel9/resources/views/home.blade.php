@@ -14,8 +14,17 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
-                    You are logged in!
+                
+                    <div class="user-info">
+                        <p>You are logged in as:</p>
+                        <div class="user-name">{{ Auth::user()->name }}</div>
+                        <div class="user-roles">
+                            Roles:
+                            @foreach (Auth::user()->roles as $role)
+                                <span class="role">{{ $role->title }}</span>
+                            @endforeach
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

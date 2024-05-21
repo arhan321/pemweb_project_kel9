@@ -21,9 +21,9 @@ class AboutController extends Controller
     {
         abort_if(Gate::denies('about_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $abouts = About::with(['media'])->get();
+        $about = About::with(['media'])->get();
 
-        return view('admin.abouts.index', compact('abouts'));
+        return view('admin.abouts.index', compact('about'));
     }
 
     public function create()
@@ -34,19 +34,18 @@ class AboutController extends Controller
     }
 
     public function store(StoreAboutRequest $request)
-    { 
-       
+    {
         $about = About::create($request->all());
-        
-        if ($request->input('imageabout', false)) {
-            $about->addMedia(storage_path('tmp/uploads/' . basename($request->input('imageabout'))))->toMediaCollection('imageabout');
+
+        if ($request->input('image', false)) {
+            $about->addMedia(storage_path('tmp/uploads/' . basename($request->input('image'))))->toMediaCollection('image');
         }
 
         if ($media = $request->input('ck-media', false)) {
             Media::whereIn('id', $media)->update(['model_id' => $about->id]);
         }
+
         return redirect()->route('admin.abouts.index');
-         
     }
 
     public function edit(About $about)
@@ -58,15 +57,17 @@ class AboutController extends Controller
 
     public function update(UpdateAboutRequest $request, About $about)
     {
-        if ($request->input('imageabout', false)) {
-            if (! $about->imageabout || $request->input('imageabout') !== $about->imageabout->file_name) {
-                if ($about->imageabout) {
-                    $about->imageabout->delete();
+        $about->update($request->all());
+
+        if ($request->input('image', false)) {
+            if (! $about->image || $request->input('image') !== $about->image->file_name) {
+                if ($about->image) {
+                    $about->image->delete();
                 }
-                $about->imageaboutstorage_path('tmp/uploads/' . basename($request->input('imageabout')))->toMediaCollection('imageabout');
+                $about->addMedia(storage_path('tmp/uploads/' . basename($request->input('image'))))->toMediaCollection('image');
             }
-        } elseif ($about->imageabout) {
-            $about->imageabout->delete();
+        } elseif ($about->image) {
+            $about->image->delete();
         }
 
         return redirect()->route('admin.abouts.index');
@@ -90,9 +91,9 @@ class AboutController extends Controller
 
     public function massDestroy(MassDestroyAboutRequest $request)
     {
-        $abouts = About::find(request('ids'));
+        $about = About::find(request('ids'));
 
-        foreach ($abouts as $about) {
+        foreach ($about as $about) {
             $about->delete();
         }
 

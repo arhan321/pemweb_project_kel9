@@ -11,23 +11,13 @@
             @csrf
             <div class="form-group">
                 <label class="required" for="title">{{ trans('cruds.gallery.fields.title') }}</label>
-                <input class="form-control {{ $errors->has('title') ? 'is-invalid' : '' }}" type="text" name="title" id="title" value="{{ old('title', '') }}" required>
+                <input class="form-control {{ $errors->has('title') ? 'is-invalid' : '' }}" type="text" name="title" id="title" value="{{ old('title', '') }}">
                 @if($errors->has('title'))
                     <div class="invalid-feedback">
                         {{ $errors->first('title') }}
                     </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.gallery.fields.title_helper') }}</span>
-            </div>
-            <div class="form-group">
-                <label for="description">{{ trans('cruds.gallery.fields.description') }}</label>
-                <textarea class="form-control ckeditor {{ $errors->has('description') ? 'is-invalid' : '' }}" name="description" id="description">{!! old('description') !!}</textarea>
-                @if($errors->has('description'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('description') }}
-                    </div>
-                @endif
-                <span class="help-block">{{ trans('cruds.gallery.fields.description_helper') }}</span>
             </div>
             <div class="form-group">
                 <label class="required" for="image">{{ trans('cruds.gallery.fields.image') }}</label>
@@ -39,16 +29,6 @@
                     </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.gallery.fields.image_helper') }}</span>
-            </div>
-            <div class="form-group">
-                <label for="price">{{ trans('cruds.gallery.fields.price') }}</label>
-                <input class="form-control {{ $errors->has('price') ? 'is-invalid' : '' }}" type="number" name="price" id="price" value="{{ old('price', '') }}" step="0.01">
-                @if($errors->has('price'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('price') }}
-                    </div>
-                @endif
-                <span class="help-block">{{ trans('cruds.gallery.fields.price_helper') }}</span>
             </div>
             <div class="form-group">
                 <button class="btn btn-danger" type="submit">

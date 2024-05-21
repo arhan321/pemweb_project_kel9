@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Gallery;
 use Gate;
-use Illuminate\Foundation\Http\FormRequest;
+use App\Models\Gallery;
 use Illuminate\Http\Response;
+use Illuminate\Foundation\Http\FormRequest;
 
 class StoreGalleryRequest extends FormRequest
 {
@@ -17,10 +17,10 @@ class StoreGalleryRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => [
-                'string',
-                'required',
-            ],
+            // 'title' => [
+            //     'string',
+            //     'required',
+            // ],
             'image' => [
                 'required',
             ],

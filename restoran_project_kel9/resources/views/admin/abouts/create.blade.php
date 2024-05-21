@@ -10,24 +10,14 @@
         <form method="POST" action="{{ route("admin.abouts.store") }}" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
-                <label for="vision">{{ trans('cruds.about.fields.vision') }}</label>
-                <textarea class="form-control ckeditor {{ $errors->has('vision') ? 'is-invalid' : '' }}" name="vision" id="vision">{!! old('vision') !!}</textarea>
-                @if($errors->has('vision'))
+                <label class="required" for="title">{{ trans('cruds.about.fields.title') }}</label>
+                <input class="form-control {{ $errors->has('title') ? 'is-invalid' : '' }}" type="text" name="title" id="title" value="{{ old('title', '') }}" >
+                @if($errors->has('title'))
                     <div class="invalid-feedback">
-                        {{ $errors->first('vision') }}
+                        {{ $errors->first('title') }}
                     </div>
                 @endif
-                <span class="help-block">{{ trans('cruds.about.fields.vision_helper') }}</span>
-            </div>
-            <div class="form-group">
-                <label for="mission">{{ trans('cruds.about.fields.mission') }}</label>
-                <textarea class="form-control ckeditor {{ $errors->has('mission') ? 'is-invalid' : '' }}" name="mission" id="mission">{!! old('mission') !!}</textarea>
-                @if($errors->has('mission'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('mission') }}
-                    </div>
-                @endif
-                <span class="help-block">{{ trans('cruds.about.fields.mission_helper') }}</span>
+                <span class="help-block">{{ trans('cruds.about.fields.title_helper') }}</span>
             </div>
             <div class="form-group">
                 <label for="description">{{ trans('cruds.about.fields.description') }}</label>
@@ -40,16 +30,17 @@
                 <span class="help-block">{{ trans('cruds.about.fields.description_helper') }}</span>
             </div>
             <div class="form-group">
-              <label for="imageabout">{{ trans('cruds.about.fields.image') }}</label>
-              <div class="needsclick dropzone {{ $errors->has('imageabout') ? 'is-invalid' : '' }}" id="imageabout-dropzone">
-              </div>
-              @if($errors->has('imageabout'))
-                  <div class="invalid-feedback">
-                      {{ $errors->first('imageabout') }}
-                  </div>
-              @endif
-              <span class="help-block">{{ trans('cruds.blog.fields.blogimage_helper') }}</span>
-          </div>
+                <label class="required" for="image">{{ trans('cruds.about.fields.image') }}</label>
+                <div class="needsclick dropzone {{ $errors->has('image') ? 'is-invalid' : '' }}" id="image-dropzone">
+                </div>
+                @if($errors->has('image'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('image') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.about.fields.image_helper') }}</span>
+            </div>
+      
             <div class="form-group">
                 <button class="btn btn-danger" type="submit">
                     {{ trans('global.save') }}
@@ -129,59 +120,58 @@
 </script>
 
 <script>
-  Dropzone.options.imageaboutDropzone = {
-  url: '{{ route('admin.blogs.storeMedia') }}',
-  maxFilesize: 2, // MB
-  acceptedFiles: '.jpeg,.jpg,.png,.gif',
-  maxFiles: 1,
-  addRemoveLinks: true,
-  headers: {
-    'X-CSRF-TOKEN': "{{ csrf_token() }}"
-  },
-  params: {
-    size: 2,
-    width: 4096,
-    height: 4096
-  },
-  success: function (file, response) {
-    $('form').find('input[name="imageabout"]').remove()
-    $('form').append('<input type="hidden" name="imageabout" value="' + response.name + '">')
-  },
-  removedfile: function (file) {
-    file.previewElement.remove()
-    if (file.status !== 'error') {
-      $('form').find('input[name="imageabout"]').remove()
-      this.options.maxFiles = this.options.maxFiles + 1
-    }
-  },
-  init: function () {
-@if(isset($blog) && $blog->imageabout)
-    var file = {!! json_encode($blog->imageabout) !!}
-        this.options.addedfile.call(this, file)
-    this.options.thumbnail.call(this, file, file.preview ?? file.preview_url)
-    file.previewElement.classList.add('dz-complete')
-    $('form').append('<input type="hidden" name="imageabout" value="' + file.file_name + '">')
-    this.options.maxFiles = this.options.maxFiles - 1
+    Dropzone.options.imageDropzone = {
+    url: '{{ route('admin.abouts.storeMedia') }}',
+    maxFilesize: 2, // MB
+    acceptedFiles: '.jpeg,.jpg,.png,.gif',
+    maxFiles: 1,
+    addRemoveLinks: true,
+    headers: {
+      'X-CSRF-TOKEN': "{{ csrf_token() }}"
+    },
+    params: {
+      size: 2,
+      width: 4096,
+      height: 4096
+    },
+    success: function (file, response) {
+      $('form').find('input[name="image"]').remove()
+      $('form').append('<input type="hidden" name="image" value="' + response.name + '">')
+    },
+    removedfile: function (file) {
+      file.previewElement.remove()
+      if (file.status !== 'error') {
+        $('form').find('input[name="image"]').remove()
+        this.options.maxFiles = this.options.maxFiles + 1
+      }
+    },
+    init: function () {
+@if(isset($about) && $about->image)
+      var file = {!! json_encode($about->image) !!}
+          this.options.addedfile.call(this, file)
+      this.options.thumbnail.call(this, file, file.preview ?? file.preview_url)
+      file.previewElement.classList.add('dz-complete')
+      $('form').append('<input type="hidden" name="image" value="' + file.file_name + '">')
+      this.options.maxFiles = this.options.maxFiles - 1
 @endif
-  },
-  error: function (file, response) {
-      if ($.type(response) === 'string') {
-          var message = response //dropzone sends it's own error messages in string
-      } else {
-          var message = response.errors.file
-      }
-      file.previewElement.classList.add('dz-error')
-      _ref = file.previewElement.querySelectorAll('[data-dz-errormessage]')
-      _results = []
-      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-          node = _ref[_i]
-          _results.push(node.textContent = message)
-      }
+    },
+    error: function (file, response) {
+        if ($.type(response) === 'string') {
+            var message = response //dropzone sends it's own error messages in string
+        } else {
+            var message = response.errors.file
+        }
+        file.previewElement.classList.add('dz-error')
+        _ref = file.previewElement.querySelectorAll('[data-dz-errormessage]')
+        _results = []
+        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+            node = _ref[_i]
+            _results.push(node.textContent = message)
+        }
 
-      return _results
-  }
+        return _results
+    }
 }
 
 </script>
-
 @endsection

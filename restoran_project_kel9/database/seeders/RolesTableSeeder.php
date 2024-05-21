@@ -12,11 +12,27 @@ class RolesTableSeeder extends Seeder
         $roles = [
             [
                 'id'    => 1,
-                'title' => 'Admin',
+                'title' => 'Owner',
             ],
             [
                 'id'    => 2,
-                'title' => 'User',
+                'title' => 'manager_umum',
+            ],
+            [
+                'id'    => 3,
+                'title' => 'kasir',
+            ],
+            [
+                'id'    => 4,
+                'title' => 'waiter',
+            ],
+            [
+                'id'    => 5,
+                'title' => 'kepala_chef',
+            ],
+            [
+                'id'    => 6,
+                'title' => 'bartender',
             ],
         ];
 

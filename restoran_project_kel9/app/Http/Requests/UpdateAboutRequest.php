@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests;
 
-use App\Models\About;
 use Gate;
-use Illuminate\Foundation\Http\FormRequest;
+use App\Models\About;
 use Illuminate\Http\Response;
+use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateAboutRequest extends FormRequest
 {
@@ -17,9 +17,9 @@ class UpdateAboutRequest extends FormRequest
     public function rules()
     {
         return [
-            'description' => [
-                'required',
-            ],
+            // 'description' => [
+            //     'required',
+            // ],
         ];
     }
 }

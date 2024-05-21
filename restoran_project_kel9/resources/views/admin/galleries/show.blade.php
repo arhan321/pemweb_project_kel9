@@ -33,14 +33,6 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.gallery.fields.description') }}
-                        </th>
-                        <td>
-                            {!! $gallery->description !!}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
                             {{ trans('cruds.gallery.fields.image') }}
                         </th>
                         <td>
@@ -49,14 +41,6 @@
                                     <img src="{{ $gallery->image->getUrl('thumb') }}">
                                 </a>
                             @endif
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.gallery.fields.price') }}
-                        </th>
-                        <td>
-                            {{ $gallery->price }}
                         </td>
                     </tr>
                 </tbody>

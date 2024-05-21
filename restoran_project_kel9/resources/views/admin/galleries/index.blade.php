@@ -28,11 +28,9 @@
                         <th>
                             {{ trans('cruds.gallery.fields.title') }}
                         </th>
+                    
                         <th>
                             {{ trans('cruds.gallery.fields.image') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.gallery.fields.price') }}
                         </th>
                         <th>
                             &nbsp;
@@ -51,15 +49,13 @@
                             <td>
                                 {{ $gallery->title ?? '' }}
                             </td>
+                         
                             <td>
                                 @if($gallery->image)
                                     <a href="{{ $gallery->image->getUrl() }}" target="_blank" style="display: inline-block">
                                         <img src="{{ $gallery->image->getUrl('thumb') }}">
                                     </a>
                                 @endif
-                            </td>
-                            <td>
-                                {{ $gallery->price ?? '' }}
                             </td>
                             <td>
                                 @can('gallery_show')

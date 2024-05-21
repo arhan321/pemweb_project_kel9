@@ -16,7 +16,7 @@
 
     <div class="card-body">
         <div class="table-responsive">
-            <table class=" table table-bordered table-striped table-hover datatable datatable-About">
+            <table class=" table table-bordered table-striped table-hover datatable datatable-about">
                 <thead>
                     <tr>
                         <th width="10">
@@ -26,10 +26,10 @@
                             {{ trans('cruds.about.fields.id') }}
                         </th>
                         <th>
-                            {{ trans('cruds.about.fields.vision') }}
+                            {{ trans('cruds.about.fields.title') }}
                         </th>
                         <th>
-                            {{ trans('cruds.about.fields.mission') }}
+                            {{ trans('cruds.about.fields.description') }}
                         </th>
                         <th>
                             {{ trans('cruds.about.fields.image') }}
@@ -40,42 +40,42 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($abouts as $key => $about)
-                        <tr data-entry-id="{{ $about->id }}">
+                    @foreach($about as $key => $a)
+                        <tr data-entry-id="{{ $a->id }}">
                             <td>
 
                             </td>
                             <td>
-                                {{ $about->id ?? '' }}
+                                {{ $a->id ?? '' }}
                             </td>
                             <td>
-                                {!! $about->vision?? '' !!}
+                                {{ $a->title ?? '' }}
                             </td>
                             <td>
-                                {!! $about->mission ?? '' !!}
+                                {!! $a->description ?? '' !!}
                             </td>
                             <td>
-                                @if($about->imageabout)
-                                    <a href="{{ $about->imageabout->getUrl() }}" target="_blank" style="display: inline-block">
-                                        <img src="{{ $about->imageabout->getUrl('thumb') }}">
+                                @if($a->image)
+                                    <a href="{{ $a->image->getUrl() }}" target="_blank" style="display: inline-block">
+                                        <img src="{{ $a->image->getUrl('thumb') }}">
                                     </a>
                                 @endif
                             </td>
                             <td>
                                 @can('about_show')
-                                    <a class="btn btn-xs btn-primary" href="{{ route('admin.abouts.show', $about->id) }}">
+                                    <a class="btn btn-xs btn-primary" href="{{ route('admin.abouts.show', $a->id) }}">
                                         {{ trans('global.view') }}
                                     </a>
                                 @endcan
 
                                 @can('about_edit')
-                                    <a class="btn btn-xs btn-info" href="{{ route('admin.abouts.edit', $about->id) }}">
+                                    <a class="btn btn-xs btn-info" href="{{ route('admin.abouts.edit', $a->id) }}">
                                         {{ trans('global.edit') }}
                                     </a>
                                 @endcan
 
                                 @can('about_delete')
-                                    <form action="{{ route('admin.abouts.destroy', $about->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
+                                    <form action="{{ route('admin.abouts.destroy', $a->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                         <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
@@ -135,7 +135,7 @@
     order: [[ 1, 'desc' ]],
     pageLength: 100,
   });
-  let table = $('.datatable-About:not(.ajaxTable)').DataTable({ buttons: dtButtons })
+  let table = $('.datatable-about:not(.ajaxTable)').DataTable({ buttons: dtButtons })
   $('a[data-toggle="tab"]').on('shown.bs.tab click', function(e){
       $($.fn.dataTable.tables(true)).DataTable()
           .columns.adjust();
