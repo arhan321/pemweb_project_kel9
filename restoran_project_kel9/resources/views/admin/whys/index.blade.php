@@ -40,9 +40,9 @@
                         <th>
                             {{ trans('cruds.whys.fields.description_box_2') }}
                         </th>
-                        <th>
+                        {{-- <th>
                             {{ trans('cruds.whys.fields.image') }}
-                        </th>
+                        </th> --}}
                         <th>
                             &nbsp;
                         </th>
@@ -72,13 +72,13 @@
                             <td>
                                 {!! $w->description_box_2 ?? '' !!}
                             </td>
-                            <td>
+                            {{-- <td>
                                 @if($w->image)
                                     <a href="{{ $w->image->getUrl() }}" target="_blank" style="display: inline-block">
                                         <img src="{{ $w->image->getUrl('thumb') }}">
                                     </a>
                                 @endif
-                            </td>
+                            </td> --}}
                             <td>
                                 @can('why_show')
                                     <a class="btn btn-xs btn-primary" href="{{ route('admin.whys.show', $w->id) }}">

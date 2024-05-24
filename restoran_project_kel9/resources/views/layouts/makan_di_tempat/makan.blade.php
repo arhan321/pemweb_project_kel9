@@ -70,30 +70,36 @@
                 <p>Check Our Tasty Menu</p>
               </div>
         
-              <div class="row" data-aos="fade-up" data-aos-delay="100">
-                <div class="col-lg-12 d-flex justify-content-center">
-                    <ul id="menu-flters">
-                        <li data-filter="*" class="filter-active">All</li>
-                        <!-- filter berdasarkan category pada model product -->
-                        @foreach(\App\Models\Product::CATEGORY_SELECT as $key => $value)
-                        <li data-filter=".filter-{{ strtolower($key) }}">{{ $value }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            </div>
-              <div class="row menu-container" data-aos="fade-up" data-aos-delay="200">
-                @foreach ($productsss as $p)
-                <div class="col-lg-6 menu-item filter-{{ strtolower($p->category) }}">
-                  <img src="{{ $p->getFirstMediaUrl('image', 'priview') }}" class="menu-img" alt="{{ $p->name }}"/>
-                  <div class="menu-content">
-                    <a href="#">{{ $p->name }}</a><span>Rp.{{$p->price}}</span>
-                  </div>
-                  <div class="menu-ingredients">
-                   {{$p->description}}
-                  </div>
-                </div>
-                @endforeach
+        <div class="row" data-aos="fade-up" data-aos-delay="100">
+        <div class="col-lg-12 d-flex justify-content-center">
+            <ul id="menu-flters">
+                <li data-filter="*" class="filter-active">All</li>
+                <!-- filter berdasarkan category pada model product -->
+                @forelse(\App\Models\Product::CATEGORY_SELECT as $key => $value)
+                    <li data-filter=".filter-{{ strtolower(str_replace(' ', '-', $key)) }}">{{ $value }}</li>
+                @empty
+                    <li>{{ trans('panel.frontend.menu.if_error_category') }}</li>
+                @endforelse
+            </ul>
+        </div>
+    </div>
+      <div class="row menu-container" data-aos="fade-up" data-aos-delay="200">
+        @forelse ($productsss as $p)
+            <div class="col-lg-6 menu-item filter-{{ strtolower(str_replace(' ', '-', $p->category)) }}">
+              <img src="{{ $p->getFirstMediaUrl('image', 'preview') }}" class="menu-img" alt="{{ $p->name }}"/>
+              <div class="menu-content">
+                <a href="#">{{ $p->name }}</a><span>Rp.{{$p->price}}</span>
               </div>
+              <div class="menu-ingredients">
+                {{$p->description}}
+              </div>
+            </div>
+        @empty
+            <div class="col-lg-12">
+                <p>{{ trans('panel.frontend.menu.if_error_menu') }}</p>
+            </div>
+        @endforelse
+      </div>
             </div>
           </section>
 
@@ -116,16 +122,16 @@
 </div>
 
     </section>
-    <script src="assets_makan/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="assets_makan/js_makan/vendor/isotope-layout/isotope.pkgd.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/js/all.min.js" integrity="sha512-u3fPA7V8qQmhBPNT5quvaXVa1mnnLSXUep5PS1qo5NRzHwG19aHmNJnj1Q8hpA/nBWZtZD4r4AX6YOt5ynLN2g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
       
     <!-- Vendor JS Files -->
-    <script src="assets_makan/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="assets_makan/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="assets_makan/js_makan/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets_makan/js_makan/vendor/isotope-layout/isotope.pkgd.min.js"></script>
     <!-- link js  -->
-    <script src="assets_makan/js_makan/main.js"></script>
+    <script src="assets_makan/js_makan/mains.js"></script>
 </body>
 
 </html>

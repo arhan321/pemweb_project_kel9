@@ -59,7 +59,7 @@
               @endif
               <span class="help-block">{{ trans('cruds.whys.fields.description_box_2_helper') }}</span>
           </div>
-            <div class="form-group">
+            {{-- <div class="form-group">
                 <label class="required" for="image">{{ trans('cruds.whys.fields.image') }}</label>
                 <div class="needsclick dropzone {{ $errors->has('image') ? 'is-invalid' : '' }}" id="image-dropzone">
                 </div>
@@ -69,7 +69,7 @@
                     </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.whys.fields.image_helper') }}</span>
-            </div>
+            </div> --}}
             <div class="form-group">
                 <button class="btn btn-danger" type="submit">
                     {{ trans('global.save') }}
@@ -148,7 +148,7 @@
   }
 });
 </script>
-
+{{-- 
 <script>
     Dropzone.options.imageDropzone = {
     url: '{{ route('admin.whys.storeMedia') }}',
@@ -203,5 +203,5 @@
     }
 }
 
-</script>
+</script> --}}
 @endsection

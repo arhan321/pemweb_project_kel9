@@ -199,8 +199,8 @@ return [
         ],
     ],
     'datachef' => [
-        'title'          => 'Chef Restaurant frontend',
-        'title_singular' => 'Chef Restaurant frontend',
+        'title'          => 'Gambar Chef di frontend',
+        'title_singular' => 'Gambar Chef di frontend',
         'fields'         => [
             'id'                 => 'ID',
             'id_helper'          => ' ',

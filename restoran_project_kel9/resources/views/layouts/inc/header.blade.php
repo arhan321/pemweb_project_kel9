@@ -34,8 +34,10 @@
     />
     <link href="frontend/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet" />
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/dropzone.min.css" />
+
     <!-- Template Main CSS File -->
-    <link href="frontend/assets/css/hj.css" rel="stylesheet" />
+    <link href="frontend/assets/css/hjs.css" rel="stylesheet" />
 
     <!-- =======================================================
   * Template Name: Restaurantly - v3.1.0
