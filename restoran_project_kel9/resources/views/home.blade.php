@@ -30,18 +30,28 @@
         </div>
     </div>
 </div>
+
 <div class="container px-4 mx-auto">
-
-    <div class="p-6 m-10 bg-white rounded shadow">
-        {!! $chart->container() !!}
+    <div class="row">
+        <div class="col-md-6">
+            <div class="p-5 m-15 bg-white rounded shadow">
+                {!! $chart->container() !!}
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="p-5 m-15 bg-white rounded shadow">
+                {!! $chartArea->container() !!}
+            </div>
+        </div>
     </div>
-
 </div>
 @endsection
+
 @section('scripts')
 <script src="{{ $chart->cdn() }}"></script>
-
 {{ $chart->script() }}
-@parent
 
+<script src="{{ $chartArea->cdn() }}"></script>
+{{ $chartArea->script() }}
+@parent
 @endsection
