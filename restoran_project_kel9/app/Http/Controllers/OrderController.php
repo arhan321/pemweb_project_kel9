@@ -22,7 +22,7 @@ class OrderController extends Controller
             'qty' => 'required|integer|min:1',
         ]);
 
-        $total_price = $request->qty * 50000;
+        $total_price = $request->qty * 250000;
         $order = Order::create([
             'days' => $request->days,
             'hours' => $request->hours,
@@ -33,13 +33,9 @@ class OrderController extends Controller
             'status' => 'Unpaid',
         ]);
 
-        // Set your Merchant Server Key
         \Midtrans\Config::$serverKey = config('midtrans.server_key');
-        // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
         \Midtrans\Config::$isProduction = false;
-        // Set sanitization on (default)
         \Midtrans\Config::$isSanitized = true;
-        // Set 3DS transaction for credit card to true
         \Midtrans\Config::$is3ds = true;
 
         $params = [
@@ -64,10 +60,17 @@ class OrderController extends Controller
         $hashed = hash("sha512", $request->order_id . $request->status_code . $request->gross_amount . $server_key);
 
         if ($hashed == $request->signature_key) {
-            if ($request->transaction_status == 'capture') {
+            if (in_array($request->transaction_status, ['capture', 'settlement'])) {
                 $order = Order::find($request->order_id);
                 $order->update(['status' => 'Paid']);
             }
         }
+        return response()->json(['status' => 'success']);
+    }
+
+    public function showOrder($id)
+    {
+        $order = Order::find($id);
+        return view('midtrans.checkout', compact('order'));
     }
 }

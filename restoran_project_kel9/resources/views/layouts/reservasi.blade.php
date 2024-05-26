@@ -23,6 +23,7 @@
                                 <option value="">Select day</option>
                                 <option value="2024-05-28">Tuesday</option>
                                 <option value="2024-05-29">Wednesday</option>
+                                <option value="2024-05-30">friday</option>
                                 <!-- Add more options as needed -->
                             </select>
                             <select name="hours" id="hours" required>

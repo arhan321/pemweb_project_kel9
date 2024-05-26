@@ -8,10 +8,12 @@ Route::get('/qr', function () {
 });
  Route::get('/makan', 'makan_tempat@getmakan')->name('layouts.makan_di_tempat.makan');
  
+
  Route::get('/reservasi', [OrderController::class, 'index'])->name('layouts.reservasi');
  Route::post('/checkout', [OrderController::class, 'checkout'])->name('midtrans.checkout');
- Route::post('/midtrand-callback', [OrderController::class, 'callback']);
- 
+ Route::post('/midtrans-callback', [OrderController::class, 'callback'])->name('midtrans.callback');
+ Route::get('/order/{id}', [OrderController::class, 'showOrder'])->name('order.show');
+
 //routing front end 
 Route::get('/', 'frontend@home')->name('frontend.home');
  Route::get('/abouts', 'frontend@abouts')->name('frontend.about');

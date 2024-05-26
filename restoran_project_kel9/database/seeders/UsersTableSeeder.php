@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Carbon\Carbon;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -17,7 +16,8 @@ class UsersTableSeeder extends Seeder
                 'email'          => 'admin@admin.com',
                 'password'       => bcrypt('password'),
                 'remember_token' => null,
-                'created_at'     => Carbon::create(2024, 1, 1), // January 2024
+                'created_at'     => now(),
+                'updated_at'     => now(),
             ],
             [
                 'id'             => 2,
@@ -25,7 +25,8 @@ class UsersTableSeeder extends Seeder
                 'email'          => 'arhanmali96@gmail.com',
                 'password'       => bcrypt('password'),
                 'remember_token' => null,
-                'created_at'     => Carbon::create(2024, 1, 2), // january 2024
+                'created_at'     => now(),
+                'updated_at'     => now(),
             ],
             [
                 'id'             => 3,
@@ -33,7 +34,8 @@ class UsersTableSeeder extends Seeder
                 'email'          => 'febru@gmail.com',
                 'password'       => bcrypt('password'),
                 'remember_token' => null,
-                'created_at'     => Carbon::create(2024, 1, 3), //january 2024
+                'created_at'     => now(),
+                'updated_at'     => now(),
             ],
             [
                 'id'             => 4,
@@ -41,7 +43,8 @@ class UsersTableSeeder extends Seeder
                 'email'          => 'enep@gmail.com',
                 'password'       => bcrypt('password'),
                 'remember_token' => null,
-                'created_at'     => Carbon::create(2024, 1, 4), // january 2024
+                'created_at'     => now(),
+                'updated_at'     => now(),
             ],
             [
                 'id'             => 5,
@@ -49,7 +52,8 @@ class UsersTableSeeder extends Seeder
                 'email'          => 'fathanghani27@gmail.com',
                 'password'       => bcrypt('password'),
                 'remember_token' => null,
-                'created_at'     => Carbon::create(2024, 2, 1), // feb 2024
+                'created_at'     => now(),
+                'updated_at'     => now(),
             ],
             [
                 'id'             => 6,
@@ -57,7 +61,8 @@ class UsersTableSeeder extends Seeder
                 'email'          => 'adella@gmail.com',
                 'password'       => bcrypt('password'),
                 'remember_token' => null,
-                'created_at'     => Carbon::create(2024, 2, 1), // feb 2024
+                'created_at'     => now(),
+                'updated_at'     => now(),
             ],
             [
                 'id'             => 7,
@@ -65,7 +70,8 @@ class UsersTableSeeder extends Seeder
                 'email'          => 'fiolin@gmail.com',
                 'password'       => bcrypt('password'),
                 'remember_token' => null,
-                'created_at'     => Carbon::create(2024, 2, 1), // feb 2024
+                'created_at'     => now(),
+                'updated_at'     => now(),
             ],
         ];
 

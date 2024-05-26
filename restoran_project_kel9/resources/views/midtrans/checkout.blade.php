@@ -5,10 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <!-- @TODO: replace SET_YOUR_CLIENT_KEY_HERE with your client key -->
+    @if(isset($snapToken))
     <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js"
         data-client-key="{{ config('midtrans.client_key') }}"></script>
-    <!-- Note: replace with src="https://app.midtrans.com/snap/snap.js" for Production environment -->
+    @endif
     <title>Restaurant Reservation Checkout</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -25,7 +25,6 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
             overflow: hidden;
-            margin: 0 auto;
         }
 
         .card-body {
@@ -80,8 +79,14 @@
                         <td><strong>Total Price</strong></td>
                         <td> : Rp {{ number_format($order->total_price, 0, ',', '.') }}</td>
                     </tr>
+                    <tr>
+                        <td><strong>Status</strong></td>
+                        <td> : {{ $order->status }}</td>
+                    </tr>
                 </table>
+                @if($order->status == 'Unpaid' && isset($snapToken))
                 <button id="pay-button" class="btn btn-primary w-100 mt-3">Pay Now</button>
+                @endif
             </div>
         </div>
     </div>
@@ -90,34 +95,33 @@
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
     </script>
 
+    @if(isset($snapToken))
     <script type="text/javascript">
-        // For example trigger on button clicked, or any time you need
         var payButton = document.getElementById('pay-button');
-        payButton.addEventListener('click', function() {
-            // Trigger snap popup. @TODO: Replace TRANSACTION_TOKEN_HERE with your transaction token
-            window.snap.pay('{{ $snapToken }}', {
-                onSuccess: function(result) {
-                    /* You may add your own implementation here */
-                    alert("Payment successful!");
-                    console.log(result);
-                },
-                onPending: function(result) {
-                    /* You may add your own implementation here */
-                    alert("Waiting for your payment!");
-                    console.log(result);
-                },
-                onError: function(result) {
-                    /* You may add your own implementation here */
-                    alert("Payment failed!");
-                    console.log(result);
-                },
-                onClose: function() {
-                    /* You may add your own implementation here */
-                    alert('You closed the popup without finishing the payment');
-                }
-            })
-        });
+        if (payButton) {
+            payButton.addEventListener('click', function() {
+                window.snap.pay('{{ $snapToken }}', {
+                    onSuccess: function(result) {
+                        alert("Payment successful!");
+                        console.log(result);
+                        window.location.href = "{{ route('order.show', ['id' => $order->id]) }}";
+                    },
+                    onPending: function(result) {
+                        alert("Waiting for your payment!");
+                        console.log(result);
+                    },
+                    onError: function(result) {
+                        alert("Payment failed!");
+                        console.log(result);
+                    },
+                    onClose: function() {
+                        alert('You closed the popup without finishing the payment');
+                    }
+                })
+            });
+        }
     </script>
+    @endif
 </body>
 
 </html>
