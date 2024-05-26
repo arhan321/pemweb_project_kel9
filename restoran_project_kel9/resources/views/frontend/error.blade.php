@@ -40,8 +40,8 @@
 </head>
 <body>
     <div class="container">
-        <h1>MAAF TOKO LAGI TUTUP</h1>
-        <p> 😋 Toko kami akan buka lagi jam 10 pagi cuyyy 😋</p>
+        <h1>MAAF layanan reservasi di tutup</h1>
+        <p> 😋 layanan reservasi di Toko kami akan buka lagi jam 8 pagi cuyyy 😋</p>
     </div>
 
     <script>
