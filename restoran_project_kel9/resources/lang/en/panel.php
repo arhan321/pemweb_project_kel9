@@ -51,8 +51,8 @@ return [
             'Testimonials'       => 'Testimonials',
             'Galery'             => 'Galery',
             'Chefs'              => 'Chefs',
-            'Contact'            => 'Contact Us',
-            'reservation'            => 'Reservation',
+            'Contact'            => 'Contact',
+            'reservation'        => 'Reservation',
         ],
     ],
   
