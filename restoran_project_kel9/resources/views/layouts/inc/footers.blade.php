@@ -1,92 +1,82 @@
 <!-- ======= Footer ======= -->
-    <footer id="footer">
-      <div class="footer-top">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-3 col-md-6">
-              <div class="footer-info">
-                <h3>Han's Bar And Restaurant</h3>
-                <p>
-                  Aloha Playground, Pasir putih PIK 2 <br />
-                  JKT29909, INA<br /><br />
-                  <!-- <strong>Phone:</strong> +62 828990 0990<br />
-                  <strong>Email:</strong> hansvocresto@gmail.com<br /> -->
-                </p>
-                <!-- <div class="social-links mt-3">
-                  <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-                  <a href="#" class="facebook"
-                    ><i class="bx bxl-facebook"></i
-                  ></a>
-                  <a href="#" class="instagram"
-                    ><i class="bx bxl-instagram"></i
-                  ></a>
-                  <a href="#" class="google-plus"
-                    ><i class="bx bxl-skype"></i
-                  ></a>
-                  <a href="#" class="linkedin"
-                    ><i class="bx bxl-linkedin"></i
-                  ></a>
-                </div> -->
-              </div>
+<footer id="footer">
+  <div class="footer-top">
+    <div class="container">
+      <div class="row">
+        @if(!empty($footer))
+          @foreach ($footer as $f)
+          <div class="col-lg-3 col-md-6">
+            <div class="footer-info">
+              @if(isset($f->logo_restoran))
+              <h3>{!! $f->logo_restoran !!}</h3>
+              @endif
+              @if(isset($f->alamat))
+              <p>{!! $f->alamat !!}</p>
+              @endif
             </div>
-
+          </div>
+          @endforeach
+         @else
+          <div class="col-lg-12">
+            <p>No footer data available.</p>
+          </div>
+          @endif
             <div class="col-lg-2 col-md-6 footer-links">
-              <h4>Useful Links</h4>
+              <h4>{{ trans('panel.frontend.Footer.usefullinks') }}</h4>
               <ul>
                 <li>
-                  <i class="bx bx-chevron-right"></i> <a href="#hero">Home</a>
+                  <i class="bx bx-chevron-right"></i> <a href="{{ route('frontend.home') }}">{{ trans('panel.frontend.usefullinks.Home') }}</a>
                 </li>
                 <li>
                   <i class="bx bx-chevron-right"></i>
-                  <a href="#about">About us</a>
+                  <a href="{{ route('frontend.about') }}">{{ trans('panel.frontend.usefullinks.Abouts') }}</a>
                 </li>
                 <li>
-                  <i class="bx bx-chevron-right"></i> <a href="#menu">Menu</a>
-                </li>
-                <li>
-                  <i class="bx bx-chevron-right"></i>
-                  <a href="#signature">Signature</a>
+                  <i class="bx bx-chevron-right"></i> <a href="{{ route('frontend.menu') }}">{{ trans('panel.frontend.usefullinks.Menu') }}</a>
                 </li>
                 <li>
                   <i class="bx bx-chevron-right"></i>
-                  <a href="#gallery">Gallery</a>
+                  <a href="{{ route('frontend.signature') }}">{{ trans('panel.frontend.usefullinks.Signature') }}</a>
+                </li>
+                <li>
+                  <i class="bx bx-chevron-right"></i>
+                  <a href="{{ route('frontend.testimonial') }}">{{ trans('panel.frontend.usefullinks.Testimonials') }}</a>
+                </li>
+                <li>
+                  <i class="bx bx-chevron-right"></i>
+                  <a href="{{ route('frontend.galery') }}">{{ trans('panel.frontend.usefullinks.Galery') }}</a>
+                </li>
+                <li>
+                  <i class="bx bx-chevron-right"></i>
+                  <a href="{{ route('frontend.chefs') }}">{{ trans('panel.frontend.usefullinks.Chefs') }}</a>
+                </li>
+                <li>
+                  <i class="bx bx-chevron-right"></i>
+                  <a href="https://wa.me/6282113862854">{{ trans('panel.frontend.usefullinks.Contact') }}</a>
                 </li>
               </ul>
             </div>
-
+            @if(!empty($footer))
+            @foreach ($footer as $fo)
             <div class="col-lg-3 col-md-6 footer-links">
-              <h4>Opening Hours</h4>
-              <ul>
-                <p>
-                  Senin - Minggu 
-                  <p>11:00 - 23:00</p>
-                </p>
-                <!-- <li>
-                  <i class="bx bx-chevron-right"></i> <a href="#">Web Design</a>
-                </li>
-                <li>
-                  <i class="bx bx-chevron-right"></i>
-                  <a href="#">Web Development</a>
-                </li>
-                <li>
-                  <i class="bx bx-chevron-right"></i>
-                  <a href="#">Product Management</a>
-                </li>
-                <li>
-                  <i class="bx bx-chevron-right"></i> <a href="#">Marketing</a>
-                </li>
-                <li>
-                  <i class="bx bx-chevron-right"></i>
-                  <a href="#">Graphic Design</a>
-                </li> -->
-              </ul>
+                @if(isset($fo->opening_day) || isset($fo->opening_hours) || isset($fo->closing_hours))
+                <h4>{{ trans('panel.frontend.Footer.openinghours') }}</h4>
+                <ul>
+                    @if(isset($fo->opening_day))
+                    <li>{!! $fo->opening_day !!}</li>
+                    @endif
+                    @if(isset($fo->opening_hours) && isset($fo->closing_hours))
+                    <li>{!! $fo->opening_hours !!} - {!! $fo->closing_hours !!}</li>
+                    @endif
+                </ul>
+                @endif
             </div>
-
+         
             <div class="col-lg-4 col-md-6 footer-newsletter">
-              <h4>Contact</h4>
+              <h4>{{ trans('panel.frontend.Footer.contact') }}</h4>
               <p>
-                <strong>Phone:</strong> +62 828990 0990<br />
-                  <strong>Email:</strong> hansvocresto@gmail.com<br />
+                <strong>{{ trans('panel.frontend.Footer.phone') }}</strong> {!! $fo->phone !!}<br />
+                  <strong>{{ trans('panel.frontend.Footer.email') }}</strong> {!! $fo->email !!}<br />
               </p>
               <!-- <form action="" method="post">
                 <input type="email" name="email" /><input
@@ -95,13 +85,19 @@
                 />
               </form> -->
             </div>
+            @endforeach
+            @else
+              <div class="col-lg-12">
+                <p>No data available.</p>
+              </div>
+            @endif
           </div>
         </div>
       </div>
-
+      @foreach ($footer as $fot)
       <div class="container">
         <div class="copyright">
-          &copy; Copyright <strong><span>Han's Bar And Restaurant</span></strong
+          &copy; {{ trans('panel.frontend.Footer.copyright') }} <strong><span>{!! $fot->copyright !!}</span></strong
           >. All Rights Reserved
         </div>
         <div class="credits">
@@ -109,12 +105,19 @@
           <!-- You can delete the links only if you purchased the pro version. -->
           <!-- Licensing information: https://bootstrapmade.com/license/ -->
           <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/restaurantly-restaurant-template/ -->
-          Designed by <a href="https://bootstrapmade.com/">Han's Bar And Restaurant</a>
+          {{ trans('panel.frontend.Footer.desain_by') }} <a href="https://bootstrapmade.com/">{!! $fot->desain_by !!}</a>
         </div>
       </div>
+      @endforeach
+      @if ($footer->isEmpty())
+      <div class="container">
+        <div class="col-lg-12">
+          <p>No footer data available.</p>
+        </div>
+      </div>
+      @endif
     </footer>
     <!-- End Footer -->
-
     <div id="preloader"></div>
     <a
       href="#"

@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Footer;
 use Gate;
-use Illuminate\Foundation\Http\FormRequest;
+use App\Models\Footer;
 use Illuminate\Http\Response;
+use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateFooterRequest extends FormRequest
 {
@@ -33,6 +33,7 @@ class UpdateFooterRequest extends FormRequest
                 'string',
                 'nullable',
             ],
+            
         ];
     }
 }

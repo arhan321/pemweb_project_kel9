@@ -3,13 +3,13 @@
 
 <div class="card">
     <div class="card-header">
-        {{ trans('global.show') }} {{ trans('cruds.gallery.title') }}
+        {{ trans('global.show') }} {{ trans('cruds.product.title') }}
     </div>
 
     <div class="card-body">
         <div class="form-group">
             <div class="form-group">
-                <a class="btn btn-default" href="{{ route('admin.galleries.index') }}">
+                <a class="btn btn-default" href="{{ route('admin.products.index') }}">
                     {{ trans('global.back_to_list') }}
                 </a>
             </div>
@@ -17,52 +17,68 @@
                 <tbody>
                     <tr>
                         <th>
-                            {{ trans('cruds.gallery.fields.id') }}
+                            {{ trans('cruds.product.fields.id') }}
                         </th>
                         <td>
-                            {{ $gallery->id }}
+                            {{ $product->id }}
                         </td>
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.gallery.fields.title') }}
+                            {{ trans('cruds.product.fields.image') }}
                         </th>
                         <td>
-                            {{ $gallery->title }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.gallery.fields.description') }}
-                        </th>
-                        <td>
-                            {!! $gallery->description !!}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.gallery.fields.image') }}
-                        </th>
-                        <td>
-                            @if($gallery->image)
-                                <a href="{{ $gallery->image->getUrl() }}" target="_blank" style="display: inline-block">
-                                    <img src="{{ $gallery->image->getUrl('thumb') }}">
+                            @if($product->image)
+                                <a href="{{ $product->image->getUrl() }}" target="_blank" style="display: inline-block">
+                                    <img src="{{ $product->image->getUrl('thumb') }}">
                                 </a>
                             @endif
                         </td>
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.gallery.fields.price') }}
+                            {{ trans('cruds.product.fields.name') }}
                         </th>
                         <td>
-                            {{ $gallery->price }}
+                            {{ $product->name }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.product.fields.description') }}
+                        </th>
+                        <td>
+                            {{ $product->description }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.product.fields.price') }}
+                        </th>
+                        <td>
+                            {{ $product->price }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.product.fields.stock') }}
+                        </th>
+                        <td>
+                            {{ $product->stock }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.product.fields.category') }}
+                        </th>
+                        <td>
+                            {{ App\Models\Product::CATEGORY_SELECT[$product->category] ?? '' }}
                         </td>
                     </tr>
                 </tbody>
             </table>
             <div class="form-group">
-                <a class="btn btn-default" href="{{ route('admin.galleries.index') }}">
+                <a class="btn btn-default" href="{{ route('admin.products.index') }}">
                     {{ trans('global.back_to_list') }}
                 </a>
             </div>

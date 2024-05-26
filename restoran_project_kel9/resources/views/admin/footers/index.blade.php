@@ -44,6 +44,21 @@
                             {{ trans('cruds.footer.fields.email') }}
                         </th>
                         <th>
+                            {{ trans('cruds.footer.fields.opening_day') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.footer.fields.opening_hours') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.footer.fields.closing_hours') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.footer.fields.copyright') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.footer.fields.desain_by') }}
+                        </th>
+                        <th>
                             &nbsp;
                         </th>
                     </tr>
@@ -58,11 +73,7 @@
                                 {{ $footer->id ?? '' }}
                             </td>
                             <td>
-                                @if($footer->logo)
-                                    <a href="{{ $footer->logo->getUrl() }}" target="_blank" style="display: inline-block">
-                                        <img src="{{ $footer->logo->getUrl('thumb') }}">
-                                    </a>
-                                @endif
+                                {{ $footer->logo_restoran ?? '' }}
                             </td>
                             <td>
                                 {{ $footer->detail ?? '' }}
@@ -78,6 +89,21 @@
                             </td>
                             <td>
                                 {{ $footer->email ?? '' }}
+                            </td>
+                            <td>
+                                {{ $footer->opening_day ?? '' }}
+                            </td>
+                            <td>
+                                {{ $footer->opening_hours ?? '' }}
+                            </td>
+                            <td>
+                                {{ $footer->closing_hours ?? '' }}
+                            </td>
+                            <td>
+                                {{ $footer->copyright ?? '' }}
+                            </td>
+                            <td>
+                                {{ $footer->desain_by ?? '' }}
                             </td>
                             <td>
                                 @can('footer_show')

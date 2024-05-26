@@ -28,11 +28,7 @@
                             {{ trans('cruds.footer.fields.logo') }}
                         </th>
                         <td>
-                            @if($footer->logo)
-                                <a href="{{ $footer->logo->getUrl() }}" target="_blank" style="display: inline-block">
-                                    <img src="{{ $footer->logo->getUrl('thumb') }}">
-                                </a>
-                            @endif
+                            {{ $footer->logo_restoran }}
                         </td>
                     </tr>
                     <tr>
@@ -73,6 +69,30 @@
                         </th>
                         <td>
                             {{ $footer->email }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.footer.fields.opening_day') }}
+                        </th>
+                        <td>
+                            {{ $footer->opening_day }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.footer.fields.closing_hours') }}
+                        </th>
+                        <td>
+                            {{ $footer->closing_hours }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.footer.fields.closing_hours') }}
+                        </th>
+                        <td>
+                            {{ $footer->closing_hours }}
                         </td>
                     </tr>
                 </tbody>

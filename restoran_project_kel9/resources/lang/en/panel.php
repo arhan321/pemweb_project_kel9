@@ -34,6 +34,26 @@ return [
             'img'               => 'Error: image not available',
             'title'             => 'Error: Title not available',
         ],
+        'Footer'                 => [
+            'usefullinks'        => 'Usefull Links',
+            'openinghours'       => 'Opening Hours',
+            'contact'            => 'Contact',
+            'phone'              => 'Phone:',
+            'email'              => 'Email:',
+            'copyright'          => 'copyright',
+            'desain_by'          => 'Desain By:',
+        ],
+        'usefullinks'            => [
+            'Home'               => 'Home',
+            'Abouts'             => 'Abouts',
+            'Menu'               => 'Menu',
+            'Signature'          => 'Signature',
+            'Testimonials'       => 'Testimonials',
+            'Galery'             => 'Galery',
+            'Chefs'              => 'Chefs',
+            'Contact'            => 'Contact Us',
+            'reservation'            => 'Reservation',
+        ],
     ],
   
 ];

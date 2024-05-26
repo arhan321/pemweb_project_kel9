@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Gate;
+use App\Models\Footer;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\Traits\MediaUploadingTrait;
-use App\Http\Requests\MassDestroyFooterRequest;
 use App\Http\Requests\StoreFooterRequest;
 use App\Http\Requests\UpdateFooterRequest;
-use App\Models\Footer;
-use Gate;
-use Illuminate\Http\Request;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Symfony\Component\HttpFoundation\Response;
+use App\Http\Requests\MassDestroyFooterRequest;
+use App\Http\Controllers\Traits\MediaUploadingTrait;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class FooterController extends Controller
 {
@@ -37,14 +37,6 @@ class FooterController extends Controller
     {
         $footer = Footer::create($request->all());
 
-        if ($request->input('logo', false)) {
-            $footer->addMedia(storage_path('tmp/uploads/' . basename($request->input('logo'))))->toMediaCollection('logo');
-        }
-
-        if ($media = $request->input('ck-media', false)) {
-            Media::whereIn('id', $media)->update(['model_id' => $footer->id]);
-        }
-
         return redirect()->route('admin.footers.index');
     }
 
@@ -58,17 +50,6 @@ class FooterController extends Controller
     public function update(UpdateFooterRequest $request, Footer $footer)
     {
         $footer->update($request->all());
-
-        if ($request->input('logo', false)) {
-            if (! $footer->logo || $request->input('logo') !== $footer->logo->file_name) {
-                if ($footer->logo) {
-                    $footer->logo->delete();
-                }
-                $footer->addMedia(storage_path('tmp/uploads/' . basename($request->input('logo'))))->toMediaCollection('logo');
-            }
-        } elseif ($footer->logo) {
-            $footer->logo->delete();
-        }
 
         return redirect()->route('admin.footers.index');
     }

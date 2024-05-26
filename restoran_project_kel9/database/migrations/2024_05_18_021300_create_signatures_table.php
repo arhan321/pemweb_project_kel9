@@ -11,7 +11,6 @@ return new class extends Migration
         Schema::create('signatures', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('product_id');
-            $table->string('menu_name')->nullable();
             $table->text('description')->nullable();
             $table->string('category')->nullable();
             $table->timestamps();

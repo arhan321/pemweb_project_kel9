@@ -153,17 +153,6 @@
             <textarea class="form-control" name="message" rows="5" placeholder="Message"></textarea>
             <div class="validate"></div>
           </div>
-          <div class="form-group mt-3">
-            <label class="required" for="image">{{ trans('cruds.about.fields.image') }}</label>
-            <div class="needsclick dropzone {{ $errors->has('image') ? 'is-invalid' : '' }}" id="image-dropzone">
-            </div>
-            @if($errors->has('image'))
-                <div class="invalid-feedback">
-                    {{ $errors->first('image') }}
-                </div>
-            @endif
-            <span class="help-block">{{ trans('cruds.about.fields.image_helper') }}</span>
-        </div>
           <div class="text-center" style="margin-top: 1%">
             <button type="submit" class="book-a-table-btn">Send</button>
           </div>
@@ -174,7 +163,7 @@
   
   <!-- End Book A Table Section -->
 
-  <script>
+  {{-- <script>
     Dropzone.options.imageDropzone = {
     url: '{{ route('admin.abouts.storeMedia') }}',
     maxFilesize: 2, // MB
@@ -228,6 +217,6 @@
     }
 }
 
-</script>
+</script> --}}
 
 @endsection

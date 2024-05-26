@@ -90,12 +90,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::post('datachefs/ckmedia', 'DatacheffController@storeCKEditorImages')->name('datachefs.storeCKEditorImages');
     Route::resource('datachefs', 'DatacheffController');
      
-
-     // Home
-     Route::delete('homes/destroy', 'HomeAdminController@massDestroy')->name('homes.massDestroy');
-     Route::post('homes/media', 'HomeAdminController@storeMedia')->name('homes.storeMedia');
-     Route::post('homes/ckmedia', 'HomeAdminController@storeCKEditorImages')->name('homes.storeCKEditorImages');
-     Route::resource('homes', 'HomeAdminController');
+    // Home
+    Route::delete('homes/destroy', 'HomeAdminController@massDestroy')->name('homes.massDestroy');
+    Route::post('homes/media', 'HomeAdminController@storeMedia')->name('homes.storeMedia');
+    Route::post('homes/ckmedia', 'HomeAdminController@storeCKEditorImages')->name('homes.storeCKEditorImages');
+    Route::resource('homes', 'HomeAdminController');
  
     // Tim
     Route::delete('tims/destroy', 'TimController@massDestroy')->name('tims.massDestroy');
@@ -134,6 +133,13 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::post('products/media', 'ProductController@storeMedia')->name('products.storeMedia');
     Route::post('products/ckmedia', 'ProductController@storeCKEditorImages')->name('products.storeCKEditorImages');
     Route::resource('products', 'ProductController');
+
+     // signature
+     Route::delete('signatures/destroy', 'SignatureController@massDestroy')->name('signatures.massDestroy');
+     Route::post('signatures/media', 'SignatureController@storeMedia')->name('signatures.storeMedia');
+     Route::post('signatures/ckmedia', 'SignatureController@storeCKEditorImages')->name('signatures.storeCKEditorImages');
+     Route::resource('signatures', 'SignatureController');
+    
 
 });
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth']], function () {

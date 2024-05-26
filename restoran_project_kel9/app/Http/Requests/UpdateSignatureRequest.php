@@ -2,27 +2,35 @@
 
 namespace App\Http\Requests;
 
+use Gate;
+use App\Models\Signature;
+use Illuminate\Http\Response;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateSignatureRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
-    public function authorize(): bool
+    public function authorize()
     {
-        return false;
+        return Gate::allows('signature_edit');
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
-    public function rules(): array
+    public function rules()
     {
         return [
-            //
+            // 'name' => [
+            //     'string',
+            //     'nullable',
+            // ],
+            // 'description' => [
+            //     'string',
+            //     'nullable',
+            // ],
+            // 'stock' => [
+            //     'nullable',
+            //     'integer',
+            //     'min:-2147483648',
+            //     'max:2147483647',
+            // ],
         ];
     }
 }

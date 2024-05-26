@@ -18,6 +18,7 @@ class Signature extends Model implements HasMedia
 
     protected $appends = [
         'image',
+        'category',
     ];
 
     protected $dates = [
@@ -28,8 +29,9 @@ class Signature extends Model implements HasMedia
 
     protected $fillable = [
         'product_id',
-        'menu_name',
+        // 'menu_name',
         'description',
+        'category',
     ];
 
     protected function serializeDate(DateTimeInterface $date)
@@ -54,10 +56,15 @@ class Signature extends Model implements HasMedia
 
         return $file;
     }
-    
+
+    public function getCategoryAttribute()
+    {
+        return $this->product ? $this->product->category : null;
+    }
+
     public function product()
     {
         return $this->belongsTo(Product::class);
     }
-    
 }
+

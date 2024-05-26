@@ -11,12 +11,11 @@
             @method('PUT')
             @csrf
             <div class="form-group">
-                <label for="logo">{{ trans('cruds.footer.fields.logo') }}</label>
-                <div class="needsclick dropzone {{ $errors->has('logo') ? 'is-invalid' : '' }}" id="logo-dropzone">
-                </div>
-                @if($errors->has('logo'))
+                <label for="logo_restoran">{{ trans('cruds.footer.fields.logo') }}</label>
+                <input class="form-control {{ $errors->has('logo_restoran') ? 'is-invalid' : '' }}" type="text" name="logo_restoran" id="logo_restoran" value="{{ old('logo_restoran', $footer->logo_restoran) }}">
+                @if($errors->has('logo_restoran'))
                     <div class="invalid-feedback">
-                        {{ $errors->first('logo') }}
+                        {{ $errors->first('logo_restoran') }}
                     </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.footer.fields.logo_helper') }}</span>
@@ -62,11 +61,61 @@
                 <span class="help-block">{{ trans('cruds.footer.fields.faximile_helper') }}</span>
             </div>
             <div class="form-group">
-                <label for="email">{{ trans('cruds.footer.fields.email') }}</label>
-                <input class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" type="text" name="email" id="email" value="{{ old('email', $footer->email) }}">
-                @if($errors->has('email'))
+                <label for="faximile">{{ trans('cruds.footer.fields.faximile') }}</label>
+                <input class="form-control {{ $errors->has('faximile') ? 'is-invalid' : '' }}" type="text" name="faximile" id="faximile" value="{{ old('faximile', $footer->faximile) }}">
+                @if($errors->has('faximile'))
                     <div class="invalid-feedback">
-                        {{ $errors->first('email') }}
+                        {{ $errors->first('faximile') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.footer.fields.faximile_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="opening_day">{{ trans('cruds.footer.fields.opening_day') }}</label>
+                <input class="form-control {{ $errors->has('opening_day') ? 'is-invalid' : '' }}" type="text" name="opening_day" id="opening_day" value="{{ old('opening_day', $footer->opening_day) }}">
+                @if($errors->has('opening_day'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('opening_day') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.footer.fields.opening_day_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="opening_hours">{{ trans('cruds.footer.fields.opening_hours') }}</label>
+                <input class="form-control {{ $errors->has('opening_hours') ? 'is-invalid' : '' }}" type="time" name="opening_hours" id="opening_hours" value="{{ old('opening_hours', $footer->opening_hours) }}">
+                @if($errors->has('opening_hours'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('opening_hours') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.footer.fields.opening_hours_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="closing_hours">{{ trans('cruds.footer.fields.closing_hours') }}</label>
+                <input class="form-control {{ $errors->has('closing_hours') ? 'is-invalid' : '' }}" type="time" name="closing_hours" id="closing_hours" value="{{ old('closing_hours', $footer->closing_hours) }}">
+                @if($errors->has('closing_hours'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('closing_hours') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.footer.fields.closing_hours_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="copyright">{{ trans('cruds.footer.fields.copyright') }}</label>
+                <input class="form-control {{ $errors->has('copyright') ? 'is-invalid' : '' }}" type="text" name="copyright" id="copyright" value="{{ old('copyright', $footer->copyright) }}">
+                @if($errors->has('copyright'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('copyright') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.footer.fields.copyright_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="desain_by">{{ trans('cruds.footer.fields.desain_by') }}</label>
+                <input class="form-control {{ $errors->has('desain_by') ? 'is-invalid' : '' }}" type="text" name="desain_by" id="desain_by" value="{{ old('desain_by', $footer->desain_by) }}">
+                @if($errors->has('desain_by'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('desain_by') }}
                     </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.footer.fields.email_helper') }}</span>
@@ -85,7 +134,7 @@
 @endsection
 
 @section('scripts')
-<script>
+{{-- <script>
     Dropzone.options.logoDropzone = {
     url: '{{ route('admin.footers.storeMedia') }}',
     maxFilesize: 2, // MB
@@ -139,5 +188,5 @@
     }
 }
 
-</script>
+</script> --}}
 @endsection

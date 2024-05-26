@@ -392,8 +392,25 @@ class PermissionsTableSeeder extends Seeder
             ],
             [
                 'id'    => 96,
-                'title' => 'testimonial_access',
+                'title' => 'signature_access',
             ],
+            [
+                'id'    => 97,
+                'title' => 'signature_create',
+            ],
+            [
+                'id'    => 98,
+                'title' => 'signature_delete',
+            ],
+            [
+                'id'    => 99,
+                'title' => 'signature_edit',
+            ],
+            [
+                'id'    => 100,
+                'title' => 'signature_show',
+            ],
+            
      
         ];
 

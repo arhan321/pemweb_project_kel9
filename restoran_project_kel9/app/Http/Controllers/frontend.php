@@ -11,6 +11,7 @@ use App\Models\Footer;
 use App\Models\Gallery;
 use App\Models\Product;
 use App\Models\Datachef;
+use App\Models\Signature;
 use App\Models\SosialMedium;
 use Illuminate\Http\Request;
 
@@ -27,8 +28,9 @@ class frontend extends Controller
     //     return view ('frontend.home', compact('blog'));
     // }
     public function home(){
+        $footer = Footer::all();
         $Home = Home::all();
-        return view ('frontend.home', compact('Home'));
+        return view ('frontend.home', compact('Home','footer'));
     }
 
     public function reservasi(){
@@ -37,34 +39,47 @@ class frontend extends Controller
     }
 
      public function abouts(){
+        $footer = Footer::all();
         $whyus = Why::all();
         $About = About::all();
-         return view ('frontend.about', compact('About','whyus'));
+         return view ('frontend.about', compact('About','whyus','footer'));
      }
      
      public function menu(){
+        $footer = Footer::all();
         $products = product::all();
-        return view ('frontend.menu', compact('products'));
+        return view ('frontend.menu', compact('products','footer'));
     }
 
-    public function signature(){
-        // $blog = Blog::all();
-        return view ('frontend.signature');
+    public function signature() {
+        $footer = Footer::all();
+        $signatures = Signature::all();
+        $categories = $signatures->pluck('category')->unique()->values()->all(); // Ambil kategori unik dari semua tanda tangan
+    
+        return view('frontend.signature', compact('signatures', 'categories','footer'));
     }
 
     public function testimonial(){
-        return view ('frontend.testimonial');
+        $footer = Footer::all();
+        return view ('frontend.testimonial', compact('footer'));
     }
     
     public function galery(){
+        $footer = Footer::all();
         $galery = Gallery::all();
-        return view ('frontend.galery', compact('galery'));
+        return view ('frontend.galery', compact('galery','footer'));
     }
     
     public function chefs(){
+        $footer = Footer::all();
         $chefs = Datachef::all();
         $icon = SosialMedium::all();
-        return view ('frontend.chefs',compact('chefs','icon'));
+        return view ('frontend.chefs',compact('chefs','icon','footer'));
+    }
+    public function footer()
+    {
+        $footer = Footer::first();
+        return view('layouts.inc.footers', compact('footer'));
     }
 
 

@@ -80,7 +80,7 @@
         </li>
     @endcan
         @can('frontend_access')
-            <li class="c-sidebar-nav-dropdown {{ request()->is("admin/homes*") ? "c-show" : "" }} {{ request()->is("admin/abouts*") ? "c-show" : "" }} {{ request()->is("admin/whys*") ? "c-show" : "" }} {{ request()->is("admin/blogs*") ? "c-show" : "" }} {{ request()->is("admin/galleries*") ? "c-show" : "" }} {{ request()->is("admin/datachefs*") ? "c-show" : "" }} {{ request()->is("admin/sosial-media*") ? "c-show" : "" }} {{ request()->is("admin/footers*") ? "c-show" : "" }}">
+            <li class="c-sidebar-nav-dropdown {{ request()->is("admin/homes*") ? "c-show" : "" }} {{ request()->is("admin/abouts*") ? "c-show" : "" }} {{ request()->is("admin/whys*") ? "c-show" : "" }} {{ request()->is("admin/blogs*") ? "c-show" : "" }} {{ request()->is("admin/signatures*") ? "c-show" : "" }} {{ request()->is("admin/galleries*") ? "c-show" : "" }} {{ request()->is("admin/datachefs*") ? "c-show" : "" }} {{ request()->is("admin/sosial-media*") ? "c-show" : "" }} {{ request()->is("admin/footers*") ? "c-show" : "" }}">
                 <a class="c-sidebar-nav-dropdown-toggle" href="#">
                     <i class="fa-fw fas fa-globe c-sidebar-nav-icon">
 
@@ -148,6 +148,16 @@
                             </a>
                         </li>
                     @endcan
+                    @can('signature_access')
+                    <li class="c-sidebar-nav-item">
+                        <a href="{{ route("admin.signatures.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/signatures") || request()->is("admin/signatures/*") ? "c-active" : "" }}">
+                            <i class="fa-fw far fa-heart c-sidebar-nav-icon">
+                                <i class="fa-solid "></i>
+                            </i>
+                            {{ trans('cruds.signature.title') }}
+                        </a>
+                    </li>
+                @endcan
                     @can('gallery_access')
                         <li class="c-sidebar-nav-item">
                             <a href="{{ route("admin.galleries.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/galleries") || request()->is("admin/galleries/*") ? "c-active" : "" }}">
