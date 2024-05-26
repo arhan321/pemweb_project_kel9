@@ -33,7 +33,7 @@
         </div>
       </div>
     </section>
-    <!-- End About Section -->
+    <!-- End About Section -->  
 @empty
   <main id="main">
     <section id="about" class="about">

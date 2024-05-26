@@ -1,11 +1,17 @@
 <?php
+use App\Http\Controllers\OrderController;
+// use App\Http\Controllers\MidtransController;
 
 //routing frontend untuk makan dittempat
 Route::get('/qr', function () {
     return view('layouts.qrcode');
 });
  Route::get('/makan', 'makan_tempat@getmakan')->name('layouts.makan_di_tempat.makan');
-
+ 
+ Route::get('/reservasi', [OrderController::class, 'index'])->name('layouts.reservasi');
+ Route::post('/checkout', [OrderController::class, 'checkout'])->name('midtrans.checkout');
+ Route::post('/midtrand-callback', [OrderController::class, 'callback']);
+ 
 //routing front end 
 Route::get('/', 'frontend@home')->name('frontend.home');
  Route::get('/abouts', 'frontend@abouts')->name('frontend.about');
@@ -17,7 +23,7 @@ Route::get('/', 'frontend@home')->name('frontend.home');
 //  Route::get('/contact', 'frontend@contact')->name('frontend.contact');
 // Route::get('/chef', 'frontend@chef')->name('frontend.chef');
 // Route::get('/contact', 'frontend@contact')->name('frontend.contact');
-Route::get('/reservasi', 'frontend@reservasi')->name('layouts.reservasi');
+// Route::get('/reservasi', 'frontend@reservasi')->name('layouts.reservasi');
 Route::get('/error', function () {
     return view('frontend.error');
 });

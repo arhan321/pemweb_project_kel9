@@ -31,11 +31,12 @@
       </ul>
       <i class="bi bi-list mobile-nav-toggle"></i>
     </nav>
-    <a id="tombol" href="reservasi.html" class="book-a-table-btn scrollto d-none d-lg-flex speak">{{ trans('panel.frontend.usefullinks.reservation') }}</a>
+    <a id="tombol" href="{{ route('layouts.reservasi') }}" class="book-a-table-btn scrollto d-none d-lg-flex speak">{{ trans('panel.frontend.usefullinks.reservation') }}</a>
   </div>
   @endforeach
 </header>
 <!-- End Header -->
+
 <script>
   document.addEventListener('DOMContentLoaded', function () {
     const elements = document.querySelectorAll('.speak');
@@ -47,7 +48,7 @@
       return voices.find(voice => voice.lang === 'id-ID' && voice.name.includes('Google'));
     }
 
-    // Ngeluarin suara wanita
+    // Ngeluarin suara wanita 
     speechSynthesis.onvoiceschanged = () => {
       const indonesianVoice = getIndonesianFemaleVoice();
 
