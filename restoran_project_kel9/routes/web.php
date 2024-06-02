@@ -1,5 +1,6 @@
 <?php
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\Admin\TablesController;
 // use App\Http\Controllers\MidtransController;
 
 //routing frontend untuk makan dittempat
@@ -14,6 +15,8 @@ Route::get('/qr', function () {
  Route::post('/midtrans-callback', [OrderController::class, 'callback'])->name('midtrans.callback');
  Route::get('/order/{id}', [OrderController::class, 'showOrder'])->name('order.show');
 
+//  Route::get('/api/available-tables', [TablesController::class, 'getAvailableTables']);
+ 
 //routing front end 
 Route::get('/', 'frontend@home')->name('frontend.home');
  Route::get('/abouts', 'frontend@abouts')->name('frontend.about');

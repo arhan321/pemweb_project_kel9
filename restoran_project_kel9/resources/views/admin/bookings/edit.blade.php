@@ -11,6 +11,26 @@
             @method('PUT')
             @csrf
             <div class="form-group">
+                <label class="required" for="nama_customer">{{ trans('cruds.booking.fields.nama_customer') }}</label>
+                <input class="form-control {{ $errors->has('nama_customer') ? 'is-invalid' : '' }}" type="text" name="nama_customer" id="nama_customer" value="{{ old('nama_customer', $booking->nama_customer) }}" required>
+                @if($errors->has('nama_customer'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('nama_customer') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.booking.fields.title_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label class="required" for="jumlah_orang">{{ trans('cruds.booking.fields.jumlah_orang') }}</label>
+                <input class="form-control {{ $errors->has('jumlah_orang') ? 'is-invalid' : '' }}" type="text" name="jumlah_orang" id="jumlah_orang" value="{{ old('jumlah_orang', $booking->jumlah_orang) }}" required>
+                @if($errors->has('jumlah_orang'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('jumlah_orang') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.booking.fields.jumlah_orang_helper') }}</span>
+            </div>
+            <div class="form-group">
                 <label class="required" for="start_book">{{ trans('cruds.booking.fields.start_book') }}</label>
                 <input class="form-control datetime {{ $errors->has('start_book') ? 'is-invalid' : '' }}" type="text" name="start_book" id="start_book" value="{{ old('start_book', $booking->start_book) }}" required>
                 @if($errors->has('start_book'))
@@ -68,7 +88,5 @@
         </form>
     </div>
 </div>
-
-
 
 @endsection

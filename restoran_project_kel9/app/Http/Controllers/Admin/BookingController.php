@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Gate;
+use App\Models\Table;
+use App\Models\Booking;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\MassDestroyBookingRequest;
 use App\Http\Requests\StoreBookingRequest;
 use App\Http\Requests\UpdateBookingRequest;
-use App\Models\Booking;
-use Gate;
-use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use App\Http\Requests\MassDestroyBookingRequest;
 
 class BookingController extends Controller
 {
@@ -26,12 +27,21 @@ class BookingController extends Controller
     {
         abort_if(Gate::denies('booking_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return view('admin.bookings.create');
+        $availableTables = Table::where('status', 'kosong')->get();
+
+        return view('admin.bookings.create', compact('availableTables'));
     }
 
     public function store(StoreBookingRequest $request)
     {
+        $table = Table::find($request->table_id);
+        if ($table->status != 'kosong') {
+            return back()->withErrors(['table_id' => 'Table is not available']);
+        }
+
         $booking = Booking::create($request->all());
+        $table->status = 'terbooking';
+        $table->save();
 
         return redirect()->route('admin.bookings.index');
     }
@@ -45,7 +55,20 @@ class BookingController extends Controller
 
     public function update(UpdateBookingRequest $request, Booking $booking)
     {
+        $previousStatus = $booking->status;
         $booking->update($request->all());
+
+        $table = Table::find($booking->table_id);
+        if ($table) {
+            if ($request->status == 'Cancel' && $previousStatus != 'Cancel') {
+                $table->status = 'kosong';
+            } elseif ($request->status == 'Selesai' && $previousStatus != 'Selesai') {
+                $table->status = 'kosong';
+            } elseif ($request->status == 'Booking' && $previousStatus != 'Booking') {
+                $table->status = 'terbooking';
+            }
+            $table->save();
+        }
 
         return redirect()->route('admin.bookings.index');
     }
@@ -61,6 +84,12 @@ class BookingController extends Controller
     {
         abort_if(Gate::denies('booking_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
+        $table = Table::find($booking->table_id);
+        if ($table && $booking->status != 'Cancel' && $booking->status != 'Selesai') {
+            $table->status = 'kosong';
+            $table->save();
+        }
+
         $booking->delete();
 
         return back();
@@ -71,6 +100,11 @@ class BookingController extends Controller
         $bookings = Booking::find(request('ids'));
 
         foreach ($bookings as $booking) {
+            $table = Table::find($booking->table_id);
+            if ($table && $booking->status != 'Cancel' && $booking->status != 'Selesai') {
+                $table->status = 'kosong';
+                $table->save();
+            }
             $booking->delete();
         }
 

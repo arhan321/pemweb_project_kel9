@@ -41,6 +41,9 @@
                             {{ trans('cruds.table.fields.finish') }}
                         </th>
                         <th>
+                            {{ trans('cruds.table.fields.status') }}
+                        </th>
+                        <th>
                             &nbsp;
                         </th>
                     </tr>
@@ -74,6 +77,15 @@
                                 {{ $table->finish ?? '' }}
                             </td>
                             <td>
+                                @if($table->status == 'kosong')
+                                    <span class="status-kosong">{{ $table->status }}</span>
+                                @elseif($table->status == 'terbooking')
+                                    <span class="status-terbooking">{{ $table->status }}</span>
+                                @else
+                                    {{ $table->status }}
+                                @endif
+                            </td>
+                            <td>
                                 @can('table_show')
                                     <a class="btn btn-xs btn-primary" href="{{ route('admin.tables.show', $table->id) }}">
                                         {{ trans('global.view') }}
@@ -87,7 +99,7 @@
                                 @endcan
 
                                 @can('table_delete')
-                                    <form action="{{ route('admin.tables.destroy', $table->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
+                                    <form action="{{ route('admin.tables.destroy', $table->id) }}" method="POST" class="delete-form" style="display: inline-block;">
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                         <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
@@ -104,56 +116,84 @@
     </div>
 </div>
 
-
-
 @endsection
+
 @section('scripts')
 @parent
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     $(function () {
-  let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
-@can('table_delete')
-  let deleteButtonTrans = '{{ trans('global.datatables.delete') }}'
-  let deleteButton = {
-    text: deleteButtonTrans,
-    url: "{{ route('admin.tables.massDestroy') }}",
-    className: 'btn-danger',
-    action: function (e, dt, node, config) {
-      var ids = $.map(dt.rows({ selected: true }).nodes(), function (entry) {
-          return $(entry).data('entry-id')
-      });
+        let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
+        @can('table_delete')
+        let deleteButtonTrans = '{{ trans('global.datatables.delete') }}'
+        let deleteButton = {
+            text: deleteButtonTrans,
+            url: "{{ route('admin.tables.massDestroy') }}",
+            className: 'btn-danger',
+            action: function (e, dt, node, config) {
+                var ids = $.map(dt.rows({ selected: true }).nodes(), function (entry) {
+                    return $(entry).data('entry-id')
+                });
 
-      if (ids.length === 0) {
-        alert('{{ trans('global.datatables.zero_selected') }}')
+                if (ids.length === 0) {
+                    Swal.fire({
+                        title: '{{ trans('global.datatables.zero_selected') }}',
+                        icon: 'warning',
+                    })
 
-        return
-      }
+                    return
+                }
 
-      if (confirm('{{ trans('global.areYouSure') }}')) {
-        $.ajax({
-          headers: {'x-csrf-token': _token},
-          method: 'POST',
-          url: config.url,
-          data: { ids: ids, _method: 'DELETE' }})
-          .done(function () { location.reload() })
-      }
-    }
-  }
-  dtButtons.push(deleteButton)
-@endcan
+                Swal.fire({
+                    title: '{{ trans('global.areYouSure') }}',
+                    text: "{{ trans('global.areYouSureDelete') }}",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: '{{ trans('global.confirmDelete') }}',
+                    cancelButtonText: '{{ trans('global.cancel') }}'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            headers: {'x-csrf-token': _token},
+                            method: 'POST',
+                            url: config.url,
+                            data: { ids: ids, _method: 'DELETE' }
+                        }).done(function () { location.reload() })
+                    }
+                })
+            }
+        }
+        dtButtons.push(deleteButton)
+        @endcan
 
-  $.extend(true, $.fn.dataTable.defaults, {
-    orderCellsTop: true,
-    order: [[ 1, 'desc' ]],
-    pageLength: 100,
-  });
-  let table = $('.datatable-Table:not(.ajaxTable)').DataTable({ buttons: dtButtons })
-  $('a[data-toggle="tab"]').on('shown.bs.tab click', function(e){
-      $($.fn.dataTable.tables(true)).DataTable()
-          .columns.adjust();
-  });
-  
-})
+        $.extend(true, $.fn.dataTable.defaults, {
+            orderCellsTop: true,
+            order: [[ 1, 'desc' ]],
+            pageLength: 100,
+        });
+        let table = $('.datatable-Table:not(.ajaxTable)').DataTable({ buttons: dtButtons })
+        $('a[data-toggle="tab"]').on('shown.bs.tab click', function(e){
+            $($.fn.dataTable.tables(true)).DataTable()
+                .columns.adjust();
+        });
+    })
 
+    // SweetAlert for individual delete buttons
+    $('.delete-form').on('submit', function(e) {
+        e.preventDefault();
+        let form = this;
+        Swal.fire({
+            title: '{{ trans('global.areYouSure') }}',
+            text: "{{ trans('global.areYouSureDelete') }}",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: '{{ trans('global.confirmDelete') }}',
+            cancelButtonText: '{{ trans('global.cancel') }}'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                form.submit();
+            }
+        })
+    });
 </script>
 @endsection

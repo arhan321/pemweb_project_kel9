@@ -37,7 +37,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/dropzone.min.css" />
 
     <!-- Template Main CSS File -->
-    <link href="frontend/assets/css/hjs.css" rel="stylesheet" />
+    <link href="frontend/assets/css/hjss.css" rel="stylesheet" />
 
     <!-- =======================================================
   * Template Name: Restaurantly - v3.1.0

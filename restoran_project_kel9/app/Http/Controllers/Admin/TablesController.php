@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Gate;
+use App\Models\Table;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\Traits\MediaUploadingTrait;
-use App\Http\Requests\MassDestroyTableRequest;
 use App\Http\Requests\StoreTableRequest;
 use App\Http\Requests\UpdateTableRequest;
-use App\Models\Table;
-use Gate;
-use Illuminate\Http\Request;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use App\Http\Requests\MassDestroyTableRequest;
 use Symfony\Component\HttpFoundation\Response;
+use App\Http\Controllers\Traits\MediaUploadingTrait;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class TablesController extends Controller
 {
@@ -110,5 +110,25 @@ class TablesController extends Controller
         $media         = $model->addMediaFromRequest('upload')->toMediaCollection('ck-media');
 
         return response()->json(['id' => $media->id, 'url' => $media->getUrl()], Response::HTTP_CREATED);
+    }
+
+    public function getAvailableTables(Request $request)
+    {
+        $date = $request->query('date');
+        $timeSlot = $request->query('time_slot');
+    
+        // Misal format timeSlot adalah "10:00-12:00"
+        list($startTime, $endTime) = explode('-', $timeSlot);
+    
+        // Lakukan query untuk mendapatkan tabel yang kosong pada tanggal dan slot waktu tertentu
+        $availableTables = Table::where('status', 'kosong')
+            ->whereDoesntHave('bookings', function($query) use ($date, $startTime, $endTime) {
+                $query->whereDate('start_book', $date)
+                      ->whereTime('start_book', '<=', $endTime)
+                      ->whereTime('finish_book', '>=', $startTime);
+            })
+            ->pluck('name');
+    
+        return response()->json(['tables' => $availableTables]);
     }
 }

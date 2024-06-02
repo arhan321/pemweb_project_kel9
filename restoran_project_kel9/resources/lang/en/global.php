@@ -5,6 +5,8 @@ return [
     'add'                            => 'Add',
     'allRightsReserved'              => 'All rights reserved.',
     'areYouSure'                     => 'Are you sure?',
+    'areYouSureDelete'               => 'Are you sure? Delete this data?',
+    'confirmDelete'                  => 'Confirm Delete',
     'clickHereToVerify'              => 'Click here to verify',
     'create'                         => 'Create',
     'dashboard'                      => 'Dashboard',

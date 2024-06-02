@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 class CreateTablesTable extends Migration
 {
@@ -14,6 +14,7 @@ class CreateTablesTable extends Migration
             $table->string('description')->nullable();
             $table->time('start')->nullable();
             $table->time('finish')->nullable();
+            $table->enum('status', ['kosong', 'terbooking'])->default('kosong');
             $table->timestamps();
             $table->softDeletes();
         });

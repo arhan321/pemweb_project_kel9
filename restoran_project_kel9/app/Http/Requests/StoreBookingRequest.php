@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Booking;
 use Gate;
-use Illuminate\Foundation\Http\FormRequest;
+use App\Models\Booking;
 use Illuminate\Http\Response;
+use Illuminate\Foundation\Http\FormRequest;
 
 class StoreBookingRequest extends FormRequest
 {
@@ -17,17 +17,17 @@ class StoreBookingRequest extends FormRequest
     public function rules()
     {
         return [
-            'start_book' => [
-                'required',
-                'date_format:' . config('panel.date_format') . ' ' . config('panel.time_format'),
-            ],
-            'finish_book' => [
-                'required',
-                'date_format:' . config('panel.date_format') . ' ' . config('panel.time_format'),
-            ],
-            'category' => [
-                'required',
-            ],
+            // 'start_book' => [
+            //     'required',
+            //     'date_format:' . config('panel.date_format') . ' ' . config('panel.time_format'),
+            // ],
+            // 'finish_book' => [
+            //     'required',
+            //     'date_format:' . config('panel.date_format') . ' ' . config('panel.time_format'),
+            // ],
+            // 'category' => [
+            //     'required',
+            // ],
         ];
     }
 }

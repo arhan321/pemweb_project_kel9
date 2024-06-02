@@ -16,5 +16,6 @@ class RoleUserTableSeeder extends Seeder
         User::findOrFail(5)->roles()->sync(5);
         User::findOrFail(6)->roles()->sync(6);
         User::findOrFail(7)->roles()->sync(6);
+        User::findOrFail(8)->roles()->sync(3);
     }
 }

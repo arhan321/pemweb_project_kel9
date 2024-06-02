@@ -51,23 +51,23 @@
         </div>
     </section>
     <script>
-        var currentTime = new Date();
-        var currentHour = currentTime.getHours();
+        // var currentTime = new Date();
+        // var currentHour = currentTime.getHours();
 
-        if (currentHour >= 22 || currentHour < 08) {
-            window.location.href = '/error';
-        }
+        // if (currentHour >= 22 || currentHour < 08) {
+        //     window.location.href = '/error';
+        // }
         document.getElementById('reservationForm').addEventListener('submit', function(event) {
             event.preventDefault();
             var form = this;
             form.submit();
         });
-        if (currentHour >= 22 || currentHour < 08) {
-                window.location.href = '/error';
-            } else {
-                form.submit();
-            }
-    </script>
+    //     if (currentHour >= 22 || currentHour < 08) {
+    //             window.location.href = '/error';
+    //         } else {
+    //             form.submit();
+    //         }
+    // </script>
     {{-- <script>
         // Mendapatkan waktu saat ini
         var currentTime = new Date();

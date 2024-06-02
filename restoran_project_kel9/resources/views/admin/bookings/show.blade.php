@@ -25,6 +25,22 @@
                     </tr>
                     <tr>
                         <th>
+                            {{ trans('cruds.booking.fields.nama_customer') }}
+                        </th>
+                        <td>
+                            {{ $booking->nama_customer }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.booking.fields.jumlah_orang') }}
+                        </th>
+                        <td>
+                            {{ $booking->jumlah_orang }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
                             {{ trans('cruds.booking.fields.start_book') }}
                         </th>
                         <td>

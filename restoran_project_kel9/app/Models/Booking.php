@@ -4,9 +4,9 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use DateTimeInterface;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Booking extends Model
 {
@@ -15,9 +15,7 @@ class Booking extends Model
     public $table = 'bookings';
 
     public const CATEGORY_SELECT = [
-        'open'   => 'Open',
-        'packet' => 'Packet',
-        'promo'  => 'Promo',
+        'reservasi'   => 'reservasi',
     ];
 
     protected $dates = [
@@ -31,14 +29,17 @@ class Booking extends Model
     public const STATUS_SELECT = [
         'Cancel'    => 'Cancel',
         'Booking'   => 'Booking',
-        'Available' => 'Available',
+        'Selesai' => 'Selesai',
     ];
 
     protected $fillable = [
+        'nama_customer',
+        'jumlah_orang',
         'start_book',
         'finish_book',
         'category',
         'status',
+        'table_id', 
         'created_at',
         'updated_at',
         'deleted_at',
@@ -51,21 +52,26 @@ class Booking extends Model
 
     public function getStartBookAttribute($value)
     {
-        return $value ? Carbon::createFromFormat('Y-m-d H:i:s', $value)->format(config('panel.date_format') . ' ' . config('panel.time_format')) : null;
+        return $value ? Carbon::parse($value)->format('Y-m-d H:i:s') : null;
     }
 
     public function setStartBookAttribute($value)
     {
-        $this->attributes['start_book'] = $value ? Carbon::createFromFormat(config('panel.date_format') . ' ' . config('panel.time_format'), $value)->format('Y-m-d H:i:s') : null;
+        $this->attributes['start_book'] = $value ? Carbon::parse($value)->format('Y-m-d H:i:s') : null;
     }
 
     public function getFinishBookAttribute($value)
     {
-        return $value ? Carbon::createFromFormat('Y-m-d H:i:s', $value)->format(config('panel.date_format') . ' ' . config('panel.time_format')) : null;
+        return $value ? Carbon::parse($value)->format('Y-m-d H:i:s') : null;
     }
 
     public function setFinishBookAttribute($value)
     {
-        $this->attributes['finish_book'] = $value ? Carbon::createFromFormat(config('panel.date_format') . ' ' . config('panel.time_format'), $value)->format('Y-m-d H:i:s') : null;
+        $this->attributes['finish_book'] = $value ? Carbon::parse($value)->format('Y-m-d H:i:s') : null;
+    }
+
+    public function table()
+    {
+        return $this->belongsTo(Table::class);
     }
 }

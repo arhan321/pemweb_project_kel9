@@ -10,24 +10,38 @@
         <form method="POST" action="{{ route("admin.bookings.store") }}" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
-                <label class="required" for="start_book">{{ trans('cruds.booking.fields.start_book') }}</label>
-                <input class="form-control datetime {{ $errors->has('start_book') ? 'is-invalid' : '' }}" type="text" name="start_book" id="start_book" value="{{ old('start_book') }}" required>
-                @if($errors->has('start_book'))
+                <label class="required" for="nama_customer">{{ trans('cruds.booking.fields.nama_customer') }}</label>
+                <input class="form-control {{ $errors->has('nama_customer') ? 'is-invalid' : '' }}" type="text" name="nama_customer" id="nama_customer" value="{{ old('nama_customer', '') }}">
+                @if($errors->has('nama_customer'))
                     <div class="invalid-feedback">
-                        {{ $errors->first('start_book') }}
+                        {{ $errors->first('nama_customer') }}
                     </div>
                 @endif
-                <span class="help-block">{{ trans('cruds.booking.fields.start_book_helper') }}</span>
+                <span class="help-block">{{ trans('cruds.booking.fields.title_helper') }}</span>
             </div>
             <div class="form-group">
-                <label class="required" for="finish_book">{{ trans('cruds.booking.fields.finish_book') }}</label>
-                <input class="form-control datetime {{ $errors->has('finish_book') ? 'is-invalid' : '' }}" type="text" name="finish_book" id="finish_book" value="{{ old('finish_book') }}" required>
-                @if($errors->has('finish_book'))
+                <label class="required" for="jumlah_orang">{{ trans('cruds.booking.fields.jumlah_orang') }}</label>
+                <input class="form-control {{ $errors->has('jumlah_orang') ? 'is-invalid' : '' }}" type="number" name="jumlah_orang" id="jumlah_orang" value="{{ old('jumlah_orang', '') }}">
+                @if($errors->has('jumlah_orang'))
                     <div class="invalid-feedback">
-                        {{ $errors->first('finish_book') }}
+                        {{ $errors->first('jumlah_orang') }}
                     </div>
                 @endif
-                <span class="help-block">{{ trans('cruds.booking.fields.finish_book_helper') }}</span>
+                <span class="help-block">{{ trans('cruds.booking.fields.jumlah_orang_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label class="required" for="booking_date">{{ trans('cruds.booking.fields.booking_date') }}</label>
+                <input class="form-control date {{ $errors->has('booking_date') ? 'is-invalid' : '' }}" type="date" name="booking_date" id="booking_date" value="{{ old('booking_date') }}" required>
+                @if($errors->has('booking_date'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('booking_date') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.booking.fields.booking_date_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <input type="hidden" name="start_book" id="start_book" value="{{ old('start_book') }}">
+                <input type="hidden" name="finish_book" id="finish_book" value="{{ old('finish_book') }}">
             </div>
             <div class="form-group">
                 <label class="required">{{ trans('cruds.booking.fields.category') }}</label>
@@ -60,6 +74,21 @@
                 <span class="help-block">{{ trans('cruds.booking.fields.status_helper') }}</span>
             </div>
             <div class="form-group">
+                <label class="required" for="table_id">{{ trans('cruds.booking.fields.table') }}</label>
+                <select class="form-control {{ $errors->has('table_id') ? 'is-invalid' : '' }}" name="table_id" id="table_id" required>
+                    <option value disabled {{ old('table_id', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
+                    @foreach($availableTables as $table)
+                        <option value="{{ $table->id }}" data-start="{{ $table->start }}" data-finish="{{ $table->finish }}" {{ old('table_id', '') === (string) $table->id ? 'selected' : '' }}>{{ $table->name }}</option>
+                    @endforeach
+                </select>
+                @if($errors->has('table_id'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('table_id') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.booking.fields.table_helper') }}</span>
+            </div>
+            <div class="form-group">
                 <button class="btn btn-danger" type="submit">
                     {{ trans('global.save') }}
                 </button>
@@ -68,6 +97,33 @@
     </div>
 </div>
 
+<script>
+document.getElementById('table_id').addEventListener('change', function() {
+    var selectedOption = this.options[this.selectedIndex];
+    var startBookTime = selectedOption.getAttribute('data-start');
+    var finishBookTime = selectedOption.getAttribute('data-finish');
+    var bookingDate = document.getElementById('booking_date').value;
 
+    if (bookingDate) {
+        document.getElementById('start_book').value = bookingDate + ' ' + startBookTime;
+        document.getElementById('finish_book').value = bookingDate + ' ' + finishBookTime;
+    } else {
+        document.getElementById('start_book').value = '';
+        document.getElementById('finish_book').value = '';
+    }
+});
+
+document.getElementById('booking_date').addEventListener('change', function() {
+    var selectedOption = document.getElementById('table_id').options[document.getElementById('table_id').selectedIndex];
+    var startBookTime = selectedOption.getAttribute('data-start');
+    var finishBookTime = selectedOption.getAttribute('data-finish');
+    var bookingDate = this.value;
+
+    if (startBookTime && finishBookTime) {
+        document.getElementById('start_book').value = bookingDate + ' ' + startBookTime;
+        document.getElementById('finish_book').value = bookingDate + ' ' + finishBookTime;
+    }
+});
+</script>
 
 @endsection
