@@ -72,6 +72,10 @@
                         <td> : {{ $order->phone }}</td>
                     </tr>
                     <tr>
+                        <td><strong>Customer_email</strong></td>
+                        <td> : {{ $order->customer_email }}</td>
+                    </tr>
+                    <tr>
                         <td><strong>Number of People</strong></td>
                         <td> : {{ $order->qty }}</td>
                     </tr>

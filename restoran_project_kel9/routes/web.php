@@ -14,7 +14,7 @@ Route::get('/qr', function () {
  Route::post('/checkout', [OrderController::class, 'checkout'])->name('midtrans.checkout');
  Route::post('/midtrans-callback', [OrderController::class, 'callback'])->name('midtrans.callback');
  Route::get('/order/{id}', [OrderController::class, 'showOrder'])->name('order.show');
-
+ Route::post('/available-tables', [OrderController::class, 'getAvailableTables'])->name('available.tables');
 //  Route::get('/api/available-tables', [TablesController::class, 'getAvailableTables']);
  
 //routing front end 

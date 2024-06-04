@@ -81,6 +81,20 @@
                 <span class="help-block">{{ trans('cruds.booking.fields.status_helper') }}</span>
             </div>
             <div class="form-group">
+                <label class="required" for="table_id">{{ trans('cruds.booking.fields.table') }}</label>
+                <select class="form-control select2 {{ $errors->has('table') ? 'is-invalid' : '' }}" name="table_id" id="table_id" required>
+                    @foreach($tables as $id => $table)
+                        <option value="{{ $id }}" {{ (old('table_id') ? old('table_id') : $booking->table->id ?? '') == $id ? 'selected' : '' }}>{{ $table }}</option>
+                    @endforeach
+                </select>
+                @if($errors->has('table'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('table') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.booking.fields.table_helper') }}</span>
+            </div>
+            <div class="form-group">
                 <button class="btn btn-danger" type="submit">
                     {{ trans('global.save') }}
                 </button>

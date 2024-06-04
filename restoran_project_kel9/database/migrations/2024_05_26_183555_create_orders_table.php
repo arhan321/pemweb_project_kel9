@@ -11,13 +11,16 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->date('days');
-            $table->time('hours');
+            $table->time('start_time'); // add start_time
+            $table->time('end_time');
             $table->string('name');
             $table->string('phone');
+            $table->string('customer_email');
             $table->integer('qty');
-            $table->bigInteger('total_price');
+            $table->bigInteger('total_price');  
             $table->enum('status', ['Unpaid', 'Paid']);
             $table->timestamps();
+            $table->foreignId('table_id')->constrained()->onDelete('cascade');
         });
     }
 

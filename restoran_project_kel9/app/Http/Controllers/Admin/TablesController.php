@@ -112,23 +112,23 @@ class TablesController extends Controller
         return response()->json(['id' => $media->id, 'url' => $media->getUrl()], Response::HTTP_CREATED);
     }
 
-    public function getAvailableTables(Request $request)
-    {
-        $date = $request->query('date');
-        $timeSlot = $request->query('time_slot');
+    // public function getAvailableTables(Request $request)
+    // {
+    //     $date = $request->query('date');
+    //     $timeSlot = $request->query('time_slot');
     
-        // Misal format timeSlot adalah "10:00-12:00"
-        list($startTime, $endTime) = explode('-', $timeSlot);
+    //     // Misal format timeSlot adalah "10:00-12:00"
+    //     list($startTime, $endTime) = explode('-', $timeSlot);
     
-        // Lakukan query untuk mendapatkan tabel yang kosong pada tanggal dan slot waktu tertentu
-        $availableTables = Table::where('status', 'kosong')
-            ->whereDoesntHave('bookings', function($query) use ($date, $startTime, $endTime) {
-                $query->whereDate('start_book', $date)
-                      ->whereTime('start_book', '<=', $endTime)
-                      ->whereTime('finish_book', '>=', $startTime);
-            })
-            ->pluck('name');
+    //     // Lakukan query untuk mendapatkan tabel yang kosong pada tanggal dan slot waktu tertentu
+    //     $availableTables = Table::where('status', 'kosong')
+    //         ->whereDoesntHave('bookings', function($query) use ($date, $startTime, $endTime) {
+    //             $query->whereDate('start_book', $date)
+    //                   ->whereTime('start_book', '<=', $endTime)
+    //                   ->whereTime('finish_book', '>=', $startTime);
+    //         })
+    //         ->pluck('name');
     
-        return response()->json(['tables' => $availableTables]);
-    }
+    //     return response()->json(['tables' => $availableTables]);
+    // }
 }

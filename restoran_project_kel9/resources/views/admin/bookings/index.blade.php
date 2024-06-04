@@ -41,6 +41,9 @@
                             {{ trans('cruds.booking.fields.category') }}
                         </th>
                         <th>
+                            {{ trans('cruds.booking.fields.table_booking') }}
+                        </th>
+                        <th>
                             {{ trans('cruds.booking.fields.status') }}
                         </th>
                         <th>
@@ -73,15 +76,18 @@
                                 {{ App\Models\Booking::CATEGORY_SELECT[$booking->category] ?? '' }}
                             </td>
                             <td>
+                                {{ $booking->table->name ?? '' }} <!-- Menggunakan relasi 'table' untuk mendapatkan nama tabel -->
+                            </td>
+                            <td>
                                 @if($booking->status == 'Cancel')
-                                <span class="status-cancel">{{ App\Models\Booking::STATUS_SELECT[$booking->status] ?? '' }}</span>
-                            @elseif($booking->status == 'Booking')
-                                <span class="status-booking">{{ App\Models\Booking::STATUS_SELECT[$booking->status] ?? '' }}</span>
-                            @elseif($booking->status == 'Selesai')
-                                <span class="status-selesai">{{ App\Models\Booking::STATUS_SELECT[$booking->status] ?? '' }}</span>
-                            @else
-                                {{ App\Models\Booking::STATUS_SELECT[$booking->status] ?? '' }}
-                            @endif
+                                    <span class="status-cancel">{{ App\Models\Booking::STATUS_SELECT[$booking->status] ?? '' }}</span>
+                                @elseif($booking->status == 'Booking')
+                                    <span class="status-booking">{{ App\Models\Booking::STATUS_SELECT[$booking->status] ?? '' }}</span>
+                                @elseif($booking->status == 'Selesai')
+                                    <span class="status-selesai">{{ App\Models\Booking::STATUS_SELECT[$booking->status] ?? '' }}</span>
+                                @else
+                                    {{ App\Models\Booking::STATUS_SELECT[$booking->status] ?? '' }}
+                                @endif
                             </td>
                             <td>
                                 @can('booking_show')

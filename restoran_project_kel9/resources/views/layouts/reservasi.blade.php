@@ -19,28 +19,29 @@
                     <form id="reservationForm" action="{{ route('midtrans.checkout') }}" method="POST">
                         @csrf
                         <div class="form-row">
-                            <select name="days" id="days" required>
-                                <option value="">Select day</option>
-                                <option value="2024-05-28">Tuesday</option>
-                                <option value="2024-05-29">Wednesday</option>
-                                <option value="2024-05-30">friday</option>
-                                <!-- Add more options as needed -->
-                            </select>
-                            <select name="hours" id="hours" required>
-                                <option value="">Select Hour</option>
-                                <option value="10:00">10:00</option>
-                                <option value="12:00">12:00</option>
-                                <option value="14:00">14:00</option>
-                                <option value="16:00">16:00</option>
-                                <option value="18:00">18:00</option>
-                                <option value="20:00">20:00</option>
-                                <option value="22:00">22:00</option>
-                            </select>
+                            <div class="form-row">
+                                <label for="days">Select Date</label>
+                                <input type="date" name="days" id="date" class="form-control" required>
+                            </div>
+                            <div class="form-row">
+                                <select name="table_id" id="table_id" class="form-control" required>
+                                    <option value="">Select Table</option>
+                                    @foreach($availableTables as $table)
+                                        @php
+                                            $start = new \DateTime($table->start);
+                                            $end = new \DateTime($table->finish);
+                                            $range = $start->format('H:i') . ' - ' . $end->format('H:i');
+                                        @endphp
+                                        <option value="{{ $table->id }}">Table {{ $table->name }} ({{ $range }})</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
                         <div class="form-row">
-                            <input type="text" name="name" placeholder="Full Name" required>
-                            <input type="tel" name="phone" placeholder="Phone Number" required>
-                            <input type="number" name="qty" placeholder="Quantity" min="1" required>
+                            <input type="text" name="name" placeholder="Full Name" class="form-control" required>
+                            <input type="tel" name="phone" placeholder="Phone Number" class="form-control" required>
+                            <input type="email" name="customer_email" placeholder="Email" class="form-control" required>
+                            <input type="number" name="qty" placeholder="Quantity" min="1" class="form-control" required>
                         </div>
                         <div class="d-grid gap-2">
                             <button class="btn btn-primary" type="submit">Reserve Now</button>

@@ -71,6 +71,14 @@
                             {{ App\Models\Booking::STATUS_SELECT[$booking->status] ?? '' }}
                         </td>
                     </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.booking.fields.table') }}
+                        </th>
+                        <td>
+                            {{ $booking->table->name ?? '' }}
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <div class="form-group">
@@ -81,7 +89,5 @@
         </div>
     </div>
 </div>
-
-
 
 @endsection

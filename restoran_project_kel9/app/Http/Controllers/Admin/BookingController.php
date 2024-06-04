@@ -18,8 +18,8 @@ class BookingController extends Controller
     {
         abort_if(Gate::denies('booking_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $bookings = Booking::all();
-
+        $bookings = Booking::with('table')->get(); // Pastikan memuat relasi 'table'
+    
         return view('admin.bookings.index', compact('bookings'));
     }
 
@@ -50,7 +50,9 @@ class BookingController extends Controller
     {
         abort_if(Gate::denies('booking_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return view('admin.bookings.edit', compact('booking'));
+        $tables = Table::pluck('name', 'id')->all(); // Ganti 'name' dengan field yang sesuai di model Table
+    
+        return view('admin.bookings.edit', compact('booking', 'tables'));
     }
 
     public function update(UpdateBookingRequest $request, Booking $booking)
@@ -76,6 +78,7 @@ class BookingController extends Controller
     public function show(Booking $booking)
     {
         abort_if(Gate::denies('booking_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        $booking->load('table');
 
         return view('admin.bookings.show', compact('booking'));
     }
