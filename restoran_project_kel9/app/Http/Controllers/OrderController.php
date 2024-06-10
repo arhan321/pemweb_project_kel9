@@ -112,9 +112,9 @@ class OrderController extends Controller
 
                     $table = Table::find($order->table_id);
                     if ($table) {
-                        $table->status = 'kosong';
+                        $table->status = 'terbooking';  // Pastikan status berubah ke 'terbooking'
                         $table->save();
-                        Log::info('Table status updated to kosong', ['table_id' => $table->id]);
+                        Log::info('Table status updated to terbooking', ['table_id' => $table->id]);
                     }
 
                     return redirect()->route('order.show', ['id' => $order->id]);
@@ -154,15 +154,16 @@ class OrderController extends Controller
 
             $table = Table::find($order->table_id);
             if ($table) {
-                $table->status = 'kosong';
+                $table->status = 'terbooking';  // Pastikan status berubah ke 'terbooking'
                 $table->save();
-                Log::info('Table status updated to kosong', ['table_id' => $table->id]);
+                Log::info('Table status updated to terbooking', ['table_id' => $table->id]);
             }
         }
 
         return view('midtrans.showOrder', compact('order'));
     }
 }
+
 
 
 
