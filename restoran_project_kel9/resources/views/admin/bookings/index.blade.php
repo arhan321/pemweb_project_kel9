@@ -41,7 +41,7 @@
                             {{ trans('cruds.booking.fields.category') }}
                         </th>
                         <th>
-                            {{ trans('cruds.booking.fields.table_booking') }}
+                            {{ trans('cruds.booking.fields.table') }}
                         </th>
                         <th>
                             {{ trans('cruds.booking.fields.status') }}

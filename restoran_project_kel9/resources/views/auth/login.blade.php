@@ -71,6 +71,11 @@
 
                         </div>
                     </div>
+                    <div class="text-center mt-3">
+                        <a href="{{ route('google.redirect') }}" class="btn btn-danger btn-block">
+                            <i class="fab fa-google"></i> Login with Google
+                        </a>
+                    </div>
                 </form>
             </div>
         </div>

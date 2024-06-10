@@ -39,7 +39,7 @@ class PermissionRoleTableSeeder extends Seeder
           Role::findOrFail(5)->permissions()->sync($kepalachef_permissions->pluck('id'));
 
           // Menambahkan izin untuk bartender fnb access
-          $bartender_permissions = Permission::whereBetween('id', [58, 78])
+          $bartender_permissions = Permission::whereBetween('id', [79, 99])
           //  ->orWhereBetween('id', [51, 80])
           ->get();
            Role::findOrFail(6)->permissions()->sync($bartender_permissions->pluck('id'));

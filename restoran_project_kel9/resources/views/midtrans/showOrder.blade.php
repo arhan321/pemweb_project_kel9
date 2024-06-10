@@ -11,7 +11,7 @@
     <div class="container mt-5">
         <div class="card">
             <div class="card-header text-center">
-                <h2>Order Confirmation</h2>
+                <h2>Invoice</h2>
             </div>
             <div class="card-body" id="orderDetails">
                 <h4 class="card-title">Thank you for your payment, {{ $order->name }}!</h4>
