@@ -7,7 +7,6 @@ use App\Http\Controllers\GoogleLoginController;
 Route::get('auth/google', [GoogleLoginController::class, 'redirectToGoogle'])->name('google.redirect');
 Route::get('auth/google/callback', [GoogleLoginController::class, 'handleGoogleCallback'])->name('google.callback');
 
-
 //routing frontend untuk makan dittempat
 Route::get('/qr', function () {
     return view('layouts.qrcode');

@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Hash;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Laravel\Socialite\Facades\Socialite;
 
 class GoogleLoginController extends Controller
@@ -25,7 +26,7 @@ class GoogleLoginController extends Controller
             $user = User::where('email', $googleUser->email)->first();
 
             if (!$user) {
-                \Log::info('User not found, creating new user.');
+                Log::info('User not found, creating new user.');
                 $user = User::create([
                     'name' => $googleUser->name,
                     'email' => $googleUser->email,
