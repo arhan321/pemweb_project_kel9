@@ -29,7 +29,7 @@ class Booking extends Model
     public const STATUS_SELECT = [
         'Cancel'    => 'Cancel',
         'Booking'   => 'Booking',
-        'Selesai' => 'Selesai',
+        'Selesai'   => 'Selesai',
     ];
 
     protected $fillable = [
@@ -38,6 +38,9 @@ class Booking extends Model
         'start_book',
         'finish_book',
         'category',
+        'customer_email',
+        'phone',
+        'total_price',
         'status',
         'table_id', 
         'created_at',

@@ -15,12 +15,15 @@ class CreateBookingsTable extends Migration
             $table->datetime('start_book');
             $table->datetime('finish_book');
             $table->string('category');
+            $table->string('customer_email');
+            $table->string('phone');
+            $table->bigInteger('total_price');
             $table->string('status')->nullable();
-            $table->unsignedBigInteger('table_id'); 
+            // $table->unsignedBigInteger('table_id')->index(); 
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('table_id')->references('id')->on('tables')->onDelete('cascade'); // Menambahkan foreign key constraint
+            $table->foreignId('table_id')->constrained()->onDelete('cascade');// Menambahkan foreign key constraint
         });
     }
 }

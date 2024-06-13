@@ -240,13 +240,13 @@
                             </a>
                         </li>
                     @endcan
-                    @can('price_access')
+                    @can('order_access')
                         <li class="c-sidebar-nav-item">
                             <a href="{{ route("admin.prices.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/prices") || request()->is("admin/prices/*") ? "c-active" : "" }}">
-                                <i class="fa-fw far fa-money-bill-alt c-sidebar-nav-icon">
-
+                                <i class="fa-fw far fa-clock c-sidebar-nav-icon">
+                                    {{-- <i class="fa-regular fa-clock"></i> --}}
                                 </i>
-                                {{ trans('cruds.price.title') }}
+                                {{ trans('cruds.order.title') }}
                             </a>
                         </li>
                     @endcan

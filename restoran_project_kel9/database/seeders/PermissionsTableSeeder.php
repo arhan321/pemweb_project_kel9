@@ -368,23 +368,23 @@ class PermissionsTableSeeder extends Seeder
             ],
             [
                 'id'    => 90,
-                'title' => 'price_create',
+                'title' => 'order_create',
             ],
             [
                 'id'    => 91,
-                'title' => 'price_edit',
+                'title' => 'order_edit',
             ],
             [
                 'id'    => 92,
-                'title' => 'price_show',
+                'title' => 'order_show',
             ],
             [
                 'id'    => 93,
-                'title' => 'price_delete',
+                'title' => 'order_delete',
             ],
             [
                 'id'    => 94,
-                'title' => 'price_access',
+                'title' => 'order_access',
             ],
             [
                 'id'    => 95,

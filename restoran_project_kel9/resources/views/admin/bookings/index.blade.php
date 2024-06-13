@@ -44,6 +44,15 @@
                             {{ trans('cruds.booking.fields.table') }}
                         </th>
                         <th>
+                            {{ trans('cruds.booking.fields.customer_email') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.booking.fields.phone') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.booking.fields.total_price') }}
+                        </th>
+                        <th>
                             {{ trans('cruds.booking.fields.status') }}
                         </th>
                         <th>
@@ -76,7 +85,16 @@
                                 {{ App\Models\Booking::CATEGORY_SELECT[$booking->category] ?? '' }}
                             </td>
                             <td>
-                                {{ $booking->table->name ?? '' }} <!-- Menggunakan relasi 'table' untuk mendapatkan nama tabel -->
+                                {{ $booking->table->name ?? '' }}
+                            </td>
+                            <td>
+                                {{ $booking->customer_email ?? '' }}
+                            </td>
+                            <td>
+                                {{ $booking->phone ?? '' }}
+                            </td>
+                            <td>
+                                Rp {{ number_format($booking->total_price, 2) }}
                             </td>
                             <td>
                                 @if($booking->status == 'Cancel')

@@ -1,79 +1,79 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+// namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\MassDestroyPriceRequest;
-use App\Http\Requests\StorePriceRequest;
-use App\Http\Requests\UpdatePriceRequest;
-use App\Models\Price;
-use Gate;
-use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
+// use App\Http\Controllers\Controller;
+// use App\Http\Requests\MassDestroyPriceRequest;
+// use App\Http\Requests\StorePriceRequest;
+// use App\Http\Requests\UpdatePriceRequest;
+// use App\Models\Price;
+// use Gate;
+// use Illuminate\Http\Request;
+// use Symfony\Component\HttpFoundation\Response;
 
-class PriceController extends Controller
-{
-    public function index()
-    {
-        abort_if(Gate::denies('price_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+// class PriceController extends Controller
+// {
+//     public function index()
+//     {
+//         abort_if(Gate::denies('price_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $prices = Price::all();
+//         $prices = Price::all();
 
-        return view('admin.prices.index', compact('prices'));
-    }
+//         return view('admin.prices.index', compact('prices'));
+//     }
 
-    public function create()
-    {
-        abort_if(Gate::denies('price_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+//     public function create()
+//     {
+//         abort_if(Gate::denies('price_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return view('admin.prices.create');
-    }
+//         return view('admin.prices.create');
+//     }
 
-    public function store(StorePriceRequest $request)
-    {
-        $price = Price::create($request->all());
+//     public function store(StorePriceRequest $request)
+//     {
+//         $price = Price::create($request->all());
 
-        return redirect()->route('admin.prices.index');
-    }
+//         return redirect()->route('admin.prices.index');
+//     }
 
-    public function edit(Price $price)
-    {
-        abort_if(Gate::denies('price_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+//     public function edit(Price $price)
+//     {
+//         abort_if(Gate::denies('price_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return view('admin.prices.edit', compact('price'));
-    }
+//         return view('admin.prices.edit', compact('price'));
+//     }
 
-    public function update(UpdatePriceRequest $request, Price $price)
-    {
-        $price->update($request->all());
+//     public function update(UpdatePriceRequest $request, Price $price)
+//     {
+//         $price->update($request->all());
 
-        return redirect()->route('admin.prices.index');
-    }
+//         return redirect()->route('admin.prices.index');
+//     }
 
-    public function show(Price $price)
-    {
-        abort_if(Gate::denies('price_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+//     public function show(Price $price)
+//     {
+//         abort_if(Gate::denies('price_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return view('admin.prices.show', compact('price'));
-    }
+//         return view('admin.prices.show', compact('price'));
+//     }
 
-    public function destroy(Price $price)
-    {
-        abort_if(Gate::denies('price_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+//     public function destroy(Price $price)
+//     {
+//         abort_if(Gate::denies('price_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $price->delete();
+//         $price->delete();
 
-        return back();
-    }
+//         return back();
+//     }
 
-    public function massDestroy(MassDestroyPriceRequest $request)
-    {
-        $prices = Price::find(request('ids'));
+//     public function massDestroy(MassDestroyPriceRequest $request)
+//     {
+//         $prices = Price::find(request('ids'));
 
-        foreach ($prices as $price) {
-            $price->delete();
-        }
+//         foreach ($prices as $price) {
+//             $price->delete();
+//         }
 
-        return response(null, Response::HTTP_NO_CONTENT);
-    }
-}
+//         return response(null, Response::HTTP_NO_CONTENT);
+//     }
+// }

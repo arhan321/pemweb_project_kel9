@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use Midtrans\Snap;
+use Midtrans\Config;
 use App\Models\Order;
 use App\Models\Table;
 use App\Models\Booking;
@@ -51,10 +53,10 @@ class OrderController extends Controller
         $table->status = 'terbooking';
         $table->save();
 
-        \Midtrans\Config::$serverKey = config('midtrans.server_key');
-        \Midtrans\Config::$isProduction = false;
-        \Midtrans\Config::$isSanitized = true;
-        \Midtrans\Config::$is3ds = true;
+        Config::$serverKey = config('midtrans.server_key');
+        Config::$isProduction = false;
+        Config::$isSanitized = true;
+        Config::$is3ds = true;
 
         $params = [
             'transaction_details' => [
@@ -68,7 +70,7 @@ class OrderController extends Controller
             ],
         ];
 
-        $snapToken = \Midtrans\Snap::getSnapToken($params);
+        $snapToken = Snap::getSnapToken($params);
         return view('midtrans.checkout', compact('snapToken', 'order'));
     }
 
@@ -101,6 +103,9 @@ class OrderController extends Controller
                             'start_book' => Carbon::parse($order->days . ' ' . $order->start_time),
                             'finish_book' => Carbon::parse($order->days . ' ' . $order->end_time),
                             'category' => 'reservasi',
+                            'customer_email' => $order->customer_email,
+                            'phone' => $order->phone,
+                            'total_price' => $order->total_price, 
                             'status' => 'Booking',
                             'table_id' => $order->table_id,
                         ]);
@@ -132,8 +137,8 @@ class OrderController extends Controller
 
     public function showOrder($id)
     {
-        $order = Order::find($id);
-        if ($order->status != 'Paid') {
+        $order = Order::with('table')->find($id);
+        if ($order && $order->status != 'Paid') {
             $order->update(['status' => 'Paid']);
 
             try {
@@ -143,6 +148,9 @@ class OrderController extends Controller
                     'start_book' => Carbon::parse($order->days . ' ' . $order->start_time),
                     'finish_book' => Carbon::parse($order->days . ' ' . $order->end_time),
                     'category' => 'reservasi',
+                    'customer_email' => $order->customer_email,
+                    'phone' => $order->phone,
+                    'total_price' => $order->total_price, 
                     'status' => 'Booking',
                     'table_id' => $order->table_id,
                 ]);
@@ -163,6 +171,7 @@ class OrderController extends Controller
         return view('midtrans.showOrder', compact('order'));
     }
 }
+
 
 
 

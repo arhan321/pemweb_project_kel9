@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Price;
 use Gate;
-use Illuminate\Foundation\Http\FormRequest;
+use App\Models\Price;
 use Illuminate\Http\Response;
+use Illuminate\Foundation\Http\FormRequest;
 
 class StorePriceRequest extends FormRequest
 {
@@ -17,17 +17,17 @@ class StorePriceRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => [
-                'string',
-                'required',
-            ],
-            'price' => [
-                'required',
-            ],
-            'description' => [
-                'string',
-                'required',
-            ],
+            // 'name' => [
+            //     'string',
+            //     'required',
+            // ],
+            // 'price' => [
+            //     'required',
+            // ],
+            // 'description' => [
+            //     'string',
+            //     'required',
+            // ],
         ];
     }
 }

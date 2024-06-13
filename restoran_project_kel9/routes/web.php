@@ -1,10 +1,12 @@
 <?php
-use App\Http\Controllers\OrderController;
-use App\Http\Controllers\Admin\TablesController;
+use App\Http\Controllers\GoogleLoginController;
+// use App\Http\Controllers\Admin\TablesController;
 // use App\Http\Controllers\MidtransController;
 
-Route::get('/google/redirect', [App\Http\Controllers\GoogleLoginController::class, 'redirectToGoogle'])->name('google.redirect');
-Route::get('/google/callback', [App\Http\Controllers\GoogleLoginController::class, 'handleGoogleCallback'])->name('google.callback');
+
+Route::get('auth/google', [GoogleLoginController::class, 'redirectToGoogle'])->name('google.redirect');
+Route::get('auth/google/callback', [GoogleLoginController::class, 'handleGoogleCallback'])->name('google.callback');
+
 
 //routing frontend untuk makan dittempat
 Route::get('/qr', function () {
@@ -12,12 +14,11 @@ Route::get('/qr', function () {
 });
  Route::get('/makan', 'makan_tempat@getmakan')->name('layouts.makan_di_tempat.makan');
  
-
- Route::get('/reservasi', [OrderController::class, 'index'])->name('layouts.reservasi');
- Route::post('/checkout', [OrderController::class, 'checkout'])->name('midtrans.checkout');
- Route::post('/midtrans-callback', [OrderController::class, 'callback'])->name('midtrans.callback');
- Route::get('/order/{id}', [OrderController::class, 'showOrder'])->name('order.show');
- Route::post('/available-tables', [OrderController::class, 'getAvailableTables'])->name('available.tables');
+ Route::get('/reservasi', 'OrderController@index')->name('layouts.reservasi');
+ Route::post('/checkout', 'OrderController@checkout')->name('midtrans.checkout');
+ Route::post('/midtrans-callback', 'OrderController@callback')->name('midtrans.callback');
+ Route::get('/order/{id}', 'OrderController@showOrder')->name('order.show');
+ Route::post('/available-tables', 'OrderController@getAvailableTables')->name('available.tables');
 //  Route::get('/api/available-tables', [TablesController::class, 'getAvailableTables']);
  
 //routing front end 
@@ -139,8 +140,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::resource('bookings', 'BookingController');
 
     // Price
-    Route::delete('prices/destroy', 'PriceController@massDestroy')->name('prices.massDestroy');
-    Route::resource('prices', 'PriceController');
+    Route::delete('prices/destroy', 'QuerryorderController@massDestroy')->name('prices.massDestroy');
+    Route::resource('prices', 'QuerryorderController');
 
     // Product
     Route::delete('products/destroy', 'ProductController@massDestroy')->name('products.massDestroy');

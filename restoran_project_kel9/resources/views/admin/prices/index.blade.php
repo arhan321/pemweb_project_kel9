@@ -1,17 +1,17 @@
 @extends('layouts.admin')
 @section('content')
-@can('price_create')
+@can('order_create')
     <div style="margin-bottom: 10px;" class="row">
         <div class="col-lg-12">
             <a class="btn btn-success" href="{{ route('admin.prices.create') }}">
-                {{ trans('global.add') }} {{ trans('cruds.price.title_singular') }}
+                {{ trans('global.add') }} {{ trans('cruds.order.title_singular') }}
             </a>
         </div>
     </div>
 @endcan
 <div class="card">
     <div class="card-header">
-        {{ trans('cruds.price.title_singular') }} {{ trans('global.list') }}
+        {{ trans('cruds.order.title_singular') }} {{ trans('global.list') }}
     </div>
 
     <div class="card-body">
@@ -23,16 +23,37 @@
 
                         </th>
                         <th>
-                            {{ trans('cruds.price.fields.id') }}
+                            {{ trans('cruds.order.fields.id') }}
                         </th>
                         <th>
-                            {{ trans('cruds.price.fields.name') }}
+                            {{ trans('cruds.order.fields.name') }}
                         </th>
                         <th>
-                            {{ trans('cruds.price.fields.price') }}
+                            {{ trans('cruds.order.fields.date') }}
                         </th>
                         <th>
-                            {{ trans('cruds.price.fields.description') }}
+                            {{ trans('cruds.order.fields.start_time') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.order.fields.end_time') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.order.fields.phone') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.order.fields.email') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.order.fields.table') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.order.fields.number_of_people') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.order.fields.total') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.order.fields.status') }}
                         </th>
                         <th>
                             &nbsp;
@@ -40,38 +61,59 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($prices as $key => $price)
-                        <tr data-entry-id="{{ $price->id }}">
+                    @foreach($order as $key => $p)
+                        <tr data-entry-id="{{ $p->id }}">
                             <td>
 
                             </td>
                             <td>
-                                {{ $price->id ?? '' }}
+                                {{ $p->id ?? '' }}
                             </td>
                             <td>
-                                {{ $price->name ?? '' }}
+                                {{ $p->name ?? '' }}
                             </td>
                             <td>
-                                {{ $price->price ?? '' }}
+                                {{ $p->days ?? '' }}
                             </td>
                             <td>
-                                {{ $price->description ?? '' }}
+                                {{ $p->start_time ?? '' }}
                             </td>
                             <td>
-                                @can('price_show')
-                                    <a class="btn btn-xs btn-primary" href="{{ route('admin.prices.show', $price->id) }}">
+                                {{ $p->end_time ?? '' }}
+                            </td>
+                            <td>
+                                {{ $p->phone ?? '' }}
+                            </td>
+                            <td>
+                                {{ $p->customer_email ?? '' }}
+                            </td>
+                            <td>
+                                {{ $p->table->name ?? '' }}
+                            </td>
+                            <td>
+                                {{ $p->qty ?? '' }}
+                            </td>
+                            <td>
+                                Rp {{ number_format($p->total_price, 2) }}
+                            </td>
+                            <td>
+                               {{ $p->status ?? '' }}
+                            </td>
+                            <td>
+                                @can('order_show')
+                                    <a class="btn btn-xs btn-primary" href="{{ route('admin.prices.show', $p->id) }}">
                                         {{ trans('global.view') }}
                                     </a>
                                 @endcan
 
-                                @can('price_edit')
-                                    <a class="btn btn-xs btn-info" href="{{ route('admin.prices.edit', $price->id) }}">
+                                @can('order_edit')
+                                    <a class="btn btn-xs btn-info" href="{{ route('admin.prices.edit', $p->id) }}">
                                         {{ trans('global.edit') }}
                                     </a>
                                 @endcan
 
-                                @can('price_delete')
-                                    <form action="{{ route('admin.prices.destroy', $price->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
+                                @can('order_delete')
+                                    <form action="{{ route('admin.prices.destroy', $p->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                         <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
@@ -96,7 +138,7 @@
 <script>
     $(function () {
   let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
-@can('price_delete')
+@can('order_delete')
   let deleteButtonTrans = '{{ trans('global.datatables.delete') }}'
   let deleteButton = {
     text: deleteButtonTrans,

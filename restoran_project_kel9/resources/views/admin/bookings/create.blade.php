@@ -58,21 +58,7 @@
                 @endif
                 <span class="help-block">{{ trans('cruds.booking.fields.category_helper') }}</span>
             </div>
-            <div class="form-group">
-                <label>{{ trans('cruds.booking.fields.status') }}</label>
-                <select class="form-control {{ $errors->has('status') ? 'is-invalid' : '' }}" name="status" id="status">
-                    <option value disabled {{ old('status', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
-                    @foreach(App\Models\Booking::STATUS_SELECT as $key => $label)
-                        <option value="{{ $key }}" {{ old('status', '') === (string) $key ? 'selected' : '' }}>{{ $label }}</option>
-                    @endforeach
-                </select>
-                @if($errors->has('status'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('status') }}
-                    </div>
-                @endif
-                <span class="help-block">{{ trans('cruds.booking.fields.status_helper') }}</span>
-            </div>
+         
             <div class="form-group">
                 <label class="required" for="table_id">{{ trans('cruds.booking.fields.table') }}</label>
                 <select class="form-control {{ $errors->has('table_id') ? 'is-invalid' : '' }}" name="table_id" id="table_id" required>
@@ -87,6 +73,51 @@
                     </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.booking.fields.table_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label class="required" for="customer_email">{{ trans('cruds.booking.fields.customer_email') }}</label>
+                <input class="form-control {{ $errors->has('customer_email') ? 'is-invalid' : '' }}" type="text" name="customer_email" id="customer_email" value="{{ old('customer_email', '') }}">
+                @if($errors->has('customer_email'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('customer_email') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.booking.fields.customer_email_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label class="required" for="phone">{{ trans('cruds.booking.fields.phone') }}</label>
+                <input class="form-control {{ $errors->has('phone') ? 'is-invalid' : '' }}" type="number" name="phone" id="phone" value="{{ old('phone', '') }}">
+                @if($errors->has('phone'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('phone') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.booking.fields.phone_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label class="required" for="total_price">{{ trans('cruds.booking.fields.total_price') }}</label>
+                <input class="form-control {{ $errors->has('total_price') ? 'is-invalid' : '' }}" type="number" name="total_price" id="total_price" value="{{ old('total_price', '') }}">
+                @if($errors->has('total_price'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('total_price') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.booking.fields.total_price_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label>{{ trans('cruds.booking.fields.status') }}</label>
+                <select class="form-control {{ $errors->has('status') ? 'is-invalid' : '' }}" name="status" id="status">
+                    <option value disabled {{ old('status', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
+                    @foreach(App\Models\Booking::STATUS_SELECT as $key => $label)
+                        <option value="{{ $key }}" {{ old('status', '') === (string) $key ? 'selected' : '' }}>{{ $label }}</option>
+                    @endforeach
+                </select>
+                @if($errors->has('status'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('status') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.booking.fields.status_helper') }}</span>
             </div>
             <div class="form-group">
                 <button class="btn btn-danger" type="submit">
