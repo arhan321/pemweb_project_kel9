@@ -34,7 +34,7 @@ class GoogleLoginController extends Controller
                     'google_id' => $googleUser->id, // Save the Google ID
                 ]);
                 $role = Role::where('title', 'Owner')->first();
-                $user->roles()->attach($role); // Assign Owner role to new user
+                $user->roles()->attach($role); 
             } else {
                 \Log::info('User found, updating Google ID if necessary.');
                 if (!$user->google_id) {
@@ -43,14 +43,14 @@ class GoogleLoginController extends Controller
                 }
                 $role = Role::where('title', 'Owner')->first();
                 if (!$user->roles->contains($role)) {
-                    $user->roles()->attach($role); // Ensure existing user has Owner role
+                    $user->roles()->attach($role); 
                 }
             }
 
             Auth::login($user);
             \Log::info('User logged in successfully.', ['user' => $user]);
 
-            return redirect('/admin'); // Redirect to /admin
+            return redirect('/admin'); 
         } catch (\Exception $e) {
             \Log::error('Google login error:', ['error' => $e->getMessage()]);
             return redirect('/login')->with('error', 'Failed to login using Google. Please try again.');
