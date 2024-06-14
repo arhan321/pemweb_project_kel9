@@ -48,7 +48,8 @@ class OrderController extends Controller
             'status' => 'Unpaid',
         ]);
 
-        $uniqueOrderId = 'order-' . $order->id . '-' . time();
+        // Generate unique order ID with a maximum length of 20 characters
+        $uniqueOrderId = 'ORD-' . $order->id . '-' . substr(time(), -5);
 
         $table->status = 'terbooking';
         $table->save();
@@ -171,6 +172,7 @@ class OrderController extends Controller
         return view('midtrans.showOrder', compact('order'));
     }
 }
+
 
 
 
