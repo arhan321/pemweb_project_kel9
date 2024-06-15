@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Gate;
+use Carbon\Carbon;
 use App\Models\Table;
 use App\Models\Booking;
 use Illuminate\Http\Request;
@@ -18,8 +19,21 @@ class BookingController extends Controller
     {
         abort_if(Gate::denies('booking_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $bookings = Booking::with('table')->get(); // Pastikan memuat relasi 'table'
-    
+        $currentDateTime = Carbon::now();
+
+        // Update status booking otomatis jika sudah selesai
+        $bookings = Booking::with('table')->get();
+        foreach ($bookings as $booking) {
+            if ($currentDateTime->greaterThanOrEqualTo(Carbon::parse($booking->finish_book)) && $booking->status != 'Selesai') {
+                $booking->update(['status' => 'Selesai']);
+                $table = Table::find($booking->table_id);
+                if ($table) {
+                    $table->status = 'kosong';
+                    $table->save();
+                }
+            }
+        }
+
         return view('admin.bookings.index', compact('bookings'));
     }
 

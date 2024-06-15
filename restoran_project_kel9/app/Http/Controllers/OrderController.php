@@ -26,7 +26,7 @@ class OrderController extends Controller
             'name' => 'required|string|max:255',
             'phone' => 'required|string|max:15',
             'customer_email' => 'required|string|email|max:255',
-            'qty' => 'required|integer|min:1',
+            'qty' => 'required|integer|min:1|max:8',
             'table_id' => 'required|exists:tables,id',
         ]);
 
