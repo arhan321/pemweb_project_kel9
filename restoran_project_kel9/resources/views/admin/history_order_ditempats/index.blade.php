@@ -28,9 +28,9 @@
                         <th>
                             {{ trans('cruds.order.fields.name') }}
                         </th>
-                        <th>
+                        {{-- <th>
                             {{ trans('cruds.order.fields.date') }}
-                        </th>
+                        </th> --}}
                         <th>
                             {{ trans('cruds.order.fields.start_time') }}
                         </th>
@@ -70,16 +70,13 @@
                                 {{ $p->id ?? '' }}
                             </td>
                             <td>
-                                {{ $p->name ?? '' }}
+                                {{ $p->nama_customer ?? '' }}
                             </td>
                             <td>
-                                {{ $p->days ?? '' }}
+                                {{ $p->start_book ?? '' }}
                             </td>
                             <td>
-                                {{ $p->start_time ?? '' }}
-                            </td>
-                            <td>
-                                {{ $p->end_time ?? '' }}
+                                {{ $p->finish_book ?? '' }}
                             </td>
                             <td>
                                 {{ $p->phone ?? '' }}
@@ -88,10 +85,10 @@
                                 {{ $p->customer_email ?? '' }}
                             </td>
                             <td>
-                                {{ $p->table->name ?? '' }}
+                                {{ trans('cruds.table_information.table') }} {{ $p->table_id ?? '' }}
                             </td>
                             <td>
-                                {{ $p->qty ?? '' }}
+                                {{ $p->jumlah_orang ?? '' }}
                             </td>
                             <td>
                                 Rp {{ number_format($p->total_price, 2) }}

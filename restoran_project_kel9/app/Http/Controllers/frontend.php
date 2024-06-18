@@ -12,6 +12,7 @@ use App\Models\Gallery;
 use App\Models\Product;
 use App\Models\Datachef;
 use App\Models\Signature;
+use App\Models\Testimonial;
 use App\Models\SosialMedium;
 use Illuminate\Http\Request;
 
@@ -61,14 +62,37 @@ class frontend extends Controller
 
     public function testimonial(){
         $footer = Footer::all();
-        return view ('frontend.testimonial', compact('footer'));
+        $testimonial = Testimonial::all();
+        return view ('frontend.testimonial', compact('footer','testimonial'));
     }
-    
+    public function store(Request $request)
+    {
+        $request->validate([
+            'nama'           => 'required|string|max:255',
+            'email'          => 'required|email|max:255',
+            'nomor_telfon'   => 'required|numeric',
+            'pesan'          => 'required|string',
+        ]);
+
+        Testimonial::create([
+            'nama'           => $request->nama,
+            'email'          => $request->email,
+            'nomor_telfon'   => $request->nomor_telfon,
+            'pesan'          => $request->pesan,
+        ]);
+        return redirect()->back()->with('success', 'Testimonial berhasil ditambahkan!');
+        // return response()->json([
+        //     'success' => true,
+        //     'message' => 'Testimonial berhasil ditambahkan !!'
+        // ]);
+    }
     public function galery(){
         $footer = Footer::all();
         $galery = Gallery::all();
         return view ('frontend.galery', compact('galery','footer'));
     }
+
+  
     
     public function chefs(){
         $footer = Footer::all();

@@ -64,4 +64,9 @@ class Table extends Model implements HasMedia
     {
         return $this->hasMany(Booking::class);
     }
+    
+    public function order()
+    {
+        return $this->hasMany(Order::class);
+    }
 }

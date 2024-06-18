@@ -80,7 +80,7 @@
         </li>
     @endcan
         @can('frontend_access')
-            <li class="c-sidebar-nav-dropdown {{ request()->is("admin/homes*") ? "c-show" : "" }} {{ request()->is("admin/abouts*") ? "c-show" : "" }} {{ request()->is("admin/whys*") ? "c-show" : "" }} {{ request()->is("admin/blogs*") ? "c-show" : "" }} {{ request()->is("admin/signatures*") ? "c-show" : "" }} {{ request()->is("admin/galleries*") ? "c-show" : "" }} {{ request()->is("admin/datachefs*") ? "c-show" : "" }} {{ request()->is("admin/sosial-media*") ? "c-show" : "" }} {{ request()->is("admin/footers*") ? "c-show" : "" }}">
+            <li class="c-sidebar-nav-dropdown {{ request()->is("admin/homes*") ? "c-show" : "" }} {{ request()->is("admin/abouts*") ? "c-show" : "" }} {{ request()->is("admin/whys*") ? "c-show" : "" }} {{ request()->is("admin/blogs*") ? "c-show" : "" }} {{ request()->is("admin/signatures*") ? "c-show" : "" }} {{ request()->is("admin/galleries*") ? "c-show" : "" }} {{ request()->is("admin/testimonials*") ? "c-show" : "" }} {{ request()->is("admin/datachefs*") ? "c-show" : "" }} {{ request()->is("admin/sosial-media*") ? "c-show" : "" }} {{ request()->is("admin/footers*") ? "c-show" : "" }}">
                 <a class="c-sidebar-nav-dropdown-toggle" href="#">
                     <i class="fa-fw fas fa-globe c-sidebar-nav-icon">
 
@@ -170,11 +170,11 @@
                     @endcan
                     @can('testimonial_access')
                     <li class="c-sidebar-nav-item">
-                        <a href="{{ route("admin.galleries.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/galleries") || request()->is("admin/galleries/*") ? "c-active" : "" }}">
+                        <a href="{{ route("admin.testimonials.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/testimonials") || request()->is("admin/testimonials/*") ? "c-active" : "" }}">
                             <i class="fa-fw fas fa-star c-sidebar-nav-icon">
                                
                             </i>
-                            {{ trans('cruds.testimonials.title') }}
+                            {{ trans('cruds.testimonial.title') }}
                         </a>
                     </li>
                      @endcan
@@ -188,7 +188,7 @@
                         </a>
                     </li>
                      @endcan
-                    @can('sosial_medium_access')
+                    {{-- @can('sosial_medium_access')
                         <li class="c-sidebar-nav-item">
                             <a href="{{ route("admin.sosial-media.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/sosial-media") || request()->is("admin/sosial-media/*") ? "c-active" : "" }}">
                                 <i class="fa-fw far fa-share-square c-sidebar-nav-icon">
@@ -197,7 +197,7 @@
                                 {{ trans('cruds.sosialMedium.title') }}
                             </a>
                         </li>
-                    @endcan
+                    @endcan --}}
                     @can('footer_access')
                         <li class="c-sidebar-nav-item">
                             <a href="{{ route("admin.footers.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/footers") || request()->is("admin/footers/*") ? "c-active" : "" }}">
@@ -240,16 +240,6 @@
                             </a>
                         </li>
                     @endcan
-                    @can('order_access')
-                        <li class="c-sidebar-nav-item">
-                            <a href="{{ route("admin.prices.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/prices") || request()->is("admin/prices/*") ? "c-active" : "" }}">
-                                <i class="fa-fw far fa-clock c-sidebar-nav-icon">
-                                    {{-- <i class="fa-regular fa-clock"></i> --}}
-                                </i>
-                                {{ trans('cruds.order.title') }}
-                            </a>
-                        </li>
-                    @endcan
                     @can('product_access')
                         <li class="c-sidebar-nav-item">
                             <a href="{{ route("admin.products.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/products") || request()->is("admin/products/*") ? "c-active" : "" }}">
@@ -263,6 +253,29 @@
                 </ul>
             </li>
         @endcan
+        @can('history_order_access')
+        <li class="c-sidebar-nav-dropdown  {{ request()->is("admin/history_order_reservations*") ? "c-show" : "" }}">
+            <a class="c-sidebar-nav-dropdown-toggle" href="#">
+                <i class="fa-fw fas fa-clock c-sidebar-nav-icon">
+
+                </i>
+                {{ trans('cruds.history_order.title') }}
+            </a>
+            <ul class="c-sidebar-nav-dropdown-items">
+                @can('history_order_reservation_access')
+                    <li class="c-sidebar-nav-item">
+                        <a href="{{ route("admin.history_order_reservations.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/history_order_reservations") || request()->is("admin/history_order_reservations/*") ? "c-active" : "" }}">
+                            <i class="fa-fw far fa-clock c-sidebar-nav-icon">
+                             
+                            </i>
+                            {{ trans('cruds.history_order_reservation.title') }}
+                        </a>
+                    </li>
+                @endcan
+            </ul>
+        </li>
+    @endcan
+        
         @if(file_exists(app_path('Http/Controllers/Auth/ChangePasswordController.php')))
             @can('profile_password_edit')
                 <li class="c-sidebar-nav-item">

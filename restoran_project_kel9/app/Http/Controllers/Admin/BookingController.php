@@ -22,7 +22,7 @@ class BookingController extends Controller
         $currentDateTime = Carbon::now();
 
         // Update status booking otomatis jika sudah selesai
-        $bookings = Booking::with('table')->get();
+        $bookings = Booking::with(['table'])->get();
         foreach ($bookings as $booking) {
             if ($currentDateTime->greaterThanOrEqualTo(Carbon::parse($booking->finish_book)) && $booking->status != 'Selesai') {
                 $booking->update(['status' => 'Selesai']);

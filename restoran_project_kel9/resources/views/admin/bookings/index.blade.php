@@ -85,7 +85,7 @@
                                 {{ App\Models\Booking::CATEGORY_SELECT[$booking->category] ?? '' }}
                             </td>
                             <td>
-                                {{ $booking->table->name ?? '' }}
+                               {{ trans('cruds.table_information.table') }} {{ $booking->table_id ?? '' }}
                             </td>
                             <td>
                                 {{ $booking->customer_email ?? '' }}

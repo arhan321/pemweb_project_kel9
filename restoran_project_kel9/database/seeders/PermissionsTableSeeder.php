@@ -408,6 +408,38 @@ class PermissionsTableSeeder extends Seeder
             ],
             [
                 'id'    => 100,
+                'title' => 'history_order_access',
+            ],
+            [
+                'id'    => 101,
+                'title' => 'history_order_reservation_access',
+            ],
+            [
+                'id'    => 102,
+                'title' => 'history_order_reservation_show',
+            ],
+            [
+                'id'    => 103,
+                'title' => 'testimonial_access',
+            ],
+            [
+                'id'    => 104,
+                'title' => 'testimonial_create',
+            ],
+            [
+                'id'    => 105,
+                'title' => 'testimonial_edit',
+            ],
+            [
+                'id'    => 106,
+                'title' => 'testimonial_show',
+            ],
+            [
+                'id'    => 107,
+                'title' => 'testimonial_delete',
+            ],
+            [
+                'id'    => 108,
                 'title' => 'profile_password_edit',
             ],
         ];
