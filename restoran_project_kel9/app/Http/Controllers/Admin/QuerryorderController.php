@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Gate;
-use App\Models\Order;
+use App\Models\Booking;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePriceRequest;
@@ -17,7 +17,7 @@ class QuerryorderController extends Controller
     {
         abort_if(Gate::denies('order_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $order = Order::with('table')->get();
+        $order = Booking::with('table')->get();
 
         return view('admin.prices.index', compact('order'));
     }
@@ -31,33 +31,33 @@ class QuerryorderController extends Controller
 
     public function store(StorePriceRequest $request)
     {
-        $order = Order::create($request->all());
+        $order = Booking::create($request->all());
 
         return redirect()->route('admin.prices.index');
     }
 
-    public function edit(Order $order)
+    public function edit(Booking $order)
     {
         abort_if(Gate::denies('order_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         return view('admin.prices.edit', compact('order'));
     }
 
-    public function update(UpdatePriceRequest $request, Order $order)
+    public function update(UpdatePriceRequest $request, Booking $order)
     {
         $order->update($request->all());
 
         return redirect()->route('admin.prices.index');
     }
 
-    public function show(Order $order)
+    public function show(Booking $order)
     {
         abort_if(Gate::denies('order_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         return view('admin.prices.show', compact('order'));
     }
 
-    public function destroy(Order $order)
+    public function destroy(Booking $order)
     {
         abort_if(Gate::denies('order_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
@@ -68,7 +68,7 @@ class QuerryorderController extends Controller
 
     public function massDestroy(MassDestroyPriceRequest $request)
     {
-        $order = Order::find(request('ids'));
+        $order = Booking::find(request('ids'));
 
         foreach ($order as $order) {
             $order->delete();

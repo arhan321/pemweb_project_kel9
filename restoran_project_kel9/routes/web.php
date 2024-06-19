@@ -19,7 +19,11 @@ Route::get('/qr', function () {
  Route::get('/order/{id}', 'OrderController@showOrder')->name('order.show');
  Route::post('/available-tables', 'OrderController@getAvailableTables')->name('available.tables');
 //  Route::get('/api/available-tables', [TablesController::class, 'getAvailableTables']);
- 
+
+
+route::get('/iseng', 'frontend@iseng')->name('frontend.iseng'); 
+//post testimonial frontend
+Route::post('/testimonial', 'frontend@store')->name('frontend.store');
 //routing front end 
 Route::get('/', 'frontend@home')->name('frontend.home');
  Route::get('/abouts', 'frontend@abouts')->name('frontend.about');
@@ -154,6 +158,16 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
      Route::post('signatures/ckmedia', 'SignatureController@storeCKEditorImages')->name('signatures.storeCKEditorImages');
      Route::resource('signatures', 'SignatureController');
     
+    // history order
+    Route::delete('history_order_reservations/destroy', 'HistoryOrderReservationController@massDestroy')->name('history_order_reservations.massDestroy');
+    Route::resource('history_order_reservations', 'HistoryOrderReservationController');
+
+    // testimonials
+    Route::delete('testimonials/destroy', 'TestimonialController@massDestroy')->name('testimonials.massDestroy');
+    Route::post('testimonials/media', 'TestimonialController@storeMedia')->name('testimonials.storeMedia');
+    Route::post('testimonials/ckmedia', 'TestimonialController@storeCKEditorImages')->name('testimonials.storeCKEditorImages');
+    Route::resource('testimonials', 'TestimonialController');
+     
 
 });
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth']], function () {

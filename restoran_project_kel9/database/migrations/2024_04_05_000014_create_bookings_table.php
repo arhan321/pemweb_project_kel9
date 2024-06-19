@@ -11,7 +11,7 @@ class CreateBookingsTable extends Migration
         Schema::create('bookings', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nama_customer');
-            $table->string('jumlah_orang');
+            $table->integer('jumlah_orang'); 
             $table->datetime('start_book');
             $table->datetime('finish_book');
             $table->string('category');
@@ -19,11 +19,15 @@ class CreateBookingsTable extends Migration
             $table->string('phone');
             $table->bigInteger('total_price');
             $table->string('status')->nullable();
-            // $table->unsignedBigInteger('table_id')->index(); 
+            $table->unsignedBigInteger('table_id')->nullable();
+            $table->foreign('table_id')->references('id')->on('tables');
             $table->timestamps();
             $table->softDeletes();
-
-            $table->foreignId('table_id')->constrained()->onDelete('cascade');// Menambahkan foreign key constraint
         });
+    }
+
+    public function down()
+    {
+        Schema::dropIfExists('bookings');
     }
 }
