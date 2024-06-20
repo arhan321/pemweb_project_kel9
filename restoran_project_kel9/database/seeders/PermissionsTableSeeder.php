@@ -204,242 +204,246 @@ class PermissionsTableSeeder extends Seeder
             ],
             [
                 'id'    => 49,
-                'title' => 'blog_create',
-            ],
-            [
-                'id'    => 50,
-                'title' => 'blog_edit',
-            ],
-            [
-                'id'    => 51,
-                'title' => 'blog_show',
-            ],
-            [
-                'id'    => 52,
-                'title' => 'blog_delete',
-            ],
-            [
-                'id'    => 53,
-                'title' => 'blog_access',
-            ],
-            [
-                'id'    => 54,
-                'title' => 'daftar_layanan_create',
-            ],
-            [
-                'id'    => 55,
-                'title' => 'daftar_layanan_edit',
-            ],
-            [
-                'id'    => 56,
-                'title' => 'daftar_layanan_show',
-            ],
-            [
-                'id'    => 57,
-                'title' => 'daftar_layanan_delete',
-            ],
-            [
-                'id'    => 58,
-                'title' => 'daftar_layanan_access',
-            ],
-            [
-                'id'    => 59,
-                'title' => 'home_access',
-            ],
-            [
-                'id'    => 60,
-                'title' => 'home_create',
-            ],
-            [
-                'id'    => 61,
-                'title' => 'home_delete',
-            ],
-            [
-                'id'    => 62,
-                'title' => 'home_edit',
-            ],
-            [
-                'id'    => 63,
-                'title' => 'home_show',
-            ],
-            [
-                'id'    => 64,
-                'title' => 'why_access',
-            ],
-            [
-                'id'    => 65,
-                'title' => 'why_create',
-            ],
-            [
-                'id'    => 66,
-                'title' => 'why_delete',
-            ],
-            [
-                'id'    => 67,
-                'title' => 'why_edit',
-            ],
-            [
-                'id'    => 68,
-                'title' => 'why_show',
-            ],
-            [
-                'id'    => 69,
-                'title' => 'datachef_access',
-            ],
-            [
-                'id'    => 70,
-                'title' => 'datachef_create',
-            ],
-            [
-                'id'    => 71,
-                'title' => 'datachef_delete',
-            ],
-            [
-                'id'    => 72,
-                'title' => 'datachef_edit',
-            ],
-            [
-                'id'    => 73,
-                'title' => 'datachef_show',
-            ],
-            [
-                'id'    => 74,
-                'title' => 'signature_access',
-            ],
-            [
-                'id'    => 75,
-                'title' => 'signature_create',
-            ],
-            [
-                'id'    => 76,
-                'title' => 'signature_delete',
-            ],
-            [
-                'id'    => 77,
-                'title' => 'signature_edit',
-            ],
-            [
-                'id'    => 78,
-                'title' => 'signature_show',
-            ],
-            [
-                'id'    => 79,
-                'title' => 'fn_b_access',
-            ],
-            [
-                'id'    => 80,
-                'title' => 'table_create',
-            ],
-            [
-                'id'    => 81,
-                'title' => 'table_edit',
-            ],
-            [
-                'id'    => 82,
-                'title' => 'table_show',
-            ],
-            [
-                'id'    => 83,
-                'title' => 'table_delete',
-            ],
-            [
-                'id'    => 84,
-                'title' => 'table_access',
-            ],
-            [
-                'id'    => 85,
-                'title' => 'booking_create',
-            ],
-            [
-                'id'    => 86,
-                'title' => 'booking_edit',
-            ],
-            [
-                'id'    => 87,
-                'title' => 'booking_show',
-            ],
-            [
-                'id'    => 88,
-                'title' => 'booking_delete',
-            ],
-            [
-                'id'    => 89,
-                'title' => 'booking_access',
-            ],
-            [
-                'id'    => 90,
-                'title' => 'order_create',
-            ],
-            [
-                'id'    => 91,
-                'title' => 'order_edit',
-            ],
-            [
-                'id'    => 92,
-                'title' => 'order_show',
-            ],
-            [
-                'id'    => 93,
-                'title' => 'order_delete',
-            ],
-            [
-                'id'    => 94,
-                'title' => 'order_access',
-            ],
-            [
-                'id'    => 95,
-                'title' => 'product_create',
-            ],
-            [
-                'id'    => 96,
-                'title' => 'product_edit',
-            ],
-            [
-                'id'    => 97,
-                'title' => 'product_show',
-            ],
-            [
-                'id'    => 98,
-                'title' => 'product_delete',
-            ],
-            [
-                'id'    => 99,
-                'title' => 'product_access',
-            ],
-            [
-                'id'    => 100,
-                'title' => 'history_order_access',
-            ],
-            [
-                'id'    => 101,
-                'title' => 'history_order_reservation_access',
-            ],
-            [
-                'id'    => 102,
-                'title' => 'history_order_reservation_show',
-            ],
-            [
-                'id'    => 103,
                 'title' => 'testimonial_access',
             ],
             [
-                'id'    => 104,
+                'id'    => 50,
                 'title' => 'testimonial_create',
             ],
             [
-                'id'    => 105,
+                'id'    => 51,
                 'title' => 'testimonial_edit',
             ],
             [
-                'id'    => 106,
+                'id'    => 52,
                 'title' => 'testimonial_show',
             ],
             [
-                'id'    => 107,
+                'id'    => 53,
                 'title' => 'testimonial_delete',
             ],
             [
+                'id'    => 54,
+                'title' => 'blog_create',
+            ],
+            [
+                'id'    => 55,
+                'title' => 'blog_edit',
+            ],
+            [
+                'id'    => 56,
+                'title' => 'blog_show',
+            ],
+            [
+                'id'    => 57,
+                'title' => 'blog_delete',
+            ],
+            [
+                'id'    => 58,
+                'title' => 'blog_access',
+            ],
+            [
+                'id'    => 59,
+                'title' => 'daftar_layanan_create',
+            ],
+            [
+                'id'    => 60,
+                'title' => 'daftar_layanan_edit',
+            ],
+            [
+                'id'    => 61,
+                'title' => 'daftar_layanan_show',
+            ],
+            [
+                'id'    => 62,
+                'title' => 'daftar_layanan_delete',
+            ],
+            [
+                'id'    => 63,
+                'title' => 'daftar_layanan_access',
+            ],
+            [
+                'id'    => 64,
+                'title' => 'home_access',
+            ],
+            [
+                'id'    => 65,
+                'title' => 'home_create',
+            ],
+            [
+                'id'    => 66,
+                'title' => 'home_delete',
+            ],
+            [
+                'id'    => 67,
+                'title' => 'home_edit',
+            ],
+            [
+                'id'    => 68,
+                'title' => 'home_show',
+            ],
+            [
+                'id'    => 69,
+                'title' => 'why_access',
+            ],
+            [
+                'id'    => 70,
+                'title' => 'why_create',
+            ],
+            [
+                'id'    => 71,
+                'title' => 'why_delete',
+            ],
+            [
+                'id'    => 72,
+                'title' => 'why_edit',
+            ],
+            [
+                'id'    => 73,
+                'title' => 'why_show',
+            ],
+            [
+                'id'    => 74,
+                'title' => 'datachef_access',
+            ],
+            [
+                'id'    => 75,
+                'title' => 'datachef_create',
+            ],
+            [
+                'id'    => 76,
+                'title' => 'datachef_delete',
+            ],
+            [
+                'id'    => 77,
+                'title' => 'datachef_edit',
+            ],
+            [
+                'id'    => 78,
+                'title' => 'datachef_show',
+            ],
+            [
+                'id'    => 79,
+                'title' => 'signature_access',
+            ],
+            [
+                'id'    => 80,
+                'title' => 'signature_create',
+            ],
+            [
+                'id'    => 81,
+                'title' => 'signature_delete',
+            ],
+            [
+                'id'    => 82,
+                'title' => 'signature_edit',
+            ],
+            [
+                'id'    => 83,
+                'title' => 'signature_show',
+            ],
+            [
+                'id'    => 84,
+                'title' => 'fn_b_access',
+            ],
+            [
+                'id'    => 85,
+                'title' => 'table_create',
+            ],
+            [
+                'id'    => 86,
+                'title' => 'table_edit',
+            ],
+            [
+                'id'    => 87,
+                'title' => 'table_show',
+            ],
+            [
+                'id'    => 88,
+                'title' => 'table_delete',
+            ],
+            [
+                'id'    => 89,
+                'title' => 'table_access',
+            ],
+            [
+                'id'    => 90,
+                'title' => 'booking_create',
+            ],
+            [
+                'id'    => 91,
+                'title' => 'booking_edit',
+            ],
+            [
+                'id'    => 92,
+                'title' => 'booking_show',
+            ],
+            [
+                'id'    => 93,
+                'title' => 'booking_delete',
+            ],
+            [
+                'id'    => 94,
+                'title' => 'booking_access',
+            ],
+            [
+                'id'    => 95,
+                'title' => 'order_create',
+            ],
+            [
+                'id'    => 96,
+                'title' => 'order_edit',
+            ],
+            [
+                'id'    => 97,
+                'title' => 'order_show',
+            ],
+            [
+                'id'    => 98,
+                'title' => 'order_delete',
+            ],
+            [
+                'id'    => 99,
+                'title' => 'order_access',
+            ],
+            [
+                'id'    => 100,
+                'title' => 'product_create',
+            ],
+            [
+                'id'    => 101,
+                'title' => 'product_edit',
+            ],
+            [
+                'id'    => 102,
+                'title' => 'product_show',
+            ],
+            [
+                'id'    => 103,
+                'title' => 'product_delete',
+            ],
+            [
+                'id'    => 104,
+                'title' => 'product_access',
+            ],
+            [
+                'id'    => 105,
+                'title' => 'history_order_access',
+            ],
+            [
+                'id'    => 106,
+                'title' => 'history_order_reservation_access',
+            ],
+            [
+                'id'    => 107,
+                'title' => 'history_order_reservation_show',
+            ],
+            [
                 'id'    => 108,
+                'title' => 'history_booking_manual_access',
+            ],
+            [
+                'id'    => 109,
                 'title' => 'profile_password_edit',
             ],
         ];

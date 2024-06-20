@@ -41,7 +41,7 @@
                             <input type="text" name="name" placeholder="Full Name" class="form-control" required>
                             <input type="tel" name="phone" placeholder="Phone Number" class="form-control" required>
                             <input type="email" name="customer_email" placeholder="Email" class="form-control" required>
-                            <input type="number" name="qty" placeholder="Quantity" min="1" max="8" class="form-control" required>
+                            <input type="number" name="qty" placeholder="Number of people" min="1" max="8" class="form-control" required>
                         </div>
                         <div class="d-grid gap-2">
                             <button class="btn btn-primary" type="submit">Reserve Now</button>

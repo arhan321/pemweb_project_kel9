@@ -3,11 +3,11 @@
 namespace App\Models;
 
 use DateTimeInterface;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\HasMedia;
+use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class Tim extends Model implements HasMedia
@@ -20,6 +20,20 @@ class Tim extends Model implements HasMedia
         'image',
     ];
 
+    public const POSITION = [
+        'owner' => 'Owner',
+        'manager_umum' => 'Manager Umum',
+        'kasir' => 'Kasir',
+        'waiter' => 'Waiter',
+        'kepala_chef' => 'Kepala Chef',
+        'bartender' => 'Bartender',
+     ];
+
+    public const STATUS = [
+       'bekerja' => 'Bekerja',
+        'tidak_bekerja' => 'Tidak Bekerja',
+    ];
+
     protected $dates = [
         'created_at',
         'updated_at',
@@ -29,7 +43,7 @@ class Tim extends Model implements HasMedia
     protected $fillable = [
         'name',
         'position',
-        'description',
+        'status',
         'created_at',
         'updated_at',
         'deleted_at',

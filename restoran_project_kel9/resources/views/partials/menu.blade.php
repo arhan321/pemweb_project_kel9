@@ -138,7 +138,7 @@
                         </a>
                     </li>
                     @endcan
-                    @can('blog_access')
+                    {{-- @can('blog_access')
                         <li class="c-sidebar-nav-item">
                             <a href="{{ route("admin.blogs.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/blogs") || request()->is("admin/blogs/*") ? "c-active" : "" }}">
                                 <i class="fa-fw far fa-newspaper c-sidebar-nav-icon">
@@ -147,7 +147,7 @@
                                 {{ trans('cruds.blog.title') }}
                             </a>
                         </li>
-                    @endcan
+                    @endcan --}}
                     @can('signature_access')
                     <li class="c-sidebar-nav-item">
                         <a href="{{ route("admin.signatures.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/signatures") || request()->is("admin/signatures/*") ? "c-active" : "" }}">
@@ -254,7 +254,7 @@
             </li>
         @endcan
         @can('history_order_access')
-        <li class="c-sidebar-nav-dropdown  {{ request()->is("admin/history_order_reservations*") ? "c-show" : "" }}">
+        <li class="c-sidebar-nav-dropdown  {{ request()->is("admin/history_order_reservations*") ? "c-show" : "" }} {{ request()->is("admin/history_booking_manuals*") ? "c-show" : "" }}">
             <a class="c-sidebar-nav-dropdown-toggle" href="#">
                 <i class="fa-fw fas fa-clock c-sidebar-nav-icon">
 
@@ -272,6 +272,16 @@
                         </a>
                     </li>
                 @endcan
+                @can('history_booking_manual_access')
+                <li class="c-sidebar-nav-item">
+                    <a href="{{ route("admin.history_booking_manuals.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/history_booking_manuals") || request()->is("admin/history_booking_manuals/*") ? "c-active" : "" }}">
+                        <i class="fa-fw far fa-clock c-sidebar-nav-icon">
+                         
+                        </i>
+                        {{ trans('cruds.history_booking_manual.title') }}
+                    </a>
+                </li>
+            @endcan
             </ul>
         </li>
     @endcan

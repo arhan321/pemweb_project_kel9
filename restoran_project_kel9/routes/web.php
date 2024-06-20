@@ -67,21 +67,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::delete('users/destroy', 'UsersController@massDestroy')->name('users.massDestroy');
     Route::resource('users', 'UsersController');
 
-    // Sosial Media
-    Route::delete('sosial-media/destroy', 'SosialMediaController@massDestroy')->name('sosial-media.massDestroy');
-    Route::resource('sosial-media', 'SosialMediaController');
-
     // Footer
     Route::delete('footers/destroy', 'FooterController@massDestroy')->name('footers.massDestroy');
     Route::post('footers/media', 'FooterController@storeMedia')->name('footers.storeMedia');
     Route::post('footers/ckmedia', 'FooterController@storeCKEditorImages')->name('footers.storeCKEditorImages');
     Route::resource('footers', 'FooterController');
-
-    // Profile
-    Route::delete('profiles/destroy', 'ProfileController@massDestroy')->name('profiles.massDestroy');
-    Route::post('profiles/media', 'ProfileController@storeMedia')->name('profiles.storeMedia');
-    Route::post('profiles/ckmedia', 'ProfileController@storeCKEditorImages')->name('profiles.storeCKEditorImages');
-    Route::resource('profiles', 'ProfileController');
 
     // About
     Route::delete('abouts/destroy', 'AboutController@massDestroy')->name('abouts.massDestroy');
@@ -89,7 +79,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::post('abouts/ckmedia', 'AboutController@storeCKEditorImages')->name('abouts.storeCKEditorImages');
     Route::resource('abouts', 'AboutController');
 
-  
     // Gallery
     Route::delete('galleries/destroy', 'GalleryController@massDestroy')->name('galleries.massDestroy');
     Route::post('galleries/media', 'GalleryController@storeMedia')->name('galleries.storeMedia');
@@ -120,18 +109,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::post('tims/ckmedia', 'TimController@storeCKEditorImages')->name('tims.storeCKEditorImages');
     Route::resource('tims', 'TimController');
 
-    // Blog
-    Route::delete('blogs/destroy', 'BlogController@massDestroy')->name('blogs.massDestroy');
-    Route::post('blogs/media', 'BlogController@storeMedia')->name('blogs.storeMedia');
-    Route::post('blogs/ckmedia', 'BlogController@storeCKEditorImages')->name('blogs.storeCKEditorImages');
-    Route::resource('blogs', 'BlogController');
-
-    // Daftar Layanan
-    Route::delete('daftar-layanans/destroy', 'DaftarLayananController@massDestroy')->name('daftar-layanans.massDestroy');
-    Route::post('daftar-layanans/media', 'DaftarLayananController@storeMedia')->name('daftar-layanans.storeMedia');
-    Route::post('daftar-layanans/ckmedia', 'DaftarLayananController@storeCKEditorImages')->name('daftar-layanans.storeCKEditorImages');
-    Route::resource('daftar-layanans', 'DaftarLayananController');
-
     // Tables
     Route::delete('tables/destroy', 'TablesController@massDestroy')->name('tables.massDestroy');
     Route::post('tables/media', 'TablesController@storeMedia')->name('tables.storeMedia');
@@ -161,6 +138,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     // history order
     Route::delete('history_order_reservations/destroy', 'HistoryOrderReservationController@massDestroy')->name('history_order_reservations.massDestroy');
     Route::resource('history_order_reservations', 'HistoryOrderReservationController');
+
+    // history order booking manual
+    Route::delete('history_booking_manuals/destroy', 'HistoryBookingManualController@massDestroy')->name('history_booking_manuals.massDestroy');
+    Route::resource('history_booking_manuals', 'HistoryBookingManualController');
 
     // testimonials
     Route::delete('testimonials/destroy', 'TestimonialController@massDestroy')->name('testimonials.massDestroy');

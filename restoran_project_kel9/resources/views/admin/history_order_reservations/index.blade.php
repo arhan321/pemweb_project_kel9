@@ -52,7 +52,7 @@
           </tr>
         </thead>
         <tbody>
-          @foreach($order as $key => $p)
+          @foreach($orders as $key => $p)
           <tr data-entry-id="{{ $p->id }}">
             <td>
 
@@ -93,11 +93,11 @@
                 </span>
               </td>
             <td>
-              @can('history_order_reservation_show')
+              {{-- @can('history_order_reservation_show')
               <a class="btn btn-xs btn-primary" href="{{ route('admin.history_order_reservations.show', $p->id) }}">
                 {{ trans('global.view') }}
               </a>
-              @endcan
+              @endcan --}}
             </td>
           </tr>
           @endforeach

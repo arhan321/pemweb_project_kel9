@@ -68,12 +68,9 @@
         <div class="swiper-pagination"></div>
       </div>
     </div>
-  </section>
-  <!-- End Testimonials Section -->
-
-  <!-- ======= Book A Table Section ======= -->
+      <!-- ======= Book A Table Section ======= -->
   <div class="form-container mx-auto p-4 bg-light rounded shadow-sm" style="max-width: 600px; margin-top: 50px;">
-    <h2 class="mb-4 text-center">Form</h2>
+    <h2 class="mb-4 text-center" style="color:black" >testimonial Restoran</h2>
     
     <!-- Menampilkan pesan sukses -->
     @if(session('success'))
@@ -103,6 +100,10 @@
         <button type="submit" class="btn btn-primary" style="background-color: #007bff; border-color: #007bff; border-radius: 5px; padding: 10px 20px; font-size: 16px; transition: background-color 0.3s;">Submit</button>
     </form>
 </div>
+  </section>
+  <!-- End Testimonials Section -->
+
+
   <!-- End Book A Table Section -->
 @endsection
 {{-- @section('scripts')

@@ -36,15 +36,17 @@
                             {{ trans('cruds.tim.fields.position') }}
                         </th>
                         <td>
-                            {{ $tim->position }}
+                            {{ App\Models\Tim::POSITION[$tim->position] ?? '' }}
                         </td>
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.tim.fields.description') }}
+                            {{ trans('cruds.tim.fields.status') }}
                         </th>
                         <td>
-                            {!! $tim->description !!}
+                            <span class="status-badge {{ $tim->status == 'bekerja' ? 'badge-success' : 'badge-danger' }}">
+                                {{ App\Models\Tim::STATUS[$tim->status] ?? '' }}
+                            </span>
                         </td>
                     </tr>
                     <tr>
@@ -69,7 +71,24 @@
         </div>
     </div>
 </div>
-
-
-
+<style>
+    .status-badge {
+        font-size: 1em; 
+        padding: 0.8em; 
+    }
+    .badge-success {
+    background-color: green;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    }
+    .badge-danger {
+    background-color: red;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    }
+</style>
 @endsection
