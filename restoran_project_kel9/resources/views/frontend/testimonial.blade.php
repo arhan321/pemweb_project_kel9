@@ -69,8 +69,8 @@
       </div>
     </div>
       <!-- ======= Book A Table Section ======= -->
-  <div class="form-container mx-auto p-4 bg-light rounded shadow-sm" style="max-width: 600px; margin-top: 50px;">
-    <h2 class="mb-4 text-center" style="color:black" >testimonial Restoran</h2>
+  <div class="form-container mx-auto p-4" style="max-width: 600px; margin-top: 50px;">
+    <h2 class="mb-4 text-center" style="color:black; font-family: Garamond Premr Pro;" >Testimonial Restoran</h2>
     
     <!-- Menampilkan pesan sukses -->
     @if(session('success'))
@@ -97,7 +97,7 @@
             <label for="pesan" class="form-label" style="font-weight: bold; color: #555;">Pesan</label>
             <textarea class="form-control" id="pesan" name="pesan" rows="4" style="border-radius: 5px;" required></textarea>
         </div>
-        <button type="submit" class="btn btn-primary" style="background-color: #007bff; border-color: #007bff; border-radius: 5px; padding: 10px 20px; font-size: 16px; transition: background-color 0.3s;">Submit</button>
+        <button type="submit" class="btn" style="vertical-align:middle"><span>Submit </span></button>
     </form>
 </div>
   </section>

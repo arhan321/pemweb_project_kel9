@@ -40,7 +40,7 @@
     crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- Template Main CSS File -->
-    <link href="frontend/assets/css/hjss.css" rel="stylesheet" />
+    <link href="frontend/assets/css/jsss.css" rel="stylesheet" />
 
     <!-- =======================================================
   * Template Name: Restaurantly - v3.1.0
