@@ -76,7 +76,7 @@
                             {{ trans('cruds.booking.fields.table') }}
                         </th>
                         <td>
-                            {{ $booking->table->name ?? '' }}
+                            {{ trans('cruds.table_information.table') }} {{ $booking->table_id ?? '' }}
                         </td>
                     </tr>
                 </tbody>

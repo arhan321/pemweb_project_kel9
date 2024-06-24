@@ -97,8 +97,8 @@ class frontend extends Controller
     public function chefs(){
         $footer = Footer::all();
         $chefs = Datachef::all();
-        $icon = SosialMedium::all();
-        return view ('frontend.chefs',compact('chefs','icon','footer'));
+        // $icon = SosialMedium::all();
+        return view ('frontend.chefs',compact('chefs','footer'));
     }
     public function footer()
     {

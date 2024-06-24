@@ -428,22 +428,42 @@ class PermissionsTableSeeder extends Seeder
             ],
             [
                 'id'    => 105,
-                'title' => 'history_order_access',
+                'title' => 'makan_di_tempat_create',
             ],
             [
                 'id'    => 106,
-                'title' => 'history_order_reservation_access',
+                'title' => 'makan_di_tempat_edit',
             ],
             [
                 'id'    => 107,
-                'title' => 'history_order_reservation_show',
+                'title' => 'makan_di_tempat_show',
             ],
             [
                 'id'    => 108,
-                'title' => 'history_booking_manual_access',
+                'title' => 'makan_di_tempat_delete',
             ],
             [
                 'id'    => 109,
+                'title' => 'makan_di_tempat_access',
+            ],
+            [
+                'id'    => 110,
+                'title' => 'history_order_access',
+            ],
+            [
+                'id'    => 111,
+                'title' => 'history_order_reservation_access',
+            ],
+            [
+                'id'    => 112,
+                'title' => 'history_order_reservation_show',
+            ],
+            [
+                'id'    => 113,
+                'title' => 'history_booking_manual_access',
+            ],
+            [
+                'id'    => 114,
                 'title' => 'profile_password_edit',
             ],
         ];

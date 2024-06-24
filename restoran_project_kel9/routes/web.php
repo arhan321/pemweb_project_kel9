@@ -1,5 +1,7 @@
 <?php
+use App\Http\Controllers\makan_tempat;
 use App\Http\Controllers\GoogleLoginController;
+
 // use App\Http\Controllers\Admin\TablesController;
 // use App\Http\Controllers\MidtransController;
 
@@ -11,8 +13,13 @@ Route::get('auth/google/callback', [GoogleLoginController::class, 'handleGoogleC
 Route::get('/qr', function () {
     return view('layouts.qrcode');
 });
- Route::get('/makan', 'makan_tempat@getmakan')->name('layouts.makan_di_tempat.makan');
- 
+//  Route::get('/makan', 'makan_tempat@getmakan')->name('layouts.makan_di_tempat.makan');
+
+Route::get('/makan', [makan_tempat::class, 'index'])->name('layouts.makan_di_tempat.makan');
+Route::post('/makan/add-to-cart', [makan_tempat::class, 'addToCart'])->name('makan.addToCart');
+Route::post('/makan/remove-from-cart', [makan_tempat::class, 'removeFromCart'])->name('makan.removeFromCart');
+Route::post('/makan/update-cart', [makan_tempat::class, 'updateCart'])->name('makan.updateCart');
+
  Route::get('/reservasi', 'OrderController@index')->name('layouts.reservasi');
  Route::post('/checkout', 'OrderController@checkout')->name('midtrans.checkout');
  Route::post('/midtrans-callback', 'OrderController@callback')->name('midtrans.callback');
@@ -129,6 +136,12 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::post('products/ckmedia', 'ProductController@storeCKEditorImages')->name('products.storeCKEditorImages');
     Route::resource('products', 'ProductController');
 
+    // Product
+    Route::delete('makan_di_tempat/destroy', 'MakanDiTempatController@massDestroy')->name('makan_di_tempat.massDestroy');
+    Route::post('makan_di_tempat/media', 'MakanDiTempatController@storeMedia')->name('makan_di_tempat.storeMedia');
+    Route::post('makan_di_tempat/ckmedia', 'MakanDiTempatController@storeCKEditorImages')->name('makan_di_tempat.storeCKEditorImages');
+    Route::resource('makan_di_tempat', 'MakanDiTempatController');
+  
      // signature
      Route::delete('signatures/destroy', 'SignatureController@massDestroy')->name('signatures.massDestroy');
      Route::post('signatures/media', 'SignatureController@storeMedia')->name('signatures.storeMedia');

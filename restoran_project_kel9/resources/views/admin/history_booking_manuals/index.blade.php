@@ -85,7 +85,15 @@
                                 Rp {{ number_format($b->total_price, 2) }}
                             </td>
                             <td>
-                               {{ $b->status ?? '' }}
+                                @if($b->status == 'Cancel')
+                                    <span class="status-cancel">{{ App\Models\Booking::STATUS_SELECT[$b->status] ?? '' }}</span>
+                                @elseif($b->status == 'Booking')
+                                    <span class="status-booking">{{ App\Models\Booking::STATUS_SELECT[$b->status] ?? '' }}</span>
+                                @elseif($b->status == 'Selesai')
+                                    <span class="status-selesai">{{ App\Models\Booking::STATUS_SELECT[$b->status] ?? '' }}</span>
+                                @else
+                                    {{ App\Models\Booking::STATUS_SELECT[$b->status] ?? '' }}
+                                @endif
                             </td>
                             <td>
                              
@@ -99,7 +107,31 @@
         </div>
     </div>
 </div>
+<style>
+    .status-cancel {
+    background-color: red;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+}
 
+.status-booking {
+    background-color: green;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.status-selesai {
+    background-color: green;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold; /* Atur warna atau gaya lainnya sesuai kebutuhan */
+}
+</style>
 
 
 @endsection
