@@ -73,15 +73,6 @@ class UsersTableSeeder extends Seeder
                 'created_at'     => now(),
                 'updated_at'     => now(),
             ],
-            [
-                'id'             => 8,
-                'name'           => 'wahyukrupuk',
-                'email'          => 'wahyukrupuk@gmail.com',
-                'password'       => bcrypt('password'),
-                'remember_token' => null,
-                'created_at'     => now(),
-                'updated_at'     => now(),
-            ],
         ];
 
         User::insert($users);

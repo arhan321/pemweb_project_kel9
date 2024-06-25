@@ -11,7 +11,7 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->date('days');
-            $table->time('start_time'); // add start_time
+            $table->time('start_time'); 
             $table->time('end_time');
             $table->string('name');
             $table->string('phone');

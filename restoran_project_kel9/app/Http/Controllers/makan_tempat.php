@@ -65,29 +65,18 @@ class makan_tempat extends Controller
 
     public function updateCart(Request $request)
     {
-        $cart = session()->get('cart', []);
-
         $product_id = $request->input('product_id');
-        $action = $request->input('action');
+        $quantity = $request->input('quantity');
         $product = Product::find($product_id);
-
-        if (!$product) {
-            return response()->json(['error' => 'Product not found.'], 404);
-        }
-
-        foreach ($cart as &$item) {
-            if ($item['id'] == $product_id) {
-                if ($action == 'increase' && $item['quantity'] < $product->stock) {
-                    $item['quantity'] += 1;
-                } elseif ($action == 'decrease' && $item['quantity'] > 1) {
-                    $item['quantity'] -= 1;
-                }
-                break;
-            }
-        }
-
-        session()->put('cart', $cart);
-        return response()->json(['cart' => $cart, 'total_price' => $this->calculateTotalPrice($cart)]);
+       
+        $product->save();
+    
+        return response()->json([
+            'cart' => $cart,
+            'total_price' => $this->calculateTotalPrice($cart),
+            'newStock' => $product->stock,
+            'newPrice' => $product->price * $quantity  
+        ]);
     }
 
     private function calculateTotalPrice($cart)
