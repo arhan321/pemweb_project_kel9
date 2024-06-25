@@ -54,9 +54,9 @@ class makan_tempat extends Controller
         $cart = session()->get('cart', []);
         $product_id = $request->input('product_id');
 
-        $cart = array_filter($cart, function($item) use ($product_id) {
+        $cart = array_values(array_filter($cart, function($item) use ($product_id) {
             return $item['id'] != $product_id;
-        });
+        }));
 
         session()->put('cart', $cart);
 
@@ -65,18 +65,38 @@ class makan_tempat extends Controller
 
     public function updateCart(Request $request)
     {
+        $cart = session()->get('cart', []);
         $product_id = $request->input('product_id');
         $quantity = $request->input('quantity');
-        $product = Product::find($product_id);
-       
-        $product->save();
+        $action = $request->input('action');
+    
+        foreach ($cart as &$item) {
+            if ($item['id'] == $product_id) {
+                if ($action == 'increase' && $item['quantity'] < $item['stock']) {
+                    $item['quantity'] += 1;
+                } elseif ($action == 'decrease' && $item['quantity'] > 1) {
+                    $item['quantity'] -= 1;
+                } else {
+                    $item['quantity'] = $quantity; // Untuk memastikan quantity di-set langsung
+                }
+                break;
+            }
+        }
+    
+        session()->put('cart', $cart);
     
         return response()->json([
             'cart' => $cart,
             'total_price' => $this->calculateTotalPrice($cart),
-            'newStock' => $product->stock,
-            'newPrice' => $product->price * $quantity  
         ]);
+    }
+    
+    public function getCart()
+    {
+        $cart = session()->get('cart', []);
+        $total_price = $this->calculateTotalPrice($cart);
+        
+        return response()->json(['cart' => $cart, 'total_price' => $total_price]);
     }
 
     private function calculateTotalPrice($cart)

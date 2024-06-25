@@ -134,10 +134,45 @@
     <script src="{{ asset('assets_makan/js_makan/mainsss.js') }}"></script>
 
     <script>
-   document.addEventListener('DOMContentLoaded', function() {
-    const cartContent = document.querySelector('.cart-content');
-    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+ document.addEventListener('DOMContentLoaded', function() {
+    fetch('/makan/get-cart', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Mengisi ulang data keranjang dari response
+        const cartContent = document.querySelector('.cart-content');
+        cartContent.innerHTML = ''; // Kosongkan konten keranjang
+        data.cart.forEach(item => {
+            cartContent.innerHTML += `
+                <div class="cart-box">
+                    <img src="${item.img}" alt="" class="cart-img">
+                    <div class="detail-box">
+                        <div class="cart-product-title">${item.name}</div>
+                        <div class="cart-quantity-wrapper">
+                            <button type="button" class="btn-quantity decrease" data-product-id="${item.id}" data-price="${item.price}">-</button>
+                            <input type="number" value="${item.quantity}" class="cart-quantity" data-product-id="${item.id}" data-stock="${item.stock}" data-price="${item.price}">
+                            <button type="button" class="btn-quantity increase" data-product-id="${item.id}" data-price="${item.price}">+</button>
+                        </div>
+                        <div class="cart-price" data-product-id="${item.id}">Rp${item.price.toLocaleString('id-ID', { minimumFractionDigits: 2 })}</div>
+                        <form method="post" action="{{ route('makan.removeFromCart') }}" class="remove-cart-form">
+                            @csrf
+                            <input type="hidden" name="product_id" value="${item.id}">
+                            <button type="submit" class="btn-remove"><i class='bx bxs-trash-alt'></i></button>
+                        </form>
+                    </div>
+                </div>
+            `;
+        });
+        document.querySelector('.total-price').innerText = `Rp${data.total_price.toLocaleString('id-ID', { minimumFractionDigits: 2 })}`;
+    })
+    .catch(error => console.error('Error fetching cart:', error));
 
+    const cartContent = document.querySelector('.cart-content');
     cartContent.addEventListener('click', function(event) {
         const target = event.target;
         if (target.classList.contains('increase') || target.classList.contains('decrease')) {
