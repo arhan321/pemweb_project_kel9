@@ -77,7 +77,7 @@ class makan_tempat extends Controller
                 } elseif ($action == 'decrease' && $item['quantity'] > 1) {
                     $item['quantity'] -= 1;
                 } else {
-                    $item['quantity'] = $quantity; // Untuk memastikan quantity di-set langsung
+                    $item['quantity'] = $quantity;
                 }
                 break;
             }
