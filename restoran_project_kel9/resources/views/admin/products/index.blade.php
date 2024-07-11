@@ -78,7 +78,7 @@
                                 {{ $product->description ?? '' }}
                             </td>
                             <td>
-                                {{ $product->price ?? '' }}
+                                {{ 'Rp ' . number_format($product->price ?? 0, 2, ',', '.') }}
                             </td>
                             <td>
                                 {{ $product->stock ?? '' }}

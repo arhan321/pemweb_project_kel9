@@ -448,22 +448,62 @@ class PermissionsTableSeeder extends Seeder
             ],
             [
                 'id'    => 110,
-                'title' => 'history_order_access',
+                'title' => 'orderditempat_create',
             ],
             [
                 'id'    => 111,
-                'title' => 'history_order_reservation_access',
+                'title' => 'orderditempat_edit',
             ],
             [
                 'id'    => 112,
-                'title' => 'history_order_reservation_show',
+                'title' => 'orderditempat_show',
             ],
             [
                 'id'    => 113,
-                'title' => 'history_booking_manual_access',
+                'title' => 'orderditempat_delete',
             ],
             [
                 'id'    => 114,
+                'title' => 'orderditempat_access',
+            ],
+            [
+                'id'    => 115,
+                'title' => 'bookingmanual_create',
+            ],
+            [
+                'id'    => 116,
+                'title' => 'bookingmanual_edit',
+            ],
+            [
+                'id'    => 117,
+                'title' => 'bookingmanual_show',
+            ],
+            [
+                'id'    => 118,
+                'title' => 'bookingmanual_delete',
+            ],
+            [
+                'id'    => 119,
+                'title' => 'bookingmanual_access',
+            ],
+            [
+                'id'    => 120,
+                'title' => 'history_order_access',
+            ],
+            [
+                'id'    => 121,
+                'title' => 'history_order_reservation_access',
+            ],
+            [
+                'id'    => 122,
+                'title' => 'history_order_reservation_show',
+            ],
+            [
+                'id'    => 123,
+                'title' => 'history_booking_manual_access',
+            ],
+            [
+                'id'    => 124,
                 'title' => 'profile_password_edit',
             ],
         ];

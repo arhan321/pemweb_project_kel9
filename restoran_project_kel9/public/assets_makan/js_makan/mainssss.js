@@ -12,7 +12,6 @@ document.addEventListener("DOMContentLoaded", function() {
       cart.classList.remove("active");
   });
 
-  // Add event listeners to forms
   addEventListenersToForms();
 
   function handleFormSubmit(event) {
@@ -82,6 +81,6 @@ document.addEventListener("DOMContentLoaded", function() {
           cartContent.appendChild(cartBox);
       });
       document.querySelector(".total-price").innerText = `Rp${total_price.toLocaleString('id-ID', { minimumFractionDigits: 2 })}`;
-      addEventListenersToForms(); // Tambahkan kembali event listeners ke elemen formulir baru
+      addEventListenersToForms(); 
   }
 });

@@ -8,7 +8,7 @@
     <title>Hans Restaurants</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="{{ asset('assets_makan/css/makanss.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets_makan/css/makansss.css') }}">
  
 </head>
 
@@ -52,8 +52,7 @@
     </header>
 
     <section class="shop container">
-        <div class="input-group mb=3">
-            <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-magnifying-glass"></i></span>
+        <div class="input-group mb-3">
             <input type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="basic-addon1">
         </div>
         <h2 class="section-title">Shop Products</h2>
@@ -90,51 +89,14 @@
     </section>
 
     <style>
-        .cart-quantity-wrapper {
-            display: flex;
-            align-items: center;
-        }
-
-        .btn-quantity {
-            background-color: #f0f0f0;
-            border: 1px solid #ccc;
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-size: 18px;
-            margin: 0 5px;
-            transition: background-color 0.3s ease, border-color 0.3s ease;
-        }
-
-        .btn-quantity:hover {
-            background-color: #e0e0e0;
-            border-color: #bbb;
-        }
-
-        .btn-quantity:active {
-            background-color: #d0d0d0;
-            border-color: #aaa;
-        }
-
-        .btn-remove {
-            background: none;
-            border: none;
-            cursor: pointer;
-            color: #ff0000;
-            font-size: 24px;
-        }
     </style>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
-    <script src="{{ asset('assets_makan/js_makan/mainsss.js') }}"></script>
+    <script src="{{ asset('assets_makan/js_makan/mainssss.js') }}"></script>
 
     <script>
- document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function() {
     fetch('/makan/get-cart', {
         method: 'GET',
         headers: {
@@ -144,9 +106,8 @@
     })
     .then(response => response.json())
     .then(data => {
-        // Mengisi ulang data keranjang dari response
         const cartContent = document.querySelector('.cart-content');
-        cartContent.innerHTML = ''; // Kosongkan konten keranjang
+        cartContent.innerHTML = ''; 
         data.cart.forEach(item => {
             cartContent.innerHTML += `
                 <div class="cart-box">
@@ -197,7 +158,7 @@
 
 function updateCart(productId, action, quantity, price) {
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-    const updateCartUrl = '/makan/update-cart';  // Jika tidak dapat menggunakan Blade syntax
+    const updateCartUrl = '/makan/update-cart'; 
     const newTotalPrice = quantity * price;
     document.querySelector(`.cart-price[data-product-id="${productId}"]`).innerText = `Rp${newTotalPrice.toLocaleString('id-ID', { minimumFractionDigits: 2 })}`;
 
@@ -224,6 +185,23 @@ function updateCart(productId, action, quantity, price) {
     .catch(error => console.error('Error updating cart:', error));
 }
 
+
+function searchFood() {
+  let searchInput = document.querySelector('.form-control').value.toLowerCase();
+  let productTitles = document.querySelectorAll('.product-title');
+
+  productTitles.forEach(title => {
+      let productName = title.textContent.toLowerCase();
+      if (productName.includes(searchInput)) {
+          title.closest('.product-box').style.display = 'block';
+      } else {
+          title.closest('.product-box').style.display = 'none';
+      }
+  });
+}
+
+let searchInput = document.querySelector('.form-control');
+searchInput.addEventListener('input', searchFood);
 </script>
 </body>
 

@@ -18,20 +18,20 @@ class PermissionRoleTableSeeder extends Seeder
          $manager_umum_permissions = Permission::all();
          Role::findOrFail(2)->permissions()->sync($manager_umum_permissions->pluck('id'));
 
-          // Menambahkan izin untuk kasir fnb access & frontedn access
-         $kasir_permissions = Permission::whereBetween('id', [79, 99])
-          ->orWhereBetween('id', [23, 78])
+          // Menambahkan izin untuk kasir fnb access & frontend access
+         $kasir_permissions = Permission::whereBetween('id', [84, 119])
+          ->orWhereBetween('id', [23, 83])
          ->get();
          Role::findOrFail(3)->permissions()->sync($kasir_permissions->pluck('id'));
 
          // Menambahkan izin untuk waiter fnb access
-         $waiter_permissions = Permission::whereBetween('id', [79, 99])
+         $waiter_permissions = Permission::whereBetween('id', [84, 119])
         //  ->orWhereBetween('id', [51, 80])
          ->get();
           Role::findOrFail(4)->permissions()->sync($waiter_permissions->pluck('id'));
 
           // Menambahkan izin untuk kepala_cheff fnb access
-          $kepalachef_permissions = Permission::whereBetween('id', [79, 99])
+          $kepalachef_permissions = Permission::whereBetween('id', [84, 119])
           // ->orWhereBetween('id', [17, 42])
           // ->orWhereBetween('id', [48, 52])
           // ->orWhereBetween('id', [80, 99])
@@ -39,7 +39,7 @@ class PermissionRoleTableSeeder extends Seeder
           Role::findOrFail(5)->permissions()->sync($kepalachef_permissions->pluck('id'));
 
           // Menambahkan izin untuk bartender fnb access
-          $bartender_permissions = Permission::whereBetween('id', [79, 99])
+          $bartender_permissions = Permission::whereBetween('id', [84, 119])
           //  ->orWhereBetween('id', [51, 80])
           ->get();
            Role::findOrFail(6)->permissions()->sync($bartender_permissions->pluck('id'));

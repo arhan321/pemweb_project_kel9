@@ -212,7 +212,7 @@
             </li>
         @endcan
         @can('fn_b_access')
-            <li class="c-sidebar-nav-dropdown {{ request()->is("admin/tables*") ? "c-show" : "" }} {{ request()->is("admin/bookings*") ? "c-show" : "" }} {{ request()->is("admin/prices*") ? "c-show" : "" }} {{ request()->is("admin/products*") ? "c-show" : "" }} {{ request()->is("admin/makan_di_tempat*") ? "c-show" : "" }}">
+            <li class="c-sidebar-nav-dropdown {{ request()->is("admin/tables*") ? "c-show" : "" }} {{ request()->is("admin/bookings*") ? "c-show" : "" }} {{ request()->is("admin/booking_manuals*") ? "c-show" : "" }} {{ request()->is("admin/prices*") ? "c-show" : "" }} {{ request()->is("admin/products*") ? "c-show" : "" }} {{ request()->is("admin/orderditempat*") ? "c-show" : "" }}">
                 <a class="c-sidebar-nav-dropdown-toggle" href="#">
                     <i class="fa-fw fas fa-utensils c-sidebar-nav-icon">
 
@@ -240,6 +240,16 @@
                             </a>
                         </li>
                     @endcan
+                    @can('bookingmanual_access')
+                    <li class="c-sidebar-nav-item">
+                        <a href="{{ route("admin.booking_manuals.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/booking_manuals") || request()->is("admin/booking_manuals/*") ? "c-active" : "" }}">
+                            <i class="fa-fw fas fa-book-open c-sidebar-nav-icon">
+
+                            </i>
+                            {{ trans('cruds.bookingmanual.title') }}
+                        </a>
+                    </li>
+                    @endcan
                     @can('product_access')
                         <li class="c-sidebar-nav-item">
                             <a href="{{ route("admin.products.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/products") || request()->is("admin/products/*") ? "c-active" : "" }}">
@@ -250,13 +260,13 @@
                             </a>
                         </li>
                     @endcan
-                    @can('makan_di_tempat_access')
+                    @can('orderditempat_access')
                     <li class="c-sidebar-nav-item">
-                        <a href="{{ route("admin.makan_di_tempat.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/makan_di_tempat") || request()->is("admin/makan_di_tempat/*") ? "c-active" : "" }}">
+                        <a href="{{ route("admin.orderditempats.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/orderditempats") || request()->is("admin/orderditempats/*") ? "c-active" : "" }}">
                             <i class="fa-fw fas fa-book c-sidebar-nav-icon">
 
                             </i>
-                            {{ trans('cruds.makan_di_tempat.title') }}
+                            {{ trans('cruds.orderditempat.title') }}
                         </a>
                     </li>
                 @endcan

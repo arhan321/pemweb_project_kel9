@@ -136,12 +136,19 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::post('products/ckmedia', 'ProductController@storeCKEditorImages')->name('products.storeCKEditorImages');
     Route::resource('products', 'ProductController');
 
-    // Product
-    Route::delete('makan_di_tempat/destroy', 'MakanDiTempatController@massDestroy')->name('makan_di_tempat.massDestroy');
-    Route::post('makan_di_tempat/media', 'MakanDiTempatController@storeMedia')->name('makan_di_tempat.storeMedia');
-    Route::post('makan_di_tempat/ckmedia', 'MakanDiTempatController@storeCKEditorImages')->name('makan_di_tempat.storeCKEditorImages');
-    Route::resource('makan_di_tempat', 'MakanDiTempatController');
+    // orderditempat
+    Route::delete('orderditempats/destroy', 'OrderDitempatController@massDestroy')->name('orderditempats.massDestroy');
+    Route::post('orderditempats/media', 'OrderDitempatController@storeMedia')->name('orderditempats.storeMedia');
+    Route::post('orderditempats/ckmedia', 'OrderDitempatController@storeCKEditorImages')->name('orderditempats.storeCKEditorImages');
+    Route::resource('orderditempats', 'OrderDitempatController');
   
+    // booking manual
+    Route::delete('booking_manuals/destroy', 'BookingManualController@massDestroy')->name('booking_manuals.massDestroy');
+    Route::post('booking_manuals/media', 'BookingManualController@storeMedia')->name('booking_manuals.storeMedia');
+    Route::post('booking_manuals/ckmedia', 'BookingManualController@storeCKEditorImages')->name('booking_manuals.storeCKEditorImages');
+    Route::resource('booking_manuals', 'BookingManualController');
+    
+
      // signature
      Route::delete('signatures/destroy', 'SignatureController@massDestroy')->name('signatures.massDestroy');
      Route::post('signatures/media', 'SignatureController@storeMedia')->name('signatures.storeMedia');

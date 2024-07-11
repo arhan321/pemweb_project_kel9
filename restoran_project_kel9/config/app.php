@@ -54,7 +54,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost:82'),
+    'url' => env('APP_URL', 'https://project.djonybaper.my.id'),
 
     'asset_url' => env('ASSET_URL', '/'),
 

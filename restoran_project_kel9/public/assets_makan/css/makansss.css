@@ -205,6 +205,76 @@ header{
     gap: 20px; /* Jarak antar produk */
 }
 
+.shop .section-title {
+    margin-bottom: -3%;
+  }
+
+    .input-group {
+    max-width: 400px;
+    margin-bottom: 20px;
+}
+
+.form-control {
+    border-radius: 20px; 
+    padding: 10px 20px; 
+    font-size: 16px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+    transition: box-shadow 0.3s ease;
+}
+
+.form-control:focus {
+    outline: none; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+}
+
+.input-group-text {
+    background-color: #f8f9fa;
+    border: none; 
+    border-radius: 20px 0 0 20px; 
+    padding: 10px; 
+}
+
+.input-group-text i {
+    color: #6c757d; 
+    font-size: 18px; 
+}
+    .cart-quantity-wrapper {
+        display: flex;
+        align-items: center;
+    }
+
+    .btn-quantity {
+        background-color: #f0f0f0;
+        border: 1px solid #ccc;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-size: 18px;
+        margin: 0 5px;
+        transition: background-color 0.3s ease, border-color 0.3s ease;
+    }
+
+    .btn-quantity:hover {
+        background-color: #e0e0e0;
+        border-color: #bbb;
+    }
+
+    .btn-quantity:active {
+        background-color: #d0d0d0;
+        border-color: #aaa;
+    }
+
+    .btn-remove {
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: #ff0000;
+        font-size: 24px;
+    }
 /*--------------------------------------------------------------
 # Menu Section
 --------------------------------------------------------------*/
