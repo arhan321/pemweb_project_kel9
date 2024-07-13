@@ -19,13 +19,19 @@ class OrderDitempat extends Model
         'deleted_at',
     ];
 
+    public const STATUS_SELECT = [
+        'Belum bayar' => 'Belum bayar',
+        'Sudah bayar' => 'Sudah bayar',
+    ];
+
     protected $fillable = [
         'nama_pemesan',
         'product',
-        'qty',
         'price',
         'jam_pesan',
         'tanggal_pesan',
+        'table_id',
+        'status_bayar',  // Tambahkan ini
         'created_at',
         'updated_at',
         'deleted_at',
@@ -34,5 +40,10 @@ class OrderDitempat extends Model
     protected function serializeDate(DateTimeInterface $date)
     {
         return $date->format('Y-m-d H:i:s');
+    }
+
+    public function table()
+    {
+        return $this->belongsTo(Table::class);
     }
 }

@@ -69,4 +69,9 @@ class Table extends Model implements HasMedia
     {
         return $this->hasMany(Order::class);
     }
+
+    public function table()
+    {
+        return $this->hasMany(table::class);
+    }
 }

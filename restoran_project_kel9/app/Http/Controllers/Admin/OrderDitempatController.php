@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Gate;
+use App\Models\Table;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Models\OrderDitempat;
@@ -16,22 +17,22 @@ use App\Http\Requests\MassDestroyMakanditempatRequest;
 class OrderDitempatController extends Controller
 {
     public function index()
-    {   
+    {
         abort_if(Gate::denies('orderditempat_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-    
+
         $orderditempats = OrderDitempat::all();
-    
+
         foreach ($orderditempats as $orderditempat) {
             Log::info('Processing orderditempat ID: ' . $orderditempat->id);
-    
+
             $productDetails = json_decode($orderditempat->product, true);
             Log::info('Decoded product details: ', ['details' => $productDetails]);
-    
+
             if (json_last_error() === JSON_ERROR_NONE && is_array($productDetails)) {
                 $product_ids = array_column($productDetails, 'id');
                 $product_names = Product::whereIn('id', $product_ids)->pluck('name', 'id')->toArray();
                 Log::info('Product names: ', ['names' => $product_names]);
-    
+
                 foreach ($productDetails as &$product) {
                     if (is_array($product) && isset($product['id'])) {
                         $product['name'] = $product_names[$product['id']] ?? 'Unknown';
@@ -40,25 +41,26 @@ class OrderDitempatController extends Controller
                         $product = ['name' => 'Unknown', 'id' => null, 'qty' => null];
                     }
                 }
-    
+
                 $orderditempat->product_details = $productDetails;
             } else {
                 $orderditempat->product_details = [];
                 Log::warning('Failed to decode JSON or not an array for orderditempat ID: ' . $orderditempat->id);
             }
         }
-    
+
         return view('admin.orderditempats.index', compact('orderditempats'));
     }
-
     public function create()
     {
         abort_if(Gate::denies('orderditempat_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
     
         $products = Product::all()->pluck('name', 'id');
         $productPrices = Product::all()->pluck('price', 'id');
-        
-        return view('admin.orderditempats.create', compact('products', 'productPrices'));
+        $tables = Table::all();
+        $statusBayarOptions = OrderDitempat::STATUS_SELECT; 
+    
+        return view('admin.orderditempats.create', compact('products', 'productPrices', 'tables', 'statusBayarOptions'));
     }
 
     public function store(StoreMakanditempatRequest $request)
@@ -73,11 +75,28 @@ class OrderDitempatController extends Controller
                     'qty' => $qty
                 ];
             }
-    
             $requestData['product'] = json_encode($productDetails);
         }
     
-        OrderDitempat::create($requestData);
+        $requestData['status_bayar'] = $request->input('status_bayar', 'Belum bayar'); 
+    
+        $order = OrderDitempat::create($requestData);
+    
+        if ($request->has('table_id')) {
+            $table = Table::find($request->input('table_id'));
+            if ($table) {
+                $table->status = 'terbooking';
+                $table->save();
+            }
+        }
+    
+        foreach ($request->input('product_qty') as $productId => $qty) {
+            $product = Product::find($productId);
+            if ($product) {
+                $product->stock -= $qty;
+                $product->save();
+            }
+        }
     
         return redirect()->route('admin.orderditempats.index');
     }
@@ -85,36 +104,34 @@ class OrderDitempatController extends Controller
     public function edit(OrderDitempat $orderditempat)
     {
         abort_if(Gate::denies('orderditempat_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
-        $products = Product::all()->pluck('name', 'id');
-        $orderditempat->product_details = json_decode($orderditempat->product, true);
-
-        return view('admin.orderditempats.edit', compact('orderditempat', 'products'));
+    
+        $products = Product::all();
+        $productPrices = Product::pluck('price', 'id');
+        $orderditempat->product_details = collect(json_decode($orderditempat->product, true) ?: []);
+        $statusBayarOptions = OrderDitempat::STATUS_SELECT;
+    
+        return view('admin.orderditempats.edit', compact('orderditempat', 'products', 'productPrices', 'statusBayarOptions'));
     }
-
     public function update(UpdateMakanditempatRequest $request, OrderDitempat $orderditempat)
     {
         $requestData = $request->all();
-
-        if ($request->has('product')) {
-            $products = $request->input('product');
-            $qtys = $request->input('qty');
-
+    
+        if ($request->has('product_qty')) {
             $productDetails = [];
-            foreach ($products as $productId) {
+            foreach ($request->input('product_qty') as $productId => $qty) {
                 $productDetails[] = [
                     'id' => $productId,
-                    'qty' => $qtys[$productId] ?? 1
+                    'qty' => $qty
                 ];
             }
-
             $requestData['product'] = json_encode($productDetails);
         }
-
+    
         $orderditempat->update($requestData);
-
+    
         return redirect()->route('admin.orderditempats.index');
     }
+    
 
     public function show(OrderDitempat $orderditempat)
     {
@@ -126,20 +143,36 @@ class OrderDitempatController extends Controller
     public function destroy(OrderDitempat $orderditempat)
     {
         abort_if(Gate::denies('orderditempat_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
+    
+        if ($orderditempat->table_id) {
+            $table = Table::find($orderditempat->table_id);
+            if ($table) {
+                $table->status = 'kosong';
+                $table->save();
+            }
+        }
+    
         $orderditempat->delete();
-
+    
         return back();
     }
-
+    
     public function massDestroy(MassDestroyMakanditempatRequest $request)
     {
         $orderditempats = OrderDitempat::find(request('ids'));
-
+    
         foreach ($orderditempats as $orderditempat) {
+            if ($orderditempat->table_id) {
+                $table = Table::find($orderditempat->table_id);
+                if ($table) {
+                    $table->status = 'kosong';
+                    $table->save();
+                }
+            }
+            
             $orderditempat->delete();
         }
-
+    
         return response(null, Response::HTTP_NO_CONTENT);
     }
 

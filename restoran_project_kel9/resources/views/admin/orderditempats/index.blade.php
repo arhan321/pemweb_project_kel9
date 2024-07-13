@@ -41,6 +41,12 @@
                             {{ trans('cruds.orderditempat.fields.tanggal_pesan') }}
                         </th>
                         <th>
+                            {{ trans('cruds.orderditempat.fields.table') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.orderditempat.fields.status_bayar') }}
+                        </th>
+                        <th>
                             &nbsp;
                         </th>
                     </tr>
@@ -68,7 +74,7 @@
                                     @endphp
                                 @endif
                             </td>
-                            <td>
+                            <td class="price-column">
                                 {{ 'Rp ' . number_format($orderditempat->price ?? 0, 2, ',', '.') }}
                             </td>
                             <td>
@@ -76,6 +82,18 @@
                             </td>
                             <td>
                                 {{ $orderditempat->tanggal_pesan ?? '' }}
+                            </td>
+                            <td>
+                                {{ trans('cruds.table_information.table') }} {{ $orderditempat->table_id ?? '' }}
+                             </td>
+                             <td>
+                                @if($orderditempat->status_bayar == 'Belum bayar')
+                                    <span class="status-unpaid">{{ App\Models\orderditempat::STATUS_SELECT['Belum_bayar'] ?? 'Belum bayar' }}</span>
+                                @elseif($orderditempat->status_bayar == 'Sudah bayar')
+                                    <span class="status-selesai">{{ App\Models\orderditempat::STATUS_SELECT['Sudah_bayar'] ?? 'Sudah bayar' }}</span>
+                                @else
+                                    {{ App\Models\Booking::STATUS_SELECT[$orderditempat->status] ?? '' }}
+                                @endif
                             </td>
                             <td>
                                 @can('orderditempat_show')
@@ -107,6 +125,43 @@
         </div>
     </div>
 </div>
+
+<style>
+    
+    .status-unpaid {
+        background-color: red;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-weight: bold;
+        margin: 5px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.3s, box-shadow 0.3s;
+        display: inline-block;
+    }
+
+    .status-unpaid:hover {
+        background-color: darkred;
+        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .status-selesai {
+        background-color: green;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-weight: bold;
+        margin: 5px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.3s, box-shadow 0.3s;
+        display: inline-block;
+    }
+
+    .status-selesai:hover {
+        background-color: darkgreen;
+        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+    }
+</style>
 @endsection
 @section('scripts')
 @parent

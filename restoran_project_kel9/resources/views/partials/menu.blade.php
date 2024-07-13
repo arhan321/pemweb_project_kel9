@@ -240,16 +240,6 @@
                             </a>
                         </li>
                     @endcan
-                    @can('bookingmanual_access')
-                    <li class="c-sidebar-nav-item">
-                        <a href="{{ route("admin.booking_manuals.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/booking_manuals") || request()->is("admin/booking_manuals/*") ? "c-active" : "" }}">
-                            <i class="fa-fw fas fa-book-open c-sidebar-nav-icon">
-
-                            </i>
-                            {{ trans('cruds.bookingmanual.title') }}
-                        </a>
-                    </li>
-                    @endcan
                     @can('product_access')
                         <li class="c-sidebar-nav-item">
                             <a href="{{ route("admin.products.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/products") || request()->is("admin/products/*") ? "c-active" : "" }}">

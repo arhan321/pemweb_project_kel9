@@ -67,6 +67,38 @@
             </div>
 
             <div class="form-group">
+                <label for="table">{{ trans('cruds.orderditempat.fields.table') }}</label>
+                <select class="form-control {{ $errors->has('table') ? 'is-invalid' : '' }}" name="table_id" id="table">
+                    @foreach($tables as $table)
+                        <option value="{{ $table->id }}" {{ (old('table_id') == $table->id ? 'selected' : '') }} {{ $table->status == 'terbooking' ? 'disabled' : '' }}>
+                            {{ $table->name }} - {{ $table->status }}
+                        </option>
+                    @endforeach
+                </select>
+                @if($errors->has('table'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('table') }}
+                    </div>
+                @endif
+            </div>
+
+            <div class="form-group">
+                <label class="required">{{ trans('cruds.orderditempat.fields.status_bayar') }}</label>
+                <select class="form-control {{ $errors->has('status_bayar') ? 'is-invalid' : '' }}" name="status_bayar" id="status_bayar" required>
+                    <option value disabled {{ old('status_bayar', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
+                    @foreach(App\Models\Orderditempat::STATUS_SELECT as $key => $label)
+                        <option value="{{ $key }}" {{ old('status_bayar', '') === (string) $key ? 'selected' : '' }}>{{ $label }}</option>
+                    @endforeach
+                </select>
+                @if($errors->has('status_bayar'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('status_bayar') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.orderditempat.fields.status_bayar_helper') }}</span>
+            </div>
+
+            <div class="form-group">
                 <button class="btn btn-danger" type="submit">
                     {{ trans('global.save') }}
                 </button>

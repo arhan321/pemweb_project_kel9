@@ -13,10 +13,12 @@ return new class extends Migration
             $table->id();
             $table->string('nama_pemesan');
             $table->json('product');
-            $table->json('qty');
             $table->biginteger('price');
             $table->time('jam_pesan')->nullable();
             $table->date('tanggal_pesan')->nullable();
+            $table->unsignedBigInteger('table_id')->nullable();
+            $table->foreign('table_id')->references('id')->on('tables');
+            $table->string('status_bayar')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
