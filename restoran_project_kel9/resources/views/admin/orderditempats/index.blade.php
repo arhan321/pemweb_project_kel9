@@ -109,10 +109,10 @@
                                 @endcan
 
                                 @can('orderditempat_delete')
-                                    <form action="{{ route('admin.orderditempats.destroy', $orderditempat->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
+                                    <form action="{{ route('admin.orderditempats.destroy', $orderditempat->id) }}" method="POST" class="delete-form" style="display: inline-block;">
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                        <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
+                                        <input type="submit" class="btn btn-xs btn-danger delete-button" value="{{ trans('global.delete') }}">
                                     </form>
                                 @endcan
 
@@ -165,6 +165,7 @@
 @endsection
 @section('scripts')
 @parent
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     $(function () {
         let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
@@ -185,14 +186,26 @@
                     return
                 }
 
-                if (confirm('{{ trans('global.areYouSure') }}')) {
-                    $.ajax({
-                        headers: {'x-csrf-token': _token},
-                        method: 'POST',
-                        url: config.url,
-                        data: { ids: ids, _method: 'DELETE' }})
-                    .done(function () { location.reload() })
-                }
+                Swal.fire({
+                    title: '{{ trans('global.areYouSure') }}',
+                    text: '{{ trans('global.areYouSureDelete') }}',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: '{{ trans('global.delete') }}',
+                    cancelButtonText: '{{ trans('global.cancel') }}'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            headers: {'x-csrf-token': _token},
+                            method: 'POST',
+                            url: config.url,
+                            data: { ids: ids, _method: 'DELETE' }
+                        })
+                        .done(function () { location.reload() })
+                    }
+                })
             }
         }
         dtButtons.push(deleteButton)
@@ -209,5 +222,25 @@
                 .columns.adjust();
         });
     })
+
+    $('.delete-button').on('click', function(e) {
+        e.preventDefault();
+        var form = $(this).closest('form');
+
+        Swal.fire({
+            title: '{{ trans('global.areYouSure') }}',
+            text: '{{ trans('global.areYouSureDelete') }}',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: '{{ trans('global.delete') }}',
+            cancelButtonText: '{{ trans('global.cancel') }}'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                form.submit();
+            }
+        });
+    });
 </script>
 @endsection

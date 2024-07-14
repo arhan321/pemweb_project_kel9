@@ -8,8 +8,9 @@
     <title>Hans Restaurants</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('assets_makan/css/makansss.css') }}">
- 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -21,7 +22,7 @@
                 <h2 class="cart-title">Your Cart</h2>
                 <div class="cart-content">
                     @foreach ($cart as $item)
-                    <div class="cart-box">
+                    <div class="cart-box" data-product-id="{{ $item['id'] }}">
                         <img src="{{ $item['img'] }}" alt="" class="cart-img">
                         <div class="detail-box">
                             <div class="cart-product-title">{{ $item['name'] }}</div>
@@ -31,12 +32,7 @@
                                 <button type="button" class="btn-quantity increase" data-product-id="{{ $item['id'] }}" data-price="{{ $item['price'] }}">+</button>
                             </div>
                             <div class="cart-price" data-product-id="{{ $item['id'] }}">Rp{{ number_format($item['price'], 2, ',', '.') }}</div>
-                            <!-- Mulai form di sini -->
-                            <form method="post" action="{{ route('makan.removeFromCart') }}" class="remove-cart-form">
-                                @csrf
-                                <input type="hidden" name="product_id" value="{{ $item['id'] }}">
-                                <button type="submit" class="btn-remove"><i class='bx bxs-trash-alt'></i></button>
-                            </form>
+                            <button type="button" class="btn-remove" data-product-id="{{ $item['id'] }}"><i class='bx bxs-trash-alt'></i></button>
                         </div>
                     </div>
                     @endforeach
@@ -45,7 +41,7 @@
                     <div class="total-title">Total</div>
                     <div class="total-price">Rp{{ number_format($total_price, 2, ',', '.') }}</div>
                 </div>
-                <button type="button" class="btn-buy">Buy Now</button>
+                <button type="button" class="btn-buy" onclick="submitOrderForm()">Buy Now</button>
                 <i class='bx bx-x' id="cart-close"></i>
             </div>
         </div>
@@ -64,6 +60,24 @@
                 </div>
             </div>
         </section>
+
+        <!-- Form untuk memasukkan nama pelanggan dan meja -->
+        <form id="orderForm" class="mb-5">
+            @csrf
+            <div class="mb-3">
+                <label for="nama_pemesan" class="form-label">Name</label>
+                <input type="text" class="form-control" id="nama_pemesan" name="nama_pemesan" required>
+            </div>
+            <div class="mb-3">
+                <label for="table_id" class="form-label">Table</label>
+                <select class="form-control" id="table_id" name="table_id" required>
+                    @foreach ($tables as $table)
+                        <option value="{{ $table->id }}">{{ $table->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <button type="button" class="btn btn-primary" onclick="submitOrderForm()">Submit</button>
+        </form>
 
         <div class="shop-content">
             <div class="product-wrapper">
@@ -88,15 +102,13 @@
         </div>
     </section>
 
-    <style>
-    </style>
-
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <script src="{{ asset('assets_makan/js_makan/mainssss.js') }}"></script>
 
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function() {
     fetch('/makan/get-cart', {
         method: 'GET',
         headers: {
@@ -110,7 +122,7 @@
         cartContent.innerHTML = ''; 
         data.cart.forEach(item => {
             cartContent.innerHTML += `
-                <div class="cart-box">
+                <div class="cart-box" data-product-id="${item.id}">
                     <img src="${item.img}" alt="" class="cart-img">
                     <div class="detail-box">
                         <div class="cart-product-title">${item.name}</div>
@@ -120,11 +132,7 @@
                             <button type="button" class="btn-quantity increase" data-product-id="${item.id}" data-price="${item.price}">+</button>
                         </div>
                         <div class="cart-price" data-product-id="${item.id}">Rp${item.price.toLocaleString('id-ID', { minimumFractionDigits: 2 })}</div>
-                        <form method="post" action="{{ route('makan.removeFromCart') }}" class="remove-cart-form">
-                            @csrf
-                            <input type="hidden" name="product_id" value="${item.id}">
-                            <button type="submit" class="btn-remove"><i class='bx bxs-trash-alt'></i></button>
-                        </form>
+                        <button type="button" class="btn-remove" data-product-id="${item.id}"><i class='bx bxs-trash-alt'></i></button>
                     </div>
                 </div>
             `;
@@ -133,8 +141,15 @@
     })
     .catch(error => console.error('Error fetching cart:', error));
 
-    const cartContent = document.querySelector('.cart-content');
-    cartContent.addEventListener('click', function(event) {
+    document.querySelector('.cart-content').addEventListener('click', function(event) {
+        const target = event.target;
+        if (target.classList.contains('btn-remove') || target.closest('.btn-remove')) {
+            const productId = target.closest('.btn-remove').getAttribute('data-product-id');
+            removeFromCart(productId);
+        }
+    });
+
+    document.querySelector('.cart-content').addEventListener('click', function(event) {
         const target = event.target;
         if (target.classList.contains('increase') || target.classList.contains('decrease')) {
             const isIncrease = target.classList.contains('increase');
@@ -155,6 +170,31 @@
         }
     });
 });
+
+function removeFromCart(productId) {
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    fetch('{{ route('makan.removeFromCart') }}', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': csrfToken
+        },
+        body: JSON.stringify({ product_id: productId })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.cart) {
+            const cartBox = document.querySelector(`.cart-box[data-product-id="${productId}"]`);
+            if (cartBox) {
+                cartBox.remove();
+            }
+            document.querySelector('.total-price').innerText = `Rp${data.total_price.toLocaleString('id-ID', { minimumFractionDigits: 2 })}`;
+        } else {
+            console.error('Error removing item from cart:', data);
+        }
+    })
+    .catch(error => console.error('Error:', error));
+}
 
 function updateCart(productId, action, quantity, price) {
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
@@ -185,24 +225,81 @@ function updateCart(productId, action, quantity, price) {
     .catch(error => console.error('Error updating cart:', error));
 }
 
-
 function searchFood() {
-  let searchInput = document.querySelector('.form-control').value.toLowerCase();
-  let productTitles = document.querySelectorAll('.product-title');
+    let searchInput = document.querySelector('.form-control').value.toLowerCase();
+    let productTitles = document.querySelectorAll('.product-title');
 
-  productTitles.forEach(title => {
-      let productName = title.textContent.toLowerCase();
-      if (productName.includes(searchInput)) {
-          title.closest('.product-box').style.display = 'block';
-      } else {
-          title.closest('.product-box').style.display = 'none';
-      }
-  });
+    productTitles.forEach(title => {
+        let productName = title.textContent.toLowerCase();
+        if (productName.includes(searchInput)) {
+            title.closest('.product-box').style.display = 'block';
+        } else {
+            title.closest('.product-box').style.display = 'none';
+        }
+    });
 }
 
 let searchInput = document.querySelector('.form-control');
 searchInput.addEventListener('input', searchFood);
-</script>
+
+function submitOrderForm() {
+    const customerName = document.getElementById('nama_pemesan').value;
+    const tableId = document.getElementById('table_id').value;
+    const cartContent = document.querySelector('.cart-content');
+    const products = [];
+    let totalPrice = 0;
+
+    cartContent.querySelectorAll('.cart-box').forEach(cartBox => {
+        const productId = cartBox.getAttribute('data-product-id');
+        const productQuantity = cartBox.querySelector('.cart-quantity').value;
+        const productPrice = parseFloat(cartBox.querySelector('.cart-price').innerText.replace(/[^\d.-]/g, ''));
+        totalPrice += productPrice * productQuantity;
+        products.push({ id: parseInt(productId), qty: parseInt(productQuantity) });
+    });
+
+    const formData = new FormData();
+    formData.append('nama_pemesan', customerName);
+    formData.append('table_id', tableId);
+    formData.append('product', JSON.stringify(products));
+    formData.append('price', totalPrice);
+    formData.append('_token', document.querySelector('meta[name="csrf-token"]').getAttribute('content'));
+
+    fetch('{{ route('makan.saveOrder') }}', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Success:', data);
+        Swal.fire({
+            icon: 'success',
+            title: 'Order Berhasil',
+            text: 'Pesanan Anda telah berhasil disimpan.',
+            confirmButtonText: 'OK'
+        }).then(() => {
+            document.getElementById('orderForm').reset();
+            fetch('/makan/get-cart', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                const cartContent = document.querySelector('.cart-content');
+                cartContent.innerHTML = ''; 
+                document.querySelector('.total-price').innerText = `Rp0,00`;
+            });
+        });
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+}
+
+
+    </script>
 </body>
 
 </html>

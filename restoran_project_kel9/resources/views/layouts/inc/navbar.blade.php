@@ -24,9 +24,9 @@
         <li><a class="nav-link scrollto speak" href="{{ route('frontend.about') }}">{{ trans('panel.frontend.usefullinks.Abouts') }}</a></li>
         <li><a class="nav-link scrollto speak" href="{{ route('frontend.menu') }}">{{ trans('panel.frontend.usefullinks.Menu') }}</a></li>
         <li><a class="nav-link scrollto speak" href="{{ route('frontend.signature') }}">{{ trans('panel.frontend.usefullinks.Signature') }}</a></li>
-        <li><a class="nav-link scrollto speak" href="{{ route('frontend.testimonial') }}">{{ trans('panel.frontend.usefullinks.Testimonials') }}</a></li>
+        {{-- <li><a class="nav-link scrollto speak" href="{{ route('frontend.testimonial') }}">{{ trans('panel.frontend.usefullinks.Testimonials') }}</a></li> --}}
         <li><a class="nav-link scrollto speak" href="{{ route('frontend.galery') }}">{{ trans('panel.frontend.usefullinks.Galery') }}</a></li>
-        <li><a class="nav-link scrollto speak" href="{{ route('frontend.chefs') }}">{{ trans('panel.frontend.usefullinks.Chefs') }}</a></li>
+        {{-- <li><a class="nav-link scrollto speak" href="{{ route('frontend.chefs') }}">{{ trans('panel.frontend.usefullinks.Chefs') }}</a></li> --}}
         <li><a class="nav-link scrollto speak" href="https://wa.me/6282113862854">{{ trans('panel.frontend.usefullinks.Contact') }}</a></li>
         <li><a class="nav-link scrollto speak" href="{{ route('layouts.reservasi') }}">{{ trans('panel.frontend.usefullinks.reservation') }}</a></li>
       </ul>

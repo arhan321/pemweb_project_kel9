@@ -15,10 +15,12 @@ Route::get('/qr', function () {
 });
 //  Route::get('/makan', 'makan_tempat@getmakan')->name('layouts.makan_di_tempat.makan');
 
-Route::get('/makan', [makan_tempat::class, 'index'])->name('layouts.makan_di_tempat.makan');
-Route::post('/makan/add-to-cart', [makan_tempat::class, 'addToCart'])->name('makan.addToCart');
-Route::post('/makan/remove-from-cart', [makan_tempat::class, 'removeFromCart'])->name('makan.removeFromCart');
-Route::post('/makan/update-cart', [makan_tempat::class, 'updateCart'])->name('makan.updateCart');
+Route::get('/makan', [makan_tempat::class, 'index'])->name('makan.index');
+Route::post('/makan/addToCart', [makan_tempat::class, 'addToCart'])->name('makan.addToCart');
+Route::post('/makan/removeFromCart', [makan_tempat::class, 'removeFromCart'])->name('makan.removeFromCart');
+Route::post('/makan/updateCart', [makan_tempat::class, 'updateCart'])->name('makan.updateCart');
+Route::get('/makan/get-cart', [makan_tempat::class, 'getCart'])->name('makan.getCart');
+Route::post('/makan/saveOrder', [makan_tempat::class, 'saveOrder'])->name('makan.saveOrder');
 
  Route::get('/reservasi', 'OrderController@index')->name('layouts.reservasi');
  Route::post('/checkout', 'OrderController@checkout')->name('midtrans.checkout');

@@ -54,6 +54,41 @@
                 <span class="help-block">{{ trans('cruds.orderditempat.fields.price_helper') }}</span>
             </div>
             <div class="form-group">
+                <label class="required" for="table_id">{{ trans('cruds.orderditempat.fields.table') }}</label>
+                <select class="form-control select2 {{ $errors->has('table') ? 'is-invalid' : '' }}" name="table_id" id="table_id" required>
+                    <option value disabled {{ old('table_id', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
+                    @foreach($tables as $id => $table)
+                        <option value="{{ $id }}" {{ (old('table_id') ? old('table_id') : $orderditempat->table_id ?? '') == $id ? 'selected' : '' }}>{{ $table }}</option>
+                    @endforeach
+                </select>
+                @if($errors->has('table'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('table') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.orderditempat.fields.table_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label class="required" for="jam_pesan">{{ trans('cruds.orderditempat.fields.jam_pesan') }}</label>
+                <input class="form-control {{ $errors->has('jam_pesan') ? 'is-invalid' : '' }}" type="time" name="jam_pesan" id="jam_pesan" value="{{ old('jam_pesan', $orderditempat->jam_pesan) }}" required>
+                @if($errors->has('jam_pesan'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('jam_pesan') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.orderditempat.fields.jam_pesan_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label class="required" for="tanggal_pesan">{{ trans('cruds.orderditempat.fields.tanggal_pesan') }}</label>
+                <input class="form-control {{ $errors->has('tanggal_pesan') ? 'is-invalid' : '' }}" type="date" name="tanggal_pesan" id="tanggal_pesan" value="{{ old('tanggal_pesan', $orderditempat->tanggal_pesan) }}" required>
+                @if($errors->has('tanggal_pesan'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('tanggal_pesan') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.orderditempat.fields.tanggal_pesan_helper') }}</span>
+            </div>
+            <div class="form-group">
                 <label for="status_bayar">{{ trans('cruds.orderditempat.fields.status_bayar') }}</label>
                 <select class="form-control {{ $errors->has('status_bayar') ? 'is-invalid' : '' }}" name="status_bayar" id="status_bayar" required>
                     <option value disabled {{ old('status_bayar', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
@@ -81,58 +116,58 @@
 
 @section('scripts')
 <script>
-    Dropzone.options.imageDropzone = {
-    url: '{{ route('admin.orderditempats.storeMedia') }}',
-    maxFilesize: 2, // MB
-    acceptedFiles: '.jpeg,.jpg,.png,.gif',
-    maxFiles: 1,
-    addRemoveLinks: true,
-    headers: {
-      'X-CSRF-TOKEN': "{{ csrf_token() }}"
-    },
-    params: {
-      size: 2,
-      width: 4096,
-      height: 4096
-    },
-    success: function (file, response) {
-      $('form').find('input[name="image"]').remove()
-      $('form').append('<input type="hidden" name="image" value="' + response.name + '">')
-    },
-    removedfile: function (file) {
-      file.previewElement.remove()
-      if (file.status !== 'error') {
-        $('form').find('input[name="image"]').remove()
-        this.options.maxFiles = this.options.maxFiles + 1
-      }
-    },
-    init: function () {
-@if(isset($orderditempat) && $orderditempat->image)
-      var file = {!! json_encode($orderditempat->image) !!}
-          this.options.addedfile.call(this, file)
-      this.options.thumbnail.call(this, file, file.preview ?? file.preview_url)
-      file.previewElement.classList.add('dz-complete')
-      $('form').append('<input type="hidden" name="image" value="' + file.file_name + '">')
-      this.options.maxFiles = this.options.maxFiles - 1
-@endif
-    },
-    error: function (file, response) {
-        if ($.type(response) === 'string') {
-            var message = response //dropzone sends it's own error messages in string
-        } else {
-            var message = response.errors.file
-        }
-        file.previewElement.classList.add('dz-error')
-        _ref = file.previewElement.querySelectorAll('[data-dz-errormessage]')
-        _results = []
-        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-            node = _ref[_i]
-            _results.push(node.textContent = message)
-        }
+//     Dropzone.options.imageDropzone = {
+//     url: '{{ route('admin.orderditempats.storeMedia') }}',
+//     maxFilesize: 2, // MB
+//     acceptedFiles: '.jpeg,.jpg,.png,.gif',
+//     maxFiles: 1,
+//     addRemoveLinks: true,
+//     headers: {
+//       'X-CSRF-TOKEN': "{{ csrf_token() }}"
+//     },
+//     params: {
+//       size: 2,
+//       width: 4096,
+//       height: 4096
+//     },
+//     success: function (file, response) {
+//       $('form').find('input[name="image"]').remove()
+//       $('form').append('<input type="hidden" name="image" value="' + response.name + '">')
+//     },
+//     removedfile: function (file) {
+//       file.previewElement.remove()
+//       if (file.status !== 'error') {
+//         $('form').find('input[name="image"]').remove()
+//         this.options.maxFiles = this.options.maxFiles + 1
+//       }
+//     },
+//     init: function () {
+// @if(isset($orderditempat) && $orderditempat->image)
+//       var file = {!! json_encode($orderditempat->image) !!}
+//           this.options.addedfile.call(this, file)
+//       this.options.thumbnail.call(this, file, file.preview ?? file.preview_url)
+//       file.previewElement.classList.add('dz-complete')
+//       $('form').append('<input type="hidden" name="image" value="' + file.file_name + '">')
+//       this.options.maxFiles = this.options.maxFiles - 1
+// @endif
+//     },
+//     error: function (file, response) {
+//         if ($.type(response) === 'string') {
+//             var message = response //dropzone sends it's own error messages in string
+//         } else {
+//             var message = response.errors.file
+//         }
+//         file.previewElement.classList.add('dz-error')
+//         _ref = file.previewElement.querySelectorAll('[data-dz-errormessage]')
+//         _results = []
+//         for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+//             node = _ref[_i]
+//             _results.push(node.textContent = message)
+//         }
 
-        return _results
-    }
-}
+//         return _results
+//     }
+// }
 
 $(document).ready(function() {
     const productPrices = @json($productPrices);

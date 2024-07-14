@@ -18,16 +18,6 @@ use Illuminate\Http\Request;
 
 class frontend extends Controller
 {
-
-    // public function getdb() {
-    //     $footer = Footer::all();
-    //     $blog = Blog::with(['media'])->get();
-    //     return view ('frontend.index', compact('footer','blog'));
-    // }
-    // public function home(){
-    //     // $blog = Blog::all();
-    //     return view ('frontend.home', compact('blog'));
-    // }
     public function home(){
         $footer = Footer::all();
         $Home = Home::all();
@@ -55,7 +45,7 @@ class frontend extends Controller
     public function signature() {
         $footer = Footer::all();
         $signatures = Signature::all();
-        $categories = $signatures->pluck('category')->unique()->values()->all(); // Ambil kategori unik dari semua tanda tangan
+        $categories = $signatures->pluck('category')->unique()->values()->all(); 
     
         return view('frontend.signature', compact('signatures', 'categories','footer'));
     }
@@ -97,7 +87,6 @@ class frontend extends Controller
     public function chefs(){
         $footer = Footer::all();
         $chefs = Datachef::all();
-        // $icon = SosialMedium::all();
         return view ('frontend.chefs',compact('chefs','footer'));
     }
     public function footer()
@@ -106,14 +95,4 @@ class frontend extends Controller
         return view('layouts.inc.footers', compact('footer'));
     }
 
-
-    // public function footer() {
-    //     $footer = Footer::all();
-    //     return view ('frontend.index', compact('footer'));
-    // }
-
-    // public function product () {
-    //     $products = Product::all();
-    //     return view ('frontend.index', compact('products'));
-    // };
 }

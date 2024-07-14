@@ -100,43 +100,81 @@ class OrderDitempatController extends Controller
     
         return redirect()->route('admin.orderditempats.index');
     }
-
     public function edit(OrderDitempat $orderditempat)
-    {
-        abort_if(Gate::denies('orderditempat_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-    
-        $products = Product::all();
-        $productPrices = Product::pluck('price', 'id');
-        $orderditempat->product_details = collect(json_decode($orderditempat->product, true) ?: []);
-        $statusBayarOptions = OrderDitempat::STATUS_SELECT;
-    
-        return view('admin.orderditempats.edit', compact('orderditempat', 'products', 'productPrices', 'statusBayarOptions'));
-    }
-    public function update(UpdateMakanditempatRequest $request, OrderDitempat $orderditempat)
-    {
-        $requestData = $request->all();
-    
-        if ($request->has('product_qty')) {
-            $productDetails = [];
-            foreach ($request->input('product_qty') as $productId => $qty) {
-                $productDetails[] = [
-                    'id' => $productId,
-                    'qty' => $qty
-                ];
-            }
-            $requestData['product'] = json_encode($productDetails);
+{
+    abort_if(Gate::denies('orderditempat_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+    $products = Product::all();
+    $productPrices = Product::pluck('price', 'id');
+    $tables = Table::pluck('name', 'id');
+    $orderditempat->product_details = collect(json_decode($orderditempat->product, true) ?: []);
+    $statusBayarOptions = OrderDitempat::STATUS_SELECT;
+
+    return view('admin.orderditempats.edit', compact('orderditempat', 'products', 'productPrices', 'statusBayarOptions', 'tables'));
+}
+
+public function update(UpdateMakanditempatRequest $request, OrderDitempat $orderditempat)
+{
+    $requestData = $request->all();
+
+    if ($request->has('product_qty')) {
+        $productDetails = [];
+        foreach ($request->input('product_qty') as $productId => $qty) {
+            $productDetails[] = [
+                'id' => $productId,
+                'qty' => $qty
+            ];
         }
-    
-        $orderditempat->update($requestData);
-    
-        return redirect()->route('admin.orderditempats.index');
+        $requestData['product'] = json_encode($productDetails);
     }
+
+    $previousStatusBayar = $orderditempat->status_bayar;
+
+    $orderditempat->update($requestData);
+
+    if ($previousStatusBayar != 'Sudah bayar' && $requestData['status_bayar'] == 'Sudah bayar') {
+        if ($orderditempat->table_id) {
+            $table = Table::find($orderditempat->table_id);
+            if ($table) {
+                $table->status = 'kosong';
+                $table->save();
+            }
+        }
+    }
+
+    return redirect()->route('admin.orderditempats.index');
+}
     
 
     public function show(OrderDitempat $orderditempat)
     {
         abort_if(Gate::denies('orderditempat_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
+    
+        Log::info('Processing orderditempat ID: ' . $orderditempat->id);
+    
+        $productDetails = json_decode($orderditempat->product, true);
+        Log::info('Decoded product details: ', ['details' => $productDetails]);
+    
+        if (json_last_error() === JSON_ERROR_NONE && is_array($productDetails)) {
+            $product_ids = array_column($productDetails, 'id');
+            $product_names = Product::whereIn('id', $product_ids)->pluck('name', 'id')->toArray();
+            Log::info('Product names: ', ['names' => $product_names]);
+    
+            foreach ($productDetails as &$product) {
+                if (is_array($product) && isset($product['id'])) {
+                    $product['name'] = $product_names[$product['id']] ?? 'Unknown';
+                } else {
+                    Log::warning('Invalid product format: ', ['product' => $product]);
+                    $product = ['name' => 'Unknown', 'id' => null, 'qty' => null];
+                }
+            }
+    
+            $orderditempat->product_details = $productDetails;
+        } else {
+            $orderditempat->product_details = [];
+            Log::warning('Failed to decode JSON or not an array for orderditempat ID: ' . $orderditempat->id);
+        }
+    
         return view('admin.orderditempats.show', compact('orderditempat'));
     }
 
