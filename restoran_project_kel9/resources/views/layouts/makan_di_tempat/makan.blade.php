@@ -61,23 +61,29 @@
             </div>
         </section>
 
-        <!-- Form untuk memasukkan nama pelanggan dan meja -->
-        <form id="orderForm" class="mb-5">
-            @csrf
-            <div class="mb-3">
-                <label for="nama_pemesan" class="form-label">Name</label>
-                <input type="text" class="form-control" id="nama_pemesan" name="nama_pemesan" required>
-            </div>
-            <div class="mb-3">
-                <label for="table_id" class="form-label">Table</label>
-                <select class="form-control" id="table_id" name="table_id" required>
-                    @foreach ($tables as $table)
-                        <option value="{{ $table->id }}">{{ $table->name }}</option>
-                    @endforeach
-                </select>
-            </div>
-            <button type="button" class="btn btn-primary" onclick="submitOrderForm()">Submit</button>
-        </form>
+        <div class="container">
+            <form id="orderForm" class="mb-5">
+                @csrf
+                <div class="mb-3">
+                    <label for="nama_pemesan" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="nama_pemesan" name="nama_pemesan" required>
+                </div>
+                <div class="mb-3">
+                    <label for="table_id" class="form-label">Table</label>
+                    <select class="form-control" id="table_id" name="table_id" required>
+                        @foreach ($tables as $table)
+                            @php
+                                $disabled = $table->status == 'terbooking' ? 'disabled' : '';
+                            @endphp
+                            <option value="{{ $table->id }}" {{ $disabled }}>
+                                {{ $table->name }} {{ $table->status == 'terbooking' ? '(Terbooking)' : '' }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+                <button type="button" class="btn btn-primary" onclick="submitOrderForm()">Submit</button>
+            </form>
+        </div>
 
         <div class="shop-content">
             <div class="product-wrapper">
