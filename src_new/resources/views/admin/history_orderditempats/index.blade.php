@@ -54,6 +54,7 @@
                     {{ App\Models\Booking::STATUS_SELECT[$h->status_bayar] ?? '' }}
                 @endif
             </td>
+            <td></td>
           </tr>
           @endforeach
         </tbody>
@@ -63,24 +64,40 @@
 </div>
 
 <style>
-    .badge {
+    
+  .status-unpaid {
+      background-color: red;
+      color: white;
       padding: 5px 10px;
-      border-radius: 4px;
-      font-size: 12px;
-      text-align: center;
+      border-radius: 5px;
+      font-weight: bold;
+      margin: 5px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: background-color 0.3s, box-shadow 0.3s;
       display: inline-block;
-      margin-right: 5px;
-    }
+  }
 
-    .badge-success {
-      background-color: #4CAF50; 
-      color: white;
-    }
+  .status-unpaid:hover {
+      background-color: darkred;
+      box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+  }
 
-    .badge-danger {
-      background-color: #f44336; 
+  .status-selesai {
+      background-color: green;
       color: white;
-    }
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-weight: bold;
+      margin: 5px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: background-color 0.3s, box-shadow 0.3s;
+      display: inline-block;
+  }
+
+  .status-selesai:hover {
+      background-color: darkgreen;
+      box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+  }
 </style>
 
 @endsection

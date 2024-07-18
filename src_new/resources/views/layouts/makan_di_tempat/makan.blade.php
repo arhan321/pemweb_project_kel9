@@ -41,7 +41,7 @@
                     <div class="total-title">Total</div>
                     <div class="total-price">Rp{{ number_format($total_price, 2, ',', '.') }}</div>
                 </div>
-                <button type="button" class="btn-buy" onclick="submitOrderForm()">Buy Now</button>
+                {{-- <button type="button" class="btn-buy" onclick="submitOrderForm()">Buy Now</button> --}}
                 <i class='bx bx-x' id="cart-close"></i>
             </div>
         </div>
@@ -93,6 +93,7 @@
                         <div class="product-details">
                             <h2 class="product-title">{{ $product->name }}</h2>
                             <span class="product-price">Rp{{ number_format($product->price, 2, ',', '.') }}</span>
+                            <span class="product-stock" data-stock="{{ $product->stock }}">Stock: {{ $product->stock }}</span>
                             <form method="post" action="{{ route('makan.addToCart') }}" class="add-cart-form">
                                 @csrf
                                 <input type="hidden" name="product_id" value="{{ $product->id }}">
@@ -114,176 +115,7 @@
     <script src="{{ asset('assets_makan/js_makan/mainssss.js') }}"></script>
 
     <script>
-document.addEventListener('DOMContentLoaded', function() {
-    fetch('/makan/get-cart', {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-        }
-    })
-    .then(response => response.json())
-    .then(data => {
-        const cartContent = document.querySelector('.cart-content');
-        cartContent.innerHTML = ''; 
-        data.cart.forEach(item => {
-            cartContent.innerHTML += `
-                <div class="cart-box" data-product-id="${item.id}">
-                    <img src="${item.img}" alt="" class="cart-img">
-                    <div class="detail-box">
-                        <div class="cart-product-title">${item.name}</div>
-                        <div class="cart-quantity-wrapper">
-                            <button type="button" class="btn-quantity decrease" data-product-id="${item.id}" data-price="${item.price}">-</button>
-                            <input type="number" value="${item.quantity}" class="cart-quantity" data-product-id="${item.id}" data-stock="${item.stock}" data-price="${item.price}">
-                            <button type="button" class="btn-quantity increase" data-product-id="${item.id}" data-price="${item.price}">+</button>
-                        </div>
-                        <div class="cart-price" data-product-id="${item.id}">Rp${item.price.toLocaleString('id-ID', { minimumFractionDigits: 2 })}</div>
-                        <button type="button" class="btn-remove" data-product-id="${item.id}"><i class='bx bxs-trash-alt'></i></button>
-                    </div>
-                </div>
-            `;
-        });
-        document.querySelector('.total-price').innerText = `Rp${data.total_price.toLocaleString('id-ID', { minimumFractionDigits: 2 })}`;
-    })
-    .catch(error => console.error('Error fetching cart:', error));
-
-    document.querySelector('.cart-content').addEventListener('click', function(event) {
-        const target = event.target;
-        if (target.classList.contains('btn-remove') || target.closest('.btn-remove')) {
-            const productId = target.closest('.btn-remove').getAttribute('data-product-id');
-            removeFromCart(productId);
-        }
-    });
-
-    document.querySelector('.cart-content').addEventListener('click', function(event) {
-        const target = event.target;
-        if (target.classList.contains('increase') || target.classList.contains('decrease')) {
-            const isIncrease = target.classList.contains('increase');
-            const input = target.closest('.cart-box').querySelector('.cart-quantity');
-            const productId = input.dataset.productId;
-            const stock = parseInt(input.dataset.stock);
-            const price = parseFloat(input.dataset.price);
-            let currentQuantity = parseInt(input.value);
-
-            if (isIncrease && currentQuantity < stock) {
-                currentQuantity++;
-            } else if (!isIncrease && currentQuantity > 1) {
-                currentQuantity--;
-            }
-
-            input.value = currentQuantity;
-            updateCart(productId, isIncrease ? 'increase' : 'decrease', currentQuantity, price);
-        }
-    });
-});
-
-function removeFromCart(productId) {
-    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-    fetch('{{ route('makan.removeFromCart') }}', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': csrfToken
-        },
-        body: JSON.stringify({ product_id: productId })
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.cart) {
-            const cartBox = document.querySelector(`.cart-box[data-product-id="${productId}"]`);
-            if (cartBox) {
-                cartBox.remove();
-            }
-            document.querySelector('.total-price').innerText = `Rp${data.total_price.toLocaleString('id-ID', { minimumFractionDigits: 2 })}`;
-        } else {
-            console.error('Error removing item from cart:', data);
-        }
-    })
-    .catch(error => console.error('Error:', error));
-}
-
-function updateCart(productId, action, quantity, price) {
-    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-    const updateCartUrl = '/makan/update-cart'; 
-    const newTotalPrice = quantity * price;
-    document.querySelector(`.cart-price[data-product-id="${productId}"]`).innerText = `Rp${newTotalPrice.toLocaleString('id-ID', { minimumFractionDigits: 2 })}`;
-
-    let newGrandTotal = 0;
-    document.querySelectorAll('.cart-quantity').forEach(input => {
-        const productPrice = parseFloat(input.dataset.price);
-        newGrandTotal += productPrice * parseInt(input.value);
-    });
-
-    document.querySelector('.total-price').innerText = `Rp${newGrandTotal.toLocaleString('id-ID', { minimumFractionDigits: 2 })}`;
-
-    fetch(updateCartUrl, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': csrfToken
-        },
-        body: JSON.stringify({ product_id: productId, action: action, quantity: quantity })
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log('Update successful:', data);
-    })
-    .catch(error => console.error('Error updating cart:', error));
-}
-
-function searchFood() {
-    let searchInput = document.querySelector('.form-control').value.toLowerCase();
-    let productTitles = document.querySelectorAll('.product-title');
-
-    productTitles.forEach(title => {
-        let productName = title.textContent.toLowerCase();
-        if (productName.includes(searchInput)) {
-            title.closest('.product-box').style.display = 'block';
-        } else {
-            title.closest('.product-box').style.display = 'none';
-        }
-    });
-}
-
-let searchInput = document.querySelector('.form-control');
-searchInput.addEventListener('input', searchFood);
-
-function submitOrderForm() {
-    const customerName = document.getElementById('nama_pemesan').value;
-    const tableId = document.getElementById('table_id').value;
-    const cartContent = document.querySelector('.cart-content');
-    const products = [];
-    let totalPrice = 0;
-
-    cartContent.querySelectorAll('.cart-box').forEach(cartBox => {
-        const productId = cartBox.getAttribute('data-product-id');
-        const productQuantity = cartBox.querySelector('.cart-quantity').value;
-        const productPrice = parseFloat(cartBox.querySelector('.cart-price').innerText.replace(/[^\d.-]/g, ''));
-        totalPrice += productPrice * productQuantity;
-        products.push({ id: parseInt(productId), qty: parseInt(productQuantity) });
-    });
-
-    const formData = new FormData();
-    formData.append('nama_pemesan', customerName);
-    formData.append('table_id', tableId);
-    formData.append('product', JSON.stringify(products));
-    formData.append('price', totalPrice);
-    formData.append('_token', document.querySelector('meta[name="csrf-token"]').getAttribute('content'));
-
-    fetch('{{ route('makan.saveOrder') }}', {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log('Success:', data);
-        Swal.fire({
-            icon: 'success',
-            title: 'Order Berhasil',
-            text: 'Pesanan Anda telah berhasil disimpan.',
-            confirmButtonText: 'OK'
-        }).then(() => {
-            document.getElementById('orderForm').reset();
+        document.addEventListener('DOMContentLoaded', function() {
             fetch('/makan/get-cart', {
                 method: 'GET',
                 headers: {
@@ -295,17 +127,201 @@ function submitOrderForm() {
             .then(data => {
                 const cartContent = document.querySelector('.cart-content');
                 cartContent.innerHTML = ''; 
-                document.querySelector('.total-price').innerText = `Rp0,00`;
+                data.cart.forEach(item => {
+                    cartContent.innerHTML += `
+                        <div class="cart-box" data-product-id="${item.id}">
+                            <img src="${item.img}" alt="" class="cart-img">
+                            <div class="detail-box">
+                                <div class="cart-product-title">${item.name}</div>
+                                <div class="cart-quantity-wrapper">
+                                    <button type="button" class="btn-quantity decrease" data-product-id="${item.id}" data-price="${item.price}">-</button>
+                                    <input type="number" value="${item.quantity}" class="cart-quantity" data-product-id="${item.id}" data-stock="${item.stock}" data-price="${item.price}">
+                                    <button type="button" class="btn-quantity increase" data-product-id="${item.id}" data-price="${item.price}">+</button>
+                                </div>
+                                <div class="cart-price" data-product-id="${item.id}">Rp${item.price.toLocaleString('id-ID', { minimumFractionDigits: 2 })}</div>
+                                <button type="button" class="btn-remove" data-product-id="${item.id}"><i class='bx bxs-trash-alt'></i></button>
+                            </div>
+                        </div>
+                    `;
+                });
+                document.querySelector('.total-price').innerText = `Rp${data.total_price.toLocaleString('id-ID', { minimumFractionDigits: 2 })}`;
+            })
+            .catch(error => console.error('Error fetching cart:', error));
+        
+            document.querySelector('.cart-content').addEventListener('click', function(event) {
+                const target = event.target;
+                if (target.classList.contains('btn-remove') || target.closest('.btn-remove')) {
+                    const productId = target.closest('.btn-remove').getAttribute('data-product-id');
+                    removeFromCart(productId);
+                }
+            });
+        
+            document.querySelector('.cart-content').addEventListener('click', function(event) {
+                const target = event.target;
+                if (target.classList.contains('increase') || target.classList.contains('decrease')) {
+                    const isIncrease = target.classList.contains('increase');
+                    const input = target.closest('.cart-box').querySelector('.cart-quantity');
+                    const productId = input.dataset.productId;
+                    const stock = parseInt(input.dataset.stock);
+                    const price = parseFloat(input.dataset.price);
+                    let currentQuantity = parseInt(input.value);
+        
+                    if (isIncrease && currentQuantity < stock) {
+                        currentQuantity++;
+                    } else if (!isIncrease && currentQuantity > 1) {
+                        currentQuantity--;
+                    }
+        
+                    input.value = currentQuantity;
+                    updateCart(productId, isIncrease ? 'increase' : 'decrease', currentQuantity, price);
+                }
+            });
+        
+            document.querySelectorAll('.add-cart-form').forEach(form => {
+                form.addEventListener('submit', function(event) {
+                    event.preventDefault();
+                    const stock = parseInt(this.querySelector('.product-stock').dataset.stock);
+                    if (stock > 0) {
+                        this.submit();
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Stock habis',
+                            text: 'Produk ini tidak dapat ditambahkan ke keranjang karena stok habis.'
+                        });
+                    }
+                });
             });
         });
-    })
-    .catch((error) => {
-        console.error('Error:', error);
-    });
-}
-
-
-    </script>
+        
+        function removeFromCart(productId) {
+            const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+            fetch('{{ route('makan.removeFromCart') }}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': csrfToken
+                },
+                body: JSON.stringify({ product_id: productId })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.cart) {
+                    const cartBox = document.querySelector(`.cart-box[data-product-id="${productId}"]`);
+                    if (cartBox) {
+                        cartBox.remove();
+                    }
+                    document.querySelector('.total-price').innerText = `Rp${data.total_price.toLocaleString('id-ID', { minimumFractionDigits: 2 })}`;
+                } else {
+                    console.error('Error removing item from cart:', data);
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+        
+        function updateCart(productId, action, quantity, price) {
+            const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+            const updateCartUrl = '/makan/update-cart'; 
+            const newTotalPrice = quantity * price;
+            document.querySelector(`.cart-price[data-product-id="${productId}"]`).innerText = `Rp${newTotalPrice.toLocaleString('id-ID', { minimumFractionDigits: 2 })}`;
+        
+            let newGrandTotal = 0;
+            document.querySelectorAll('.cart-quantity').forEach(input => {
+                const productPrice = parseFloat(input.dataset.price);
+                newGrandTotal += productPrice * parseInt(input.value);
+            });
+        
+            document.querySelector('.total-price').innerText = `Rp${newGrandTotal.toLocaleString('id-ID', { minimumFractionDigits: 2 })}`;
+        
+            fetch(updateCartUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': csrfToken
+                },
+                body: JSON.stringify({ product_id: productId, action: action, quantity: quantity })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Update successful:', data);
+            })
+            .catch(error => console.error('Error updating cart:', error));
+        }
+        
+        function searchFood() {
+            let searchInput = document.querySelector('.form-control').value.toLowerCase();
+            let productTitles = document.querySelectorAll('.product-title');
+        
+            productTitles.forEach(title => {
+                let productName = title.textContent.toLowerCase();
+                if (productName.includes(searchInput)) {
+                    title.closest('.product-box').style.display = 'block';
+                } else {
+                    title.closest('.product-box').style.display = 'none';
+                }
+            });
+        }
+        
+        let searchInput = document.querySelector('.form-control');
+        searchInput.addEventListener('input', searchFood);
+        
+        function submitOrderForm() {
+            const customerName = document.getElementById('nama_pemesan').value;
+            const tableId = document.getElementById('table_id').value;
+            const cartContent = document.querySelector('.cart-content');
+            const products = [];
+            let totalPrice = 0;
+        
+            cartContent.querySelectorAll('.cart-box').forEach(cartBox => {
+                const productId = cartBox.getAttribute('data-product-id');
+                const productQuantity = cartBox.querySelector('.cart-quantity').value;
+                const productPrice = parseFloat(cartBox.querySelector('.cart-price').innerText.replace(/[^\d.-]/g, ''));
+                totalPrice += productPrice * productQuantity;
+                products.push({ id: parseInt(productId), qty: parseInt(productQuantity) });
+            });
+        
+            const formData = new FormData();
+            formData.append('nama_pemesan', customerName);
+            formData.append('table_id', tableId);
+            formData.append('product', JSON.stringify(products));
+            formData.append('price', totalPrice);
+            formData.append('_token', document.querySelector('meta[name="csrf-token"]').getAttribute('content'));
+        
+            fetch('{{ route('makan.saveOrder') }}', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Order Berhasil',
+                    text: 'Pesanan Anda telah berhasil disimpan.',
+                    confirmButtonText: 'OK'
+                }).then(() => {
+                    document.getElementById('orderForm').reset();
+                    fetch('/makan/get-cart', {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        const cartContent = document.querySelector('.cart-content');
+                        cartContent.innerHTML = ''; 
+                        document.querySelector('.total-price').innerText = `Rp0,00`;
+                    });
+                });
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        }
+        </script>
+        
 </body>
 
 </html>
