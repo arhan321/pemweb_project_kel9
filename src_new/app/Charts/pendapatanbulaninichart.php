@@ -36,7 +36,7 @@ class pendapatanbulaninichart
         $days = range(1, $daysInMonth);
 
         return $this->chart->lineChart()
-            ->setTitle('Pendapatan Bulan Ini')
+            ->setTitle('Pendapatan Bulan Ini berdasarkan dari reservasi')
             ->setSubtitle('Pendapatan berdasarkan hari dalam bulan ini')
             ->addData('Pendapatan', $dailyEarnings)
             ->setXAxis($days);

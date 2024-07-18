@@ -9,7 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ asset('assets_makan/css/makansss.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets_makan/css/c.css') }}">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
@@ -51,7 +51,7 @@
         <div class="input-group mb-3">
             <input type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="basic-addon1">
         </div>
-        <h2 class="section-title">Shop Products</h2>
+        <h2 class="section-title" style="margin-bottom: -8%;">Shop Products</h2>
         <section id="menu" class="menu section-bg">
             <div class="container" data-aos="fade-up">
                 <div class="section-title">
@@ -61,7 +61,7 @@
             </div>
         </section>
 
-        <div class="container">
+        <div class="container" style="margin-top: -3%; width:50%;">
             <form id="orderForm" class="mb-5">
                 @csrf
                 <div class="mb-3">

@@ -110,6 +110,9 @@ class makan_tempat extends Controller
     }
     public function saveOrder(Request $request)
     {
+        // Setel zona waktu ke Asia/Jakarta untuk WIB
+        date_default_timezone_set('Asia/Jakarta');
+    
         $validatedData = $request->validate([
             'nama_pemesan' => 'required|string|max:255',
             'table_id' => 'required|exists:tables,id',
@@ -122,17 +125,17 @@ class makan_tempat extends Controller
         $order->table_id = $validatedData['table_id'];
         $order->product = $validatedData['product'];
         $order->price = $validatedData['price'];
-        $order->jam_pesan = now()->toTimeString();
-        $order->tanggal_pesan = now()->toDateString();
+        $order->jam_pesan = now()->toTimeString(); 
+        $order->tanggal_pesan = now()->toDateString(); 
         $order->status_bayar = 'Belum bayar';
         $order->save();
     
-        // Update table status
-        $table = Table::find($request->input('table_id'));
-        if ($table) {
-            $table->status = 'terbooking';
-            $table->save();
-        }
+        // Update status meja
+        // $table = Table::find($request->input('table_id'));
+        // if ($table) {
+        //     $table->status = 'terbooking';
+        //     $table->save();
+        // }
     
         $products = json_decode($validatedData['product'], true);
         foreach ($products as $productDetail) {
@@ -147,6 +150,7 @@ class makan_tempat extends Controller
     
         return response()->json(['success' => 'Order has been saved successfully.']);
     }
+    
     
 
     private function calculateTotalPrice($cart)

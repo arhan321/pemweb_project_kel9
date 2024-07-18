@@ -26,7 +26,7 @@
 		/* with all available options: */
 		 new QRCode({
 
-			 msg   :  'https://shared.djncloud.my.id'
+			 msg   :  'https://project.djncloud.my.id/makan'
 			,dim   :   256
 			,pad   :   4
 			,mtx   :  -1

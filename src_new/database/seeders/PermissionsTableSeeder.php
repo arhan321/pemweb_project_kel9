@@ -432,18 +432,14 @@ class PermissionsTableSeeder extends Seeder
             ],
             [
                 'id'    => 106,
-                'title' => 'history_order_reservation_access',
+                'title' => 'history_orderditempat_access',
             ],
             [
                 'id'    => 107,
-                'title' => 'history_order_reservation_show',
+                'title' => 'history_booking_access',
             ],
             [
                 'id'    => 108,
-                'title' => 'history_booking_manual_access',
-            ],
-            [
-                'id'    => 109,
                 'title' => 'profile_password_edit',
             ],
         ];

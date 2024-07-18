@@ -151,12 +151,12 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
      Route::resource('signatures', 'SignatureController');
     
     // history order
-    Route::delete('history_order_reservations/destroy', 'HistoryOrderReservationController@massDestroy')->name('history_order_reservations.massDestroy');
-    Route::resource('history_order_reservations', 'HistoryOrderReservationController');
+    Route::delete('history_orderditempats/destroy', 'HistoryOrderDitempatController@massDestroy')->name('history_orderditempats.massDestroy');
+    Route::resource('history_orderditempats', 'HistoryOrderDitempatController');
 
     // history order booking manual
-    Route::delete('history_booking_manuals/destroy', 'HistoryBookingManualController@massDestroy')->name('history_booking_manuals.massDestroy');
-    Route::resource('history_booking_manuals', 'HistoryBookingManualController');
+    Route::delete('history_bookings/destroy', 'HistoryBookingController@massDestroy')->name('history_bookings.massDestroy');
+    Route::resource('history_bookings', 'HistoryBookingController');
 
     // testimonials
     // Route::delete('testimonials/destroy', 'TestimonialController@massDestroy')->name('testimonials.massDestroy');

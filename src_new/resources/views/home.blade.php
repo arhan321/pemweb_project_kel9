@@ -57,6 +57,15 @@
         </div>
     </div>
 </div>
+<div class="row mb-4">
+    <div class="col-lg-12">
+        <div class="card p-4 shadow-sm">
+            <div class="card-body">
+                {!! $chartByDineIn->container() !!}
+            </div>
+        </div>
+    </div>
+</div>
 </div>
 @endsection
 
@@ -69,5 +78,8 @@
 
 <script src="{{ $penghasilanbulanini->cdn() }}"></script>
 {{ $penghasilanbulanini->script() }}
+
+<script src="{{ $chartByDineIn->cdn() }}"></script>
+{{ $chartByDineIn->script() }}
 @parent
 @endsection

@@ -46,4 +46,12 @@ class OrderDitempat extends Model
     {
         return $this->belongsTo(Table::class);
     }
+    public static function getMonthlyRevenue()
+    {
+        return self::selectRaw('MONTH(tanggal_pesan) as month, SUM(price) as total')
+                    ->groupBy('month')
+                    ->orderBy('month')
+                    ->get()
+                    ->pluck('total', 'month');
+    }
 }

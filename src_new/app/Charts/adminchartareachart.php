@@ -33,7 +33,7 @@ class AdminChartAreaChart
         }
 
         return $this->chart->areaChart()
-            ->setTitle('Data Orders Per Month in 2024')
+            ->setTitle('Data order lewat reservasi online di tahun 2024')
             ->setSubtitle('Number of orders placed each month')
             ->addData('Orders', $orderCounts)
             ->setXAxis($months);

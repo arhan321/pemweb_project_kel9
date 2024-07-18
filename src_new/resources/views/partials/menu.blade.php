@@ -264,7 +264,7 @@
             </li>
         @endcan
         @can('history_order_access')
-        <li class="c-sidebar-nav-dropdown  {{ request()->is("admin/history_order_reservations*") ? "c-show" : "" }} {{ request()->is("admin/history_booking_manuals*") ? "c-show" : "" }}">
+        <li class="c-sidebar-nav-dropdown  {{ request()->is("admin/history_orderditempats*") ? "c-show" : "" }} {{ request()->is("admin/history_bookings*") ? "c-show" : "" }}">
             <a class="c-sidebar-nav-dropdown-toggle" href="#">
                 <i class="fa-fw fas fa-clock c-sidebar-nav-icon">
 
@@ -272,29 +272,29 @@
                 {{ trans('cruds.history_order.title') }}
             </a>
             <ul class="c-sidebar-nav-dropdown-items">
-                @can('history_order_reservation_access')
+                @can('history_orderditempat_access')
                     <li class="c-sidebar-nav-item">
-                        <a href="{{ route("admin.history_order_reservations.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/history_order_reservations") || request()->is("admin/history_order_reservations/*") ? "c-active" : "" }}">
+                        <a href="{{ route("admin.history_orderditempats.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/history_orderditempats") || request()->is("admin/history_orderditempats/*") ? "c-active" : "" }}">
                             <i class="fa-fw far fa-clock c-sidebar-nav-icon">
                              
                             </i>
-                            {{ trans('cruds.history_order_reservation.title') }}
+                            {{ trans('cruds.history_orderditempat.title') }}
                         </a>
                     </li>
                 @endcan
-                @can('history_booking_manual_access')
+                @can('history_booking_access')
                 <li class="c-sidebar-nav-item">
-                    <a href="{{ route("admin.history_booking_manuals.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/history_booking_manuals") || request()->is("admin/history_booking_manuals/*") ? "c-active" : "" }}">
+                    <a href="{{ route("admin.history_bookings.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/history_bookings") || request()->is("admin/history_bookings/*") ? "c-active" : "" }}">
                         <i class="fa-fw far fa-clock c-sidebar-nav-icon">
                          
                         </i>
-                        {{ trans('cruds.history_booking_manual.title') }}
+                        {{ trans('cruds.history_booking.title') }}
                     </a>
                 </li>
             @endcan
             </ul>
         </li>
-    @endcan
+        @endcan
         
         @if(file_exists(app_path('Http/Controllers/Auth/ChangePasswordController.php')))
             @can('profile_password_edit')
