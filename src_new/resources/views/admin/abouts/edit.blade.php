@@ -3,35 +3,35 @@
 
 <div class="card">
     <div class="card-header">
-        {{ trans('global.edit') }} {{ trans('cruds.gallery.title_singular') }}
+        {{ trans('global.edit') }} {{ trans('cruds.about.title_singular') }}
     </div>
 
     <div class="card-body">
-        <form method="POST" action="{{ route("admin.galleries.update", [$gallery->id]) }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route("admin.abouts.update", [$about->id]) }}" enctype="multipart/form-data">
             @method('PUT')
             @csrf
             <div class="form-group">
-                <label class="required" for="title">{{ trans('cruds.gallery.fields.title') }}</label>
-                <input class="form-control {{ $errors->has('title') ? 'is-invalid' : '' }}" type="text" name="title" id="title" value="{{ old('title', $gallery->title) }}" required>
+                <label class="required" for="title">{{ trans('cruds.about.fields.title') }}</label>
+                <input class="form-control {{ $errors->has('title') ? 'is-invalid' : '' }}" type="text" name="title" id="title" value="{{ old('title', $about->title) }}" required>
                 @if($errors->has('title'))
                     <div class="invalid-feedback">
                         {{ $errors->first('title') }}
                     </div>
                 @endif
-                <span class="help-block">{{ trans('cruds.gallery.fields.title_helper') }}</span>
+                <span class="help-block">{{ trans('cruds.about.fields.title_helper') }}</span>
             </div>
             <div class="form-group">
-                <label for="description">{{ trans('cruds.gallery.fields.description') }}</label>
-                <textarea class="form-control ckeditor {{ $errors->has('description') ? 'is-invalid' : '' }}" name="description" id="description">{!! old('description', $gallery->description) !!}</textarea>
+                <label for="description">{{ trans('cruds.about.fields.description') }}</label>
+                <textarea class="form-control ckeditor {{ $errors->has('description') ? 'is-invalid' : '' }}" name="description" id="description">{!! old('description', $about->description) !!}</textarea>
                 @if($errors->has('description'))
                     <div class="invalid-feedback">
                         {{ $errors->first('description') }}
                     </div>
                 @endif
-                <span class="help-block">{{ trans('cruds.gallery.fields.description_helper') }}</span>
+                <span class="help-block">{{ trans('cruds.about.fields.description_helper') }}</span>
             </div>
             <div class="form-group">
-                <label class="required" for="image">{{ trans('cruds.gallery.fields.image') }}</label>
+                <label class="required" for="image">{{ trans('cruds.about.fields.image') }}</label>
                 <div class="needsclick dropzone {{ $errors->has('image') ? 'is-invalid' : '' }}" id="image-dropzone">
                 </div>
                 @if($errors->has('image'))
@@ -39,7 +39,7 @@
                         {{ $errors->first('image') }}
                     </div>
                 @endif
-                <span class="help-block">{{ trans('cruds.gallery.fields.image_helper') }}</span>
+                <span class="help-block">{{ trans('cruds.about.fields.image_helper') }}</span>
             </div>
             <div class="form-group">
                 <button class="btn btn-danger" type="submit">
@@ -66,7 +66,7 @@
               return new Promise(function(resolve, reject) {
                 // Init request
                 var xhr = new XMLHttpRequest();
-                xhr.open('POST', '{{ route('admin.galleries.storeCKEditorImages') }}', true);
+                xhr.open('POST', '{{ route('admin.abouts.storeCKEditorImages') }}', true);
                 xhr.setRequestHeader('x-csrf-token', window._token);
                 xhr.setRequestHeader('Accept', 'application/json');
                 xhr.responseType = 'json';
@@ -99,7 +99,7 @@
                 // Send request
                 var data = new FormData();
                 data.append('upload', file);
-                data.append('crud_id', '{{ $gallery->id ?? 0 }}');
+                data.append('crud_id', '{{ $about->id ?? 0 }}');
                 xhr.send(data);
               });
             })
@@ -121,7 +121,7 @@
 
 <script>
     Dropzone.options.imageDropzone = {
-    url: '{{ route('admin.galleries.storeMedia') }}',
+    url: '{{ route('admin.abouts.storeMedia') }}',
     maxFilesize: 2, // MB
     acceptedFiles: '.jpeg,.jpg,.png,.gif',
     maxFiles: 1,
@@ -146,8 +146,8 @@
       }
     },
     init: function () {
-@if(isset($gallery) && $gallery->image)
-      var file = {!! json_encode($gallery->image) !!}
+@if(isset($about) && $about->image)
+      var file = {!! json_encode($about->image) !!}
           this.options.addedfile.call(this, file)
       this.options.thumbnail.call(this, file, file.preview ?? file.preview_url)
       file.previewElement.classList.add('dz-complete')

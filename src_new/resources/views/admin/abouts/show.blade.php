@@ -3,13 +3,13 @@
 
 <div class="card">
     <div class="card-header">
-        {{ trans('global.show') }} {{ trans('cruds.gallery.title') }}
+        {{ trans('global.show') }} {{ trans('cruds.about.title') }}
     </div>
 
     <div class="card-body">
         <div class="form-group">
             <div class="form-group">
-                <a class="btn btn-default" href="{{ route('admin.galleries.index') }}">
+                <a class="btn btn-default" href="{{ route('admin.abouts.index') }}">
                     {{ trans('global.back_to_list') }}
                 </a>
             </div>
@@ -17,52 +17,44 @@
                 <tbody>
                     <tr>
                         <th>
-                            {{ trans('cruds.gallery.fields.id') }}
+                            {{ trans('cruds.about.fields.id') }}
                         </th>
                         <td>
-                            {{ $gallery->id }}
+                            {{ $about->id }}
                         </td>
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.gallery.fields.title') }}
+                            {{ trans('cruds.about.fields.title') }}
                         </th>
                         <td>
-                            {{ $gallery->title }}
+                            {{ $about->title }}
                         </td>
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.gallery.fields.description') }}
+                            {{ trans('cruds.about.fields.description') }}
                         </th>
                         <td>
-                            {!! $gallery->description !!}
+                            {!! $about->description !!}
                         </td>
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.gallery.fields.image') }}
+                            {{ trans('cruds.about.fields.image') }}
                         </th>
                         <td>
-                            @if($gallery->image)
-                                <a href="{{ $gallery->image->getUrl() }}" target="_blank" style="display: inline-block">
-                                    <img src="{{ $gallery->image->getUrl('thumb') }}">
+                            @if($about->image)
+                                <a href="{{ $about->image->getUrl() }}" target="_blank" style="display: inline-block">
+                                    <img src="{{ $about->image->getUrl('thumb') }}">
                                 </a>
                             @endif
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.gallery.fields.price') }}
-                        </th>
-                        <td>
-                            {{ $gallery->price }}
                         </td>
                     </tr>
                 </tbody>
             </table>
             <div class="form-group">
-                <a class="btn btn-default" href="{{ route('admin.galleries.index') }}">
+                <a class="btn btn-default" href="{{ route('admin.abouts.index') }}">
                     {{ trans('global.back_to_list') }}
                 </a>
             </div>

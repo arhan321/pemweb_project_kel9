@@ -3,15 +3,15 @@
 
 <div class="card">
     <div class="card-header">
-        {{ trans('global.edit') }} {{ trans('cruds.product.title_singular') }}
+        {{ trans('global.edit') }} {{ trans('cruds.signature.title_singular') }}
     </div>
 
     <div class="card-body">
-        <form method="POST" action="{{ route("admin.products.update", [$product->id]) }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route("admin.signatures.update", [$signature->id]) }}" enctype="multipart/form-data">
             @method('PUT')
             @csrf
             <div class="form-group">
-                <label for="image">{{ trans('cruds.product.fields.image') }}</label>
+                <label for="image">{{ trans('cruds.signature.fields.image') }}</label>
                 <div class="needsclick dropzone {{ $errors->has('image') ? 'is-invalid' : '' }}" id="image-dropzone">
                 </div>
                 @if($errors->has('image'))
@@ -19,54 +19,38 @@
                         {{ $errors->first('image') }}
                     </div>
                 @endif
-                <span class="help-block">{{ trans('cruds.product.fields.image_helper') }}</span>
+                <span class="help-block">{{ trans('cruds.signature.fields.image_helper') }}</span>
             </div>
             <div class="form-group">
-                <label for="name">{{ trans('cruds.product.fields.name') }}</label>
-                <input class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" type="text" name="name" id="name" value="{{ old('name', $product->name) }}">
-                @if($errors->has('name'))
+                <label for="product_id">{{ trans('cruds.signature.fields.product') }}</label>
+                <select class="form-control select2 {{ $errors->has('product_id') ? 'is-invalid' : '' }}" name="product_id" id="product_id">
+                    @foreach($products as $id => $product)
+                        <option value="{{ $id }}" {{ (old('product_id') ? old('product_id') : $signature->product->id ?? '') == $id ? 'selected' : '' }}>{{ $product }}</option>
+                    @endforeach
+                </select>
+                @if($errors->has('product_id'))
                     <div class="invalid-feedback">
-                        {{ $errors->first('name') }}
+                        {{ $errors->first('product_id') }}
                     </div>
                 @endif
-                <span class="help-block">{{ trans('cruds.product.fields.name_helper') }}</span>
+                <span class="help-block">{{ trans('cruds.signature.fields.product_helper') }}</span>
             </div>
             <div class="form-group">
-                <label for="description">{{ trans('cruds.product.fields.description') }}</label>
-                <input class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}" type="text" name="description" id="description" value="{{ old('description', $product->description) }}">
+                <label for="description">{{ trans('cruds.signature.fields.description') }}</label>
+                <textarea class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}" name="description" id="description">{!! old('description', $signature->description) !!}</textarea>
                 @if($errors->has('description'))
                     <div class="invalid-feedback">
                         {{ $errors->first('description') }}
                     </div>
                 @endif
-                <span class="help-block">{{ trans('cruds.product.fields.description_helper') }}</span>
+                <span class="help-block">{{ trans('cruds.signature.fields.description_helper') }}</span>
             </div>
             <div class="form-group">
-                <label for="price">{{ trans('cruds.product.fields.price') }}</label>
-                <input class="form-control {{ $errors->has('price') ? 'is-invalid' : '' }}" type="number" name="price" id="price" value="{{ old('price', $product->price) }}" step="0.01">
-                @if($errors->has('price'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('price') }}
-                    </div>
-                @endif
-                <span class="help-block">{{ trans('cruds.product.fields.price_helper') }}</span>
-            </div>
-            <div class="form-group">
-                <label for="stock">{{ trans('cruds.product.fields.stock') }}</label>
-                <input class="form-control {{ $errors->has('stock') ? 'is-invalid' : '' }}" type="number" name="stock" id="stock" value="{{ old('stock', $product->stock) }}" step="1">
-                @if($errors->has('stock'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('stock') }}
-                    </div>
-                @endif
-                <span class="help-block">{{ trans('cruds.product.fields.stock_helper') }}</span>
-            </div>
-            <div class="form-group">
-                <label>{{ trans('cruds.product.fields.category') }}</label>
+                <label for="category">{{ trans('cruds.signature.fields.category') }}</label>
                 <select class="form-control {{ $errors->has('category') ? 'is-invalid' : '' }}" name="category" id="category">
                     <option value disabled {{ old('category', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
                     @foreach(App\Models\Product::CATEGORY_SELECT as $key => $label)
-                        <option value="{{ $key }}" {{ old('category', $product->category) === (string) $key ? 'selected' : '' }}>{{ $label }}</option>
+                        <option value="{{ $key }}" {{ old('category', $signature->category) === (string) $key ? 'selected' : '' }}>{{ $label }}</option>
                     @endforeach
                 </select>
                 @if($errors->has('category'))
@@ -74,7 +58,7 @@
                         {{ $errors->first('category') }}
                     </div>
                 @endif
-                <span class="help-block">{{ trans('cruds.product.fields.category_helper') }}</span>
+                <span class="help-block">{{ trans('cruds.signature.fields.category_helper') }}</span>
             </div>
             <div class="form-group">
                 <button class="btn btn-danger" type="submit">
@@ -85,14 +69,12 @@
     </div>
 </div>
 
-
-
 @endsection
 
 @section('scripts')
 <script>
     Dropzone.options.imageDropzone = {
-    url: '{{ route('admin.products.storeMedia') }}',
+    url: '{{ route('admin.signatures.storeMedia') }}',
     maxFilesize: 2, // MB
     acceptedFiles: '.jpeg,.jpg,.png,.gif',
     maxFiles: 1,
@@ -117,8 +99,8 @@
       }
     },
     init: function () {
-@if(isset($product) && $product->image)
-      var file = {!! json_encode($product->image) !!}
+@if(isset($signature) && $signature->image)
+      var file = {!! json_encode($signature->image) !!}
           this.options.addedfile.call(this, file)
       this.options.thumbnail.call(this, file, file.preview ?? file.preview_url)
       file.previewElement.classList.add('dz-complete')

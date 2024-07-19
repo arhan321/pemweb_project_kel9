@@ -9,4 +9,4 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/dropzone.min.js"></script>
 
     <!-- Template Main JS File -->
-    <script src="frontend/assets/js/mains.js"></script>
+    <script src="frontend/assets/js/mainss.js"></script>
